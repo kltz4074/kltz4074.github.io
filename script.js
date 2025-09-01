@@ -35,6 +35,81 @@ function initParticles() {
   }
 }
 
+function ShowText() {
+  // List of element IDs in the order they should appear
+  const elementIds = [
+    "title",
+    "titleAnim",
+    "hr1",
+    "aboutme",
+    "aboutmeList",
+    "age",
+    "aspiring",
+    "setup",
+    "diving",
+    "lang",
+    "hr2",
+    "skills",
+    "skillsList",
+    "Know",
+    "Learn",
+    "hr3",
+    "connect",
+    "connectLinks",
+    "githubLink",
+    "telegramUSRN",
+    "gmail",
+    "tgk",
+    "connectList",
+    "discord",
+    "hr4",
+    "FeaturedProjects",
+    "featuredProjectsList",
+    "klang",
+    "create-cardboard",
+    "WebCum",
+    "KLTOOL",
+    "site",
+    "hr5",
+    "streak",
+    "streakImg",
+    "hr6",
+    "mostUsed",
+    "mostUsedImg",
+    "stats",
+    "statsImg",
+    "hr7",
+    "visitors",
+    "visitorsImg",
+    "hr8",
+    "fact",
+    "factText",
+    "hr9",
+    "footer"
+  ];
+
+  // Initially set all elements to opacity 0
+  elementIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.opacity = "0";
+      el.style.transition = "opacity 0.3s"; // Smooth transition
+    }
+  });
+
+  // Sequentially fade in each element
+  let delay = 0;
+  const step = 80; // ms between each fade-in, adjust for speed
+
+  elementIds.forEach((id, i) => {
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.style.opacity = "1";
+    }, delay);
+    delay += step;
+  });
+}
+
 // рисуем частицы
 function drawParticles() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -78,3 +153,5 @@ function animate() {
 // init
 initParticles();
 animate();
+ShowText()
+
