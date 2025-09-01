@@ -1,6 +1,7 @@
 html {
   scroll-behavior: smooth;
 }
+
 #background {
   position: fixed;
   top: 0;
