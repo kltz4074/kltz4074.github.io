@@ -107,6 +107,12 @@ code {
   font-size: 0.95em;
 }
 
+footer {
+  color: #e1e1e1;
+  opacity: 80%;
+}
+
+
 @media (max-width: 800px) {
   ul, .title, p, .webstimeTitle {
     max-width: 95vw;
