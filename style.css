@@ -132,6 +132,27 @@ footer {
 #page {
   transition: opacity 0.5s ease, transform 0.5s ease;
   opacity: 1;
+  border-color: rgba(22, 22, 22, 0.557);
+  border-radius: 50px;
+  border-style: solid;
+  border-width: 2px;
+  width: 80%;
+  margin: auto;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: rgba(22, 22, 22, 0.557);
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+  -webkit-transition: opacity 0.5s ease, transform 0.5s ease;
+  -moz-transition: opacity 0.5s ease, transform 0.5s ease;
+  -ms-transition: opacity 0.5s ease, transform 0.5s ease;
+  -o-transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .page-hidden {
