@@ -1,124 +1,140 @@
-html {
+/* Global */
+html, body {
+  margin: 0;
+  padding: 0;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', sans-serif;
   scroll-behavior: smooth;
+
+  /* ключевой момент */
+  background: none;
+  background-color: transparent;
+  overflow-x: hidden;
+  height: 100%;
 }
 
-#background {
+/* canvas должен быть за всем */
+canvas#background {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  background: black;
+  z-index: 0;
+  pointer-events: none;
+  background: #000; /* если нужно, можно поставить базовый цвет */
 }
 
-body {
-  background-color: #1f1f1f;
-  display: flex;
-  align-items: center;
-  min-height: 100vh;
-  flex-direction: column;
-  font-family: 'Segoe UI', 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
+/* всё содержимое поверх */
+#page {
+  position: relative;
+  z-index: 1;
 }
 
-.webstimeTitle {
-  color: antiquewhite;
-  border-radius: 5px;
-  border-width: 2px;
-  border-color: antiquewhite;
-  border-style: double;
-  border-top: 0px;
-  border-left: 0px;
-  border-right: 0px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem 2rem;
-}
-
-.title {
-  font-weight: bold;
-  color: antiquewhite;
-  font-size: 1.3rem;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px #242424;
-}
-
-ul {
-  color: #e1e1e1;
-  margin-bottom: 1.5rem;
-  padding-left: 1.2rem;
-  font-size: 1rem;
-  max-width: 700px;
-}
-
-li {
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
-}
-
-hr {
-  width: 30%;
-  border: 0;
-  border-top: 1.5px dashed #676767;
-  margin: 2rem 0;
-}
-
-p, a {
-  color: #e1e1e1;
-  font-size: 1rem;
-  text-align: left;
-}
-
-p[align="center"], p.centered {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Layout */
+header {
+  width: 100%;
+  padding: 1rem 0;
   text-align: center;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  margin: 0.2rem 0;
-  border-radius: 8px;
+nav a {
+  color: #aaa;
+  margin: 0 15px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #00bfff;
+}
+
+nav a.active {
+  color: #00bfff;
+  font-weight: bold;
+}
+
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h1, h2 {
+  color: #00bfff;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
 }
 
 a {
+  color: #00bfff;
   text-decoration: none;
-  margin-right: 0.7em;
-  transition: color 0.2s;
 }
 
 a:hover {
-  color: #00bfff;
+  text-decoration: underline;
 }
 
-code {
-  background: #232333;
-  color: #00bfff;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-family: 'Fira Mono', 'Consolas', monospace;
-  font-size: 0.95em;
+section {
+  margin-bottom: 2rem;
 }
 
 footer {
-  color: #f3f3f3;
-  opacity: 90%
+  text-align: center;
+  color: #888;
+  padding: 2rem 0;
+  font-size: 0.9em;
 }
 
+/* Projects */
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
 
-@media (max-width: 800px) {
-  ul, .title, p, .webstimeTitle {
-    max-width: 95vw;
-    font-size: 0.97em;
-  }
+.project {
+  background: rgba(37, 37, 37, 0.8);
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  transition: transform 0.2s, border-color 0.3s;
+}
+
+.project:hover {
+  transform: translateY(-5px);
+  border-color: #00bfff;
+}
+
+.accent {
+  color: #00bfff;
+}
+
+.subtitle {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
   body {
-    padding: 0 1vw;
+    font-size: 0.95em;
   }
+  .projects {
+    gap: 1rem;
+  }
+}
+
+/* Page transitions */
+#page {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 1;
+}
+
+.page-hidden {
+  opacity: 0;
+  transform: scale(0.98);
 }
