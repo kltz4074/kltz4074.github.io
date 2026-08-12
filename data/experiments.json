@@ -1,8 +1,0 @@
-[
-  {"title":{"en":"Volumetric cloud prototype","ru":"Прототип объёмных облаков"},"summary":{"en":"Exploring raymarching and volumetric shapes for stylized Babbdi-like cloud forms.","ru":"Эксперимент с raymarching и объёмными формами для стилизованных облаков в духе Babbdi."},"tech":["Unity","ShaderLab","HLSL"]},
-  {"title":{"en":"Screen-space RGB split","ru":"Screen-space RGB split"},"summary":{"en":"Custom post-processing / fullscreen shader work for URP and HDRP.","ru":"Кастомная постобработка и fullscreen-шейдеры для URP и HDRP."},"tech":["URP","HDRP","HLSL"]},
-  {"title":{"en":"God rays & occlusion","ru":"God rays и occlusion"},"summary":{"en":"A custom volumetric light experiment with geometry, cameras and shadow/occlusion handling.","ru":"Эксперимент с объёмным светом, геометрией, камерами и обработкой теней / occlusion."},"tech":["Unity","C#","Shaders"]},
-  {"title":{"en":"PSX visual pipeline","ru":"PSX visual pipeline"},"summary":{"en":"Pixelization, vertex instability and post effects for a deliberately unstable retro image.","ru":"Пикселизация, vertex jitter и постэффекты для намеренно нестабильной ретро-картинки."},"tech":["Unity","Rendering"]},
-  {"title":{"en":"Physics gun & interaction","ru":"Physics gun и взаимодействие"},"summary":{"en":"Runtime pickup, throw, weld and physics manipulation systems.","ru":"Системы поднятия, броска, сварки и физического взаимодействия с объектами."},"tech":["Unity","C#","Physics"]},
-  {"title":{"en":"Multi-monitor UI rendering","ru":"Многомониторный UI-рендеринг"},"summary":{"en":"Three cameras, three RenderTextures and monitor-aware UI mapping for BackOS.","ru":"Три камеры, три RenderTexture и привязка UI к мониторам для BackOS."},"tech":["Unity","UI","RenderTexture"]}
-]

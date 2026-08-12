@@ -1,0 +1,33 @@
+{
+  "id": "backos",
+  "slug": "backos",
+  "title": "BackOS",
+  "status": "In development",
+  "year": "2026",
+  "date": "July 2026 — Now",
+  "role": "Systems / UI",
+  "team": "Solo development",
+  "engine": "Unity UGUI",
+  "stack": "Unity / C# / UGUI",
+  "downloads": "Part of The Dev Blog",
+  "description": {
+    "en": "A fully interactive in-game operating system built around windows, apps and physical screens.",
+    "ru": "Полностью интерактивная внутриигровая ОС с окнами, приложениями и физическими мониторами."
+  },
+  "longDescription": {
+    "en": "A reusable computer system for The Dev Blog: multiple physical displays, draggable windows, app definitions, cursor input and a camera that reacts to the interface.",
+    "ru": "Переиспользуемая компьютерная система для The Dev Blog: несколько физических мониторов, перетаскиваемые окна, приложения, курсор и камера, реагирующая на интерфейс."
+  },
+  "challenge": {
+    "en": "Making a desktop interface feel natural through a 3D monitor while keeping window input, cursor movement and physical camera motion in sync.",
+    "ru": "Сделать настольный интерфейс естественным внутри 3D-монитора и синхронизировать окна, курсор и физическое движение камеры."
+  },
+  "learnings": {
+    "en": "UI architecture becomes much easier to extend when windows, apps, displays and input have clear ownership instead of talking to everything directly.",
+    "ru": "UI-архитектуру намного проще расширять, когда окна, приложения, мониторы и ввод имеют чёткие зоны ответственности, а не обращаются напрямую ко всему подряд."
+  },
+  "githubUrl": "",
+  "projectUrl": "",
+  "coverUrl": "",
+  "featured": false
+}

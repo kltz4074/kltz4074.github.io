@@ -1,0 +1,25 @@
+{
+  "hero": {
+    "title": {
+      "en": "I make games that stay with you.",
+      "ru": "Я делаю игры, которые остаются с тобой."
+    },
+    "subtitle": {
+      "en": "Atmospheric indie games and technical systems.",
+      "ru": "Атмосферные инди-игры и технические системы."
+    },
+    "eyebrow": {
+      "en": "Independent game developer / Tel Aviv",
+      "ru": "Независимый разработчик игр / Тель-Авив"
+    },
+    "current": {
+      "en": "Building a psychological horror game",
+      "ru": "Разрабатываю психологический хоррор"
+    }
+  },
+  "downloads": "20K+",
+  "links": {
+    "github": "https://github.com/kltz4074",
+    "itch": "https://kltzqu.itch.io"
+  }
+}

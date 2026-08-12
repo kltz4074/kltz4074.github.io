@@ -1,0 +1,44 @@
+[
+  {
+    "id": "gallery-01",
+    "title": {
+      "en": "Work in progress",
+      "ru": "В разработке"
+    },
+    "caption": {
+      "en": "Add a real screenshot in media/gallery and set its path here.",
+      "ru": "Добавь настоящий скриншот в media/gallery и укажи здесь путь."
+    },
+    "imageUrl": "",
+    "mediaType": "image",
+    "projectSlug": "the-dev-blog"
+  },
+  {
+    "id": "gallery-02",
+    "title": {
+      "en": "Systems study",
+      "ru": "Исследование систем"
+    },
+    "caption": {
+      "en": "Interface, light and interaction.",
+      "ru": "Интерфейс, свет и взаимодействие."
+    },
+    "imageUrl": "",
+    "mediaType": "image",
+    "projectSlug": "backos"
+  },
+  {
+    "id": "gallery-03",
+    "title": {
+      "en": "Archive slot",
+      "ru": "Место в архиве"
+    },
+    "caption": {
+      "en": "Images, GIF, MP4 and WebM are supported.",
+      "ru": "Поддерживаются изображения, GIF, MP4 и WebM."
+    },
+    "imageUrl": "",
+    "mediaType": "image",
+    "projectSlug": ""
+  }
+]

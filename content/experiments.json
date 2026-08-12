@@ -1,0 +1,58 @@
+[
+  {
+    "id": "ps1-visuals",
+    "title": "PS1 Visual Study",
+    "year": "2026",
+    "category": "Rendering",
+    "stack": "Unity / Shader Graph / URP",
+    "description": {
+      "en": "Vertex snapping, pixelization and restrained post-processing for an unstable retro image.",
+      "ru": "Дрожание вершин, пикселизация и сдержанная постобработка для нестабильного ретро-изображения."
+    },
+    "mediaUrl": "",
+    "mediaType": "image",
+    "projectUrl": ""
+  },
+  {
+    "id": "physics-gun",
+    "title": "Physics Gun",
+    "year": "2026",
+    "category": "Interaction",
+    "stack": "Unity / ConfigurableJoint",
+    "description": {
+      "en": "A physical object tool with distance control, rotation, throwing and freeze states.",
+      "ru": "Физический инструмент для объектов с управлением расстоянием, вращением, броском и заморозкой."
+    },
+    "mediaUrl": "",
+    "mediaType": "image",
+    "projectUrl": ""
+  },
+  {
+    "id": "monitor-light",
+    "title": "Monitor Light",
+    "year": "2026",
+    "category": "Lighting",
+    "stack": "Unity / RenderTexture / HDRP",
+    "description": {
+      "en": "Screen-driven lighting that reads the monitor image and carries its color into the room.",
+      "ru": "Освещение от экрана, которое считывает изображение монитора и переносит его цвет в комнату."
+    },
+    "mediaUrl": "",
+    "mediaType": "image",
+    "projectUrl": ""
+  },
+  {
+    "id": "water-buoyancy",
+    "title": "Water Buoyancy",
+    "year": "2026",
+    "category": "Physics",
+    "stack": "Unity / Rigidbody",
+    "description": {
+      "en": "Multi-point buoyancy, damping and debug tools for objects that need to feel heavy in water.",
+      "ru": "Многоточечная плавучесть, демпфирование и отладка для объектов, которые должны ощущаться тяжёлыми в воде."
+    },
+    "mediaUrl": "",
+    "mediaType": "image",
+    "projectUrl": ""
+  }
+]

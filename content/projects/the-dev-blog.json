@@ -1,0 +1,33 @@
+{
+  "id": "the-dev-blog",
+  "slug": "the-dev-blog",
+  "title": "The Dev Blog",
+  "status": "In development",
+  "year": "2026",
+  "date": "2026 — Now",
+  "role": "Game direction / code",
+  "team": "Solo development",
+  "engine": "Unity 6 / HDRP",
+  "stack": "Unity / C# / HDRP",
+  "downloads": "—",
+  "description": {
+    "en": "A psychological horror about responsibility, isolation and a world that stops without you.",
+    "ru": "Психологический хоррор об ответственности, изоляции и мире, который без тебя останавливается."
+  },
+  "longDescription": {
+    "en": "A story-driven game set mostly inside one apartment. Ordinary work slowly becomes an unbearable system of obligations, while a brief outside scene shows the life that keeps moving somewhere else.",
+    "ru": "Сюжетная игра, почти полностью происходящая в одной квартире. Обычная работа постепенно превращается в невыносимую систему обязанностей, а короткая сцена снаружи показывает жизнь, которая продолжает двигаться где-то ещё."
+  },
+  "challenge": {
+    "en": "Turning repetitive work into tension without relying on constant scares. Every system has to feel useful first, then slowly become a burden.",
+    "ru": "Превратить повторяющуюся работу в напряжение без постоянных скримеров. Каждая система сначала должна казаться полезной, а затем постепенно становиться грузом."
+  },
+  "learnings": {
+    "en": "A strong horror mechanic can begin as a comfortable routine. The apartment, computer and tasks work best when they all reinforce the same feeling of responsibility.",
+    "ru": "Сильная хоррор-механика может начинаться как удобная рутина. Квартира, компьютер и задачи лучше всего работают, когда вместе усиливают одно чувство ответственности."
+  },
+  "githubUrl": "",
+  "projectUrl": "",
+  "coverUrl": "",
+  "featured": true
+}

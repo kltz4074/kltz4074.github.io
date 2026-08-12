@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>KLTZQU — Redirecting</title>
+    <script>
+      (function redirectToSinglePageApp(location) {
+        // This repository is the account-level Pages site
+        // (kltz4074.github.io), so the SPA lives at the domain root.
+        var segmentsToKeep = 0;
+        var base = location.pathname
+          .split("/")
+          .slice(0, 1 + segmentsToKeep)
+          .join("/");
+        var route = location.pathname
+          .slice(1)
+          .split("/")
+          .slice(segmentsToKeep)
+          .join("/")
+          .replace(/&/g, "~and~");
+        var target =
+          location.protocol +
+          "//" +
+          location.host +
+          base +
+          "/?/" +
+          route +
+          (location.search ? "&" + location.search.slice(1).replace(/&/g, "~and~") : "") +
+          location.hash;
+        location.replace(target);
+      })(window.location);
+    </script>
+  </head>
+  <body></body>
+</html>

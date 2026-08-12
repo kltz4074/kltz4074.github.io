@@ -1,0 +1,33 @@
+{
+  "id": "pillars",
+  "slug": "pillars",
+  "title": "Pillars",
+  "status": "Paused",
+  "year": "2026",
+  "date": "2026",
+  "role": "Plugin architecture",
+  "team": "Solo development",
+  "engine": "Paper",
+  "stack": "Paper / Java / Maven",
+  "downloads": "Private server tool",
+  "description": {
+    "en": "A Minecraft map editor and match system designed for repeatable multiplayer arenas.",
+    "ru": "Редактор карт и система матчей Minecraft для переиспользуемых многопользовательских арен."
+  },
+  "longDescription": {
+    "en": "A Paper plugin with isolated build worlds, anchors, automatic floors, schematic exports, undo/redo and a parallel match-world strategy.",
+    "ru": "Paper-плагин с изолированными мирами строительства, якорями, автоматическим полом, экспортом схем, undo/redo и системой параллельных матчей."
+  },
+  "challenge": {
+    "en": "Keeping multiple build and match worlds isolated, reusable and fast enough for many parallel arenas.",
+    "ru": "Изолировать несколько миров строительства и матчей, переиспользовать их и сохранить достаточную скорость для множества параллельных арен."
+  },
+  "learnings": {
+    "en": "Editor tools need the same care as player-facing systems. Undo, export and safe world lifecycle rules are what make a complex workflow usable.",
+    "ru": "Инструменты редактора требуют не меньше внимания, чем игровые системы. Undo, экспорт и безопасный жизненный цикл миров делают сложный процесс действительно удобным."
+  },
+  "githubUrl": "",
+  "projectUrl": "",
+  "coverUrl": "",
+  "featured": false
+}

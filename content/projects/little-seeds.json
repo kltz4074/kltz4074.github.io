@@ -1,0 +1,33 @@
+{
+  "id": "little-seeds",
+  "slug": "little-seeds",
+  "title": "LittleSeeds",
+  "status": "Released",
+  "year": "2026",
+  "date": "March 2026",
+  "role": "Lead developer / game design",
+  "team": "4-person jam team",
+  "engine": "Unity",
+  "stack": "Unity / C#",
+  "downloads": "Game jam release",
+  "description": {
+    "en": "A calm plant-growing game that quietly turns into horror.",
+    "ru": "Спокойная игра о выращивании растений, которая незаметно превращается в хоррор."
+  },
+  "longDescription": {
+    "en": "Made for My First Game Jam with a small team. You accept orders through a terminal, grow plants and deliver them — until the routine reveals what it has been hiding.",
+    "ru": "Сделана небольшой командой для My First Game Jam. Ты принимаешь заказы через терминал, выращиваешь растения и отправляешь их — пока рутина не показывает, что она скрывала."
+  },
+  "challenge": {
+    "en": "Building a complete order, terminal, farming and delivery loop inside a short game-jam schedule while keeping the horror turn hidden.",
+    "ru": "Собрать полный цикл заказов, терминала, выращивания и доставки за короткий гейм-джем, не раскрывая хоррор-поворот заранее."
+  },
+  "learnings": {
+    "en": "Clear responsibilities and reusable data structures let a small team move fast. The quiet first half made the final tonal shift much stronger.",
+    "ru": "Чёткое распределение задач и переиспользуемые структуры данных помогли маленькой команде работать быстро. Спокойная первая половина сильно усилила финальную смену тона."
+  },
+  "githubUrl": "",
+  "projectUrl": "https://kltzqu.itch.io/little-seeds",
+  "coverUrl": "",
+  "featured": true
+}

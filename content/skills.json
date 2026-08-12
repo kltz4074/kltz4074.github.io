@@ -1,0 +1,38 @@
+[
+  {
+    "id": "unity",
+    "name": "Unity / C#",
+    "level": 5,
+    "note": {
+      "en": "Gameplay systems, interaction, custom tools, UI, physics and atmosphere-first prototyping.",
+      "ru": "Игровые системы, взаимодействие, собственные инструменты, UI, физика и атмосферные прототипы."
+    }
+  },
+  {
+    "id": "game-design",
+    "name": "Game Design",
+    "level": 4,
+    "note": {
+      "en": "Mechanics built around emotion, pacing and the player's sense of responsibility.",
+      "ru": "Механики, построенные вокруг эмоций, темпа и чувства ответственности игрока."
+    }
+  },
+  {
+    "id": "systems",
+    "name": "Systems",
+    "level": 4,
+    "note": {
+      "en": "Window managers, editors, reusable architecture and tools that make iteration faster.",
+      "ru": "Оконные менеджеры, редакторы, переиспользуемая архитектура и инструменты для быстрой итерации."
+    }
+  },
+  {
+    "id": "visual-direction",
+    "name": "Visual Direction",
+    "level": 3,
+    "note": {
+      "en": "PS1-era texture, severe contrast, restrained color and environments that tell the story.",
+      "ru": "PS1-фактура, сильный контраст, сдержанный цвет и окружение, которое рассказывает историю."
+    }
+  }
+]

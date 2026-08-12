@@ -1,0 +1,33 @@
+{
+  "id": "frozen-fries",
+  "slug": "frozen-fries",
+  "title": "FrozenFries",
+  "status": "Released",
+  "year": "2026",
+  "date": "2025 — January 2026",
+  "role": "Solo developer / game design",
+  "team": "Solo development",
+  "engine": "Unity",
+  "stack": "Unity / C# / Blender",
+  "downloads": "Released on itch.io",
+  "description": {
+    "en": "A short atmospheric horror game about frozen french fries, born from a stranger's strange dream.",
+    "ru": "Короткий атмосферный хоррор о замороженной картошке фри, родившийся из странного сна незнакомца."
+  },
+  "longDescription": {
+    "en": "My first released game, developed from early 2025 to January 2026. What began as a story about someone isolated in a small room became a compact retro horror about an ordinary bag of frozen fries and a night that stops making sense.",
+    "ru": "Моя первая выпущенная игра, которую я разрабатывал с начала 2025 года до января 2026-го. История об изолированном человеке в маленькой комнате превратилась в компактный ретро-хоррор об обычной пачке замороженной картошки и ночи, в которой всё перестаёт иметь смысл."
+  },
+  "challenge": {
+    "en": "Finishing a first full release and finding a visual language that could carry a strange dream without over-explaining it.",
+    "ru": "Довести первую полноценную игру до релиза и найти визуальный язык, который передаст странный сон без лишних объяснений."
+  },
+  "learnings": {
+    "en": "A small finished game teaches more than an endless large prototype: scope, pacing, atmosphere, packaging and the confidence to publish.",
+    "ru": "Небольшая законченная игра учит больше, чем бесконечный большой прототип: масштабу, темпу, атмосфере, сборке и уверенности, необходимой для публикации."
+  },
+  "githubUrl": "",
+  "projectUrl": "https://kltzqu.itch.io/frozen-fries",
+  "coverUrl": "",
+  "featured": true
+}
