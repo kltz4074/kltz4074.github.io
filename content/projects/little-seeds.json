@@ -28,6 +28,7 @@
   },
   "githubUrl": "",
   "projectUrl": "https://kltzqu.itch.io/little-seeds",
-  "coverUrl": "",
-  "featured": true
+  "coverUrl": "media/projects/little-seeds/cover.png",
+  "featured": true,
+  "mediaType": "image"
 }
