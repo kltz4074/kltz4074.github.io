@@ -41,7 +41,6 @@ export function renderProject(slug) {
           <p class="page-kicker">
             /${String(index + 1).padStart(2, "0")} · ${escapeHTML(statusLabel(project.status))}
           </p>
-          <h1 class="detail-title">${escapeHTML(project.title)}</h1>
           <p class="detail-summary">${escapeHTML(localize(project.description))}</p>
           ${
             projectUrl || githubUrl
@@ -76,6 +75,7 @@ export function renderProject(slug) {
           ${cover ? `style="background-image:url('${escapeHTML(cover)}')"` : ""}
         >
           ${cover ? "" : `<span class="visual-number">${String(index + 1).padStart(2, "0")}</span>`}
+          <h1 class="detail-title project-visual-title">${escapeHTML(project.title)}</h1>
           <div class="visual-status">
             <span>${escapeHTML(project.stack)}</span>
             <span>${escapeHTML(project.year)}</span>
