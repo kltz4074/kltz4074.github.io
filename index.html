@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="Atmospheric indie games and technical systems by KLTZQU."
+    >
+    <meta name="theme-color" content="#050505">
+    <title>KLTZQU — Game Developer</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/styles.css">
+    <script>
+      try {
+        document.documentElement.dataset.theme =
+          localStorage.getItem("kltzqu-theme") || "dark";
+      } catch (_) {
+        document.documentElement.dataset.theme = "dark";
+      }
+
+      (function restoreGitHubPagesRoute(location) {
+        if (location.search.slice(0, 2) !== "?/") return;
+        var route = location.search
+          .slice(2)
+          .split("&")
+          .map(function (part) {
+            return part.replace(/~and~/g, "&");
+          })
+          .join("?");
+        var base = location.pathname.replace(/\/$/, "");
+        window.history.replaceState(null, "", base + "/" + route + location.hash);
+      })(window.location);
+    </script>
+  </head>
+  <body>
+    <div id="app" class="static-status">
+      <div>
+        <strong>KLTZQU</strong>
+        Loading archive…
+      </div>
+    </div>
+    <noscript>
+      <div class="static-status">
+        This portfolio needs JavaScript to render its JSON content.
+      </div>
+    </noscript>
+    <script type="module" src="./assets/app.js"></script>
+  </body>
+</html>
