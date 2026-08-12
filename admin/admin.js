@@ -5,7 +5,8 @@ const CONFIG = Object.freeze({
   apiRoot: "https://api.github.com",
   vaultKey: "kltzqu-admin-v1",
   iterations: 600000,
-  maxUploadBytes: 25 * 1024 * 1024,
+  maxImageUploadBytes: 25 * 1024 * 1024,
+  maxVideoUploadBytes: 100 * 1024 * 1024,
 });
 
 const state = {
@@ -308,10 +309,17 @@ async function writeJson(path, value, message) {
   return writeContent(path, textToBase64(json), message);
 }
 
-async function uploadFile(path, file, message) {
-  if (file.size > CONFIG.maxUploadBytes) {
-    throw new Error(`Файл ${file.name} больше 25 МБ.`);
+function validateUploadSize(file) {
+  const isVideo = mediaTypeFromFile(file) === "video";
+  const limit = isVideo ? CONFIG.maxVideoUploadBytes : CONFIG.maxImageUploadBytes;
+  if (file.size > limit) {
+    const label = isVideo ? "100 МБ" : "25 МБ";
+    throw new Error(`Файл ${file.name} больше ${label}.`);
   }
+}
+
+async function uploadFile(path, file, message) {
+  validateUploadSize(file);
   const bytes = new Uint8Array(await file.arrayBuffer());
   return writeContent(path, bytesToBase64(bytes), message);
 }
@@ -861,7 +869,7 @@ async function handleGalleryUpload(event) {
   showNotice(`Загружаю файлов: ${files.length}…`, "info", true);
   try {
     for (const [index, file] of files.entries()) {
-      if (file.size > CONFIG.maxUploadBytes) throw new Error(`Файл ${file.name} больше 25 МБ.`);
+      validateUploadSize(file);
       const base = slugify(file.name.replace(/\.[^.]+$/, ""));
       const path = `media/gallery/${Date.now()}-${index}-${base}.${extensionFromFile(file)}`;
       await uploadFile(path, file, `Upload gallery media ${file.name}`);
