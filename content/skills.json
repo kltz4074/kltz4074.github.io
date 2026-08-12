@@ -31,8 +31,17 @@
     "name": "Visual Direction",
     "level": 3,
     "note": {
-      "en": "PS1-era texture, severe contrast, restrained color and environments that tell the story.",
-      "ru": "PS1-фактура, сильный контраст, сдержанный цвет и окружение, которое рассказывает историю."
+      "en": "PSX graphics, custom screen-space shaders, restrained color and environments that tell the story.",
+      "ru": "PS1-фактура, кастомные экранные шейдеры, сдержанный цвет и окружение, которое рассказывает историю."
+    }
+  },
+  {
+    "id": "skill-1786567322452",
+    "name": "UnrealEngine/C++",
+    "level": 2,
+    "note": {
+      "en": "",
+      "ru": ""
     }
   }
 ]
