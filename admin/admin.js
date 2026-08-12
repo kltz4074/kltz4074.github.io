@@ -4,7 +4,7 @@ const CONFIG = Object.freeze({
   branch: "main",
   apiRoot: "https://api.github.com",
   vaultKey: "kltzqu-admin-v1",
-  iterations: 310000,
+  iterations: 600000,
   maxUploadBytes: 25 * 1024 * 1024,
 });
 
@@ -154,7 +154,7 @@ function setButtonBusy(button, busy, busyText = "СОХРАНЕНИЕ…") {
   }
 }
 
-async function deriveVaultKey(phrase, salt, usages) {
+async function deriveVaultKey(phrase, salt, usages, iterations = CONFIG.iterations) {
   const sourceKey = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(phrase),
@@ -166,7 +166,7 @@ async function deriveVaultKey(phrase, salt, usages) {
     {
       name: "PBKDF2",
       salt,
-      iterations: CONFIG.iterations,
+      iterations,
       hash: "SHA-256",
     },
     sourceKey,
@@ -197,12 +197,18 @@ async function encryptToken(token, phrase) {
 }
 
 async function decryptToken(vault, phrase) {
-  if (!vault || vault.version !== 1 || vault.iterations !== CONFIG.iterations) {
+  if (
+    !vault ||
+    vault.version !== 1 ||
+    !Number.isSafeInteger(vault.iterations) ||
+    vault.iterations < 100000 ||
+    vault.iterations > 2000000
+  ) {
     throw new Error("Формат локального хранилища не поддерживается.");
   }
   const salt = base64ToBytes(vault.salt);
   const iv = base64ToBytes(vault.iv);
-  const key = await deriveVaultKey(phrase, salt, ["decrypt"]);
+  const key = await deriveVaultKey(phrase, salt, ["decrypt"], vault.iterations);
   try {
     const plaintext = await crypto.subtle.decrypt(
       { name: "AES-GCM", iv },
@@ -644,10 +650,13 @@ async function handleSetupSubmit(event) {
       const token = await decryptToken(vault, phrase);
       await validateToken(token);
       state.token = token;
+      if (vault.iterations !== CONFIG.iterations) {
+        saveVault(await encryptToken(token, phrase));
+      }
     } else {
       const token = elements.tokenInput.value.trim();
       const confirmation = elements.phraseConfirmInput.value;
-      if (!token.startsWith("github_pat_") && !token.startsWith("ghp_")) {
+      if (!token.startsWith("github_pat_")) {
         throw new Error("Вставь GitHub token, который начинается с github_pat_.");
       }
       if (phrase.length < 14) throw new Error("Секретная фраза должна быть длиннее 14 символов.");
