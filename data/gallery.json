@@ -1,0 +1,8 @@
+[
+  {"type":"placeholder","ratio":"wide","title":{"en":"The Dev Blog — apartment","ru":"The Dev Blog — квартира"},"caption":{"en":"Environment / lighting slot","ru":"Место под environment / lighting"},"placeholder":{"en":"DROP SCREENSHOT HERE","ru":"ДОБАВЬ СЮДА СКРИНШОТ"}},
+  {"type":"placeholder","ratio":"","title":{"en":"BackOS","ru":"BackOS"},"caption":{"en":"UI / multi-monitor media slot","ru":"Место под UI / multi-monitor медиа"},"placeholder":{"en":"IMAGE / GIF / VIDEO","ru":"IMAGE / GIF / VIDEO"}},
+  {"type":"placeholder","ratio":"tall","title":{"en":"Rendering experiments","ru":"Рендер-эксперименты"},"caption":{"en":"Shader / post-processing slot","ru":"Место под шейдер / постобработку"},"placeholder":{"en":"MEDIA SLOT","ru":"MEDIA SLOT"}},
+  {"type":"placeholder","ratio":"wide","title":{"en":"Little Seeds","ru":"Little Seeds"},"caption":{"en":"Gameplay capture slot","ru":"Место под gameplay capture"},"placeholder":{"en":"GAMEPLAY","ru":"GAMEPLAY"}},
+  {"type":"placeholder","ratio":"","title":{"en":"Level design","ru":"Level design"},"caption":{"en":"Environment work","ru":"Работа с окружением"},"placeholder":{"en":"SCREENSHOT","ru":"СКРИНШОТ"}},
+  {"type":"placeholder","ratio":"wide","title":{"en":"Graphics lab","ru":"Graphics lab"},"caption":{"en":"Add GIF or MP4 in data/gallery.json","ru":"Добавь GIF или MP4 в data/gallery.json"},"placeholder":{"en":"GIF / MP4","ru":"GIF / MP4"}}
+]
