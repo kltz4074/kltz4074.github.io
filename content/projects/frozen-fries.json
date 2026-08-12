@@ -11,12 +11,12 @@
   "stack": "Unity / C# / Blender",
   "downloads": "3k+",
   "description": {
-    "en": "A short atmospheric horror game about frozen french fries, born from a stranger's strange dream.",
-    "ru": "Короткий атмосферный хоррор о замороженной картошке фри, родившийся из странного сна незнакомца."
+    "en": "A short atmospheric horror game about frozen french fries, born from a strange dream.",
+    "ru": "Короткий атмосферный хоррор о замороженной картошке фри, родившийся из странного сна."
   },
   "longDescription": {
-    "en": "My first released game, developed from early 2025 to January 2026. What began as a story about someone isolated in a small room became a compact retro horror about an ordinary bag of frozen fries and a night that stops making sense.",
-    "ru": "Моя первая выпущенная игра, которую я разрабатывал с начала 2025 года до января 2026-го. История об изолированном человеке в маленькой комнате превратилась в компактный ретро-хоррор об обычной пачке замороженной картошки и ночи, в которой всё перестаёт иметь смысл."
+    "en": "My first released game, developed from early 2025 to January 2026. What began as a story about someone isolated in a small room became a retro horror about an ordinary bag of frozen fries.",
+    "ru": "Моя первая выпущенная игра, которую я разрабатывал с начала 2025 года до января 2026-го. История об изолированном человеке в маленькой комнате превратилась в ретро-хоррор об обычной пачке замороженной картошки."
   },
   "challenge": {
     "en": "Finishing a first full release and finding a visual language that could carry a strange dream without over-explaining it.",
