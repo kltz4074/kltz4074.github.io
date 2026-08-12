@@ -4,7 +4,7 @@ AI generated
 
 A permanent, fully static portfolio for KLTZQU — an independent game developer focused on atmospheric games, psychological horror and technical gameplay systems.
 
-The site has no backend, database, admin panel or build step. GitHub Pages serves the files directly, while all text and media can be edited from the repository.
+The site has no backend, database or build step. GitHub Pages serves the files directly, while the private-write admin interface updates the content files through the GitHub API.
 
 ## What is included
 
@@ -16,6 +16,19 @@ The site has no backend, database, admin panel or build step. GitHub Pages serve
 - adaptive image, GIF and video gallery;
 - smooth SPA navigation and GitHub Pages deep-link support;
 - content stored separately from the layout and code.
+
+## Admin panel
+
+Open [`/admin/`](https://kltz4074.github.io/admin/) and complete the one-time setup in your own browser.
+
+1. Create a fine-grained personal access token in GitHub.
+2. Limit it to the `kltz4074/kltz4074.github.io` repository only.
+3. Grant only `Contents: Read and write` repository permission.
+4. Paste the token into the admin panel and choose a long secret phrase (ideally 5–7 random words).
+
+The secret phrase is never stored. It derives a PBKDF2-SHA256 key that encrypts the token locally with AES-256-GCM. Only the encrypted vault is saved in this browser's `localStorage`; the decrypted token stays in the current tab's memory until the panel is locked or closed.
+
+The `/admin/` URL itself is public because GitHub Pages is static. Write access is protected by the repository-scoped GitHub token, not by hiding the URL. Never put a token or secret phrase into source files, screenshots or commits. If a device is lost, revoke the token in GitHub immediately.
 
 ## Edit the main text
 

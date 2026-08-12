@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="referrer" content="no-referrer">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; connect-src https://api.github.com; img-src 'self' data: blob:; media-src 'self' blob:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    >
+    <meta name="theme-color" content="#050505">
+    <title>KLTZQU — Admin</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/admin/admin.css">
+  </head>
+  <body>
+    <div class="admin-frame">
+      <header class="admin-header">
+        <a class="admin-wordmark" href="/">KLTZQU <span>/ ADMIN</span></a>
+        <div class="admin-header-actions">
+          <span class="connection-state" id="connection-state">LOCKED</span>
+          <a class="header-link" href="/" target="_blank" rel="noreferrer">PORTFOLIO ↗</a>
+        </div>
+      </header>
+
+      <main class="lock-screen" id="lock-screen">
+        <section class="lock-panel">
+          <div class="lock-index">SECURE LOCAL ACCESS / 01</div>
+          <h1>Управление<br>портфолио</h1>
+          <p class="lock-intro">
+            Токен GitHub хранится только в этом браузере и зашифрован ключом,
+            который создаётся из твоей секретной фразы.
+          </p>
+
+          <div class="notice lock-notice" id="lock-notice" role="alert" aria-live="assertive" hidden></div>
+
+          <form class="lock-form" id="setup-form" autocomplete="off">
+            <div class="setup-only" id="setup-fields">
+              <label class="field">
+                <span>Fine-grained GitHub token</span>
+                <input
+                  id="token-input"
+                  name="token"
+                  type="password"
+                  spellcheck="false"
+                  autocomplete="off"
+                  placeholder="github_pat_..."
+                >
+                <small>Только репозиторий kltz4074.github.io · Contents: Read and write</small>
+              </label>
+            </div>
+
+            <label class="field">
+              <span>Секретная фраза</span>
+              <input
+                id="phrase-input"
+                name="phrase"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Лучше 5–7 случайных слов"
+                required
+              >
+            </label>
+
+            <label class="field setup-only" id="confirm-field">
+              <span>Повтори секретную фразу</span>
+              <input
+                id="phrase-confirm-input"
+                name="phrase-confirm"
+                type="password"
+                autocomplete="new-password"
+              >
+            </label>
+
+            <button class="primary-button" id="unlock-button" type="submit">
+              <span id="unlock-label">НАСТРОИТЬ ДОСТУП</span>
+              <span>→</span>
+            </button>
+          </form>
+
+          <div class="lock-help">
+            <a
+              href="https://github.com/settings/personal-access-tokens/new"
+              target="_blank"
+              rel="noreferrer"
+            >Создать безопасный токен GitHub ↗</a>
+            <button class="text-button" id="reset-vault-button" type="button" hidden>
+              Сбросить сохранённый доступ
+            </button>
+          </div>
+        </section>
+
+        <aside class="security-panel">
+          <div class="security-grid" aria-hidden="true">
+            <span>PBKDF2</span><span>AES-256-GCM</span><span>310K</span><span>LOCAL</span>
+          </div>
+          <div class="security-copy">
+            <span>ВАЖНО</span>
+            <p>
+              Эта фраза не хранится и не восстанавливается. Если забудешь её,
+              сбрось доступ и подключи токен заново.
+            </p>
+          </div>
+        </aside>
+      </main>
+
+      <main class="admin-shell" id="admin-shell" hidden>
+        <aside class="admin-sidebar">
+          <div class="sidebar-meta">
+            <span>REPOSITORY</span>
+            <strong>kltz4074/<br>kltz4074.github.io</strong>
+            <small>BRANCH / MAIN</small>
+          </div>
+
+          <nav class="admin-nav" aria-label="Разделы админки">
+            <button class="admin-nav-button is-active" data-section="home" type="button"><span>01</span>Главная</button>
+            <button class="admin-nav-button" data-section="projects" type="button"><span>02</span>Проекты</button>
+            <button class="admin-nav-button" data-section="skills" type="button"><span>03</span>Навыки</button>
+            <button class="admin-nav-button" data-section="lab" type="button"><span>04</span>LAB</button>
+            <button class="admin-nav-button" data-section="gallery" type="button"><span>05</span>Галерея</button>
+            <button class="admin-nav-button" data-section="security" type="button"><span>06</span>Доступ</button>
+          </nav>
+
+          <div class="sidebar-actions">
+            <button class="secondary-button" id="reload-button" type="button">↻ ОБНОВИТЬ ДАННЫЕ</button>
+            <button class="secondary-button" id="lock-button" type="button">ЗАБЛОКИРОВАТЬ</button>
+          </div>
+        </aside>
+
+        <section class="admin-content">
+          <div class="notice" id="notice" role="status" aria-live="polite" hidden></div>
+
+          <section class="admin-section is-active" data-panel="home">
+            <header class="section-header">
+              <div><span>01 / HOME</span><h1>Главная</h1></div>
+              <button class="save-button" id="save-home" type="button">СОХРАНИТЬ →</button>
+            </header>
+            <form class="editor-grid" id="home-form"></form>
+          </section>
+
+          <section class="admin-section" data-panel="projects">
+            <header class="section-header">
+              <div><span>02 / PROJECT ARCHIVE</span><h1>Проекты</h1></div>
+              <button class="save-button" id="save-project" type="button">СОХРАНИТЬ ПРОЕКТ →</button>
+            </header>
+            <div class="project-toolbar">
+              <label class="field compact-field">
+                <span>Выбранный проект</span>
+                <select id="project-select"></select>
+              </label>
+              <button class="secondary-button" id="new-project-button" type="button">+ НОВЫЙ ПРОЕКТ</button>
+              <button class="secondary-button danger-button" id="archive-project-button" type="button">УБРАТЬ ИЗ СПИСКА</button>
+            </div>
+            <form class="editor-grid" id="project-form"></form>
+          </section>
+
+          <section class="admin-section" data-panel="skills">
+            <header class="section-header">
+              <div><span>03 / CAPABILITIES</span><h1>Навыки</h1></div>
+              <div class="header-button-group">
+                <button class="secondary-button" id="add-skill" type="button">+ ДОБАВИТЬ</button>
+                <button class="save-button" id="save-skills" type="button">СОХРАНИТЬ →</button>
+              </div>
+            </header>
+            <div class="stack-editor" id="skills-editor"></div>
+          </section>
+
+          <section class="admin-section" data-panel="lab">
+            <header class="section-header">
+              <div><span>04 / EXPERIMENTS</span><h1>LAB</h1></div>
+              <div class="header-button-group">
+                <button class="secondary-button" id="add-experiment" type="button">+ ДОБАВИТЬ</button>
+                <button class="save-button" id="save-lab" type="button">СОХРАНИТЬ →</button>
+              </div>
+            </header>
+            <div class="stack-editor" id="lab-editor"></div>
+          </section>
+
+          <section class="admin-section" data-panel="gallery">
+            <header class="section-header">
+              <div><span>05 / MEDIA ARCHIVE</span><h1>Галерея</h1></div>
+              <div class="header-button-group">
+                <label class="upload-button">
+                  ЗАГРУЗИТЬ МЕДИА
+                  <input id="gallery-upload" type="file" accept="image/*,.gif,video/mp4,video/webm" multiple>
+                </label>
+                <button class="secondary-button" id="add-gallery-item" type="button">+ ПУСТАЯ ЗАПИСЬ</button>
+                <button class="save-button" id="save-gallery" type="button">СОХРАНИТЬ →</button>
+              </div>
+            </header>
+            <p class="section-note">JPG, PNG, WebP, GIF, MP4 и WebM · до 25 МБ на файл.</p>
+            <div class="stack-editor" id="gallery-editor"></div>
+          </section>
+
+          <section class="admin-section" data-panel="security">
+            <header class="section-header">
+              <div><span>06 / LOCAL VAULT</span><h1>Доступ</h1></div>
+            </header>
+            <div class="security-settings-grid">
+              <article class="settings-card">
+                <span>ЗАЩИТА</span>
+                <h2>AES-256-GCM</h2>
+                <p>Токен хранится в localStorage только в зашифрованном виде. Расшифрованная версия живёт в памяти до блокировки или закрытия вкладки.</p>
+              </article>
+              <article class="settings-card">
+                <span>НОВАЯ СЕКРЕТНАЯ ФРАЗА</span>
+                <label class="field"><input id="new-phrase" type="password" autocomplete="new-password" placeholder="Новая секретная фраза"></label>
+                <label class="field"><input id="new-phrase-confirm" type="password" autocomplete="new-password" placeholder="Повтори новую фразу"></label>
+                <button class="primary-button" id="change-phrase-button" type="button"><span>СМЕНИТЬ ФРАЗУ</span><span>→</span></button>
+              </article>
+              <article class="settings-card danger-card">
+                <span>СБРОС</span>
+                <h2>Удалить локальный доступ</h2>
+                <p>Зашифрованный токен будет удалён из этого браузера. Сам токен на GitHub останется активным, пока ты его не отзовёшь.</p>
+                <button class="secondary-button danger-button" id="forget-access-button" type="button">УДАЛИТЬ С ЭТОГО УСТРОЙСТВА</button>
+              </article>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/admin/admin.js"></script>
+  </body>
+</html>
