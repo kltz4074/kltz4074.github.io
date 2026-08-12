@@ -4,7 +4,7 @@
     "name": "Unity / C#",
     "level": 5,
     "note": {
-      "en": "Gameplay systems, interaction, custom tools, UI, physics and atmosphere-first prototyping.",
+      "en": "Gameplay systems, interaction, custom tools, UI and physics.",
       "ru": "Игровые системы, взаимодействие, собственные инструменты, UI, физика и атмосферные прототипы."
     }
   },
@@ -22,8 +22,8 @@
     "name": "Systems",
     "level": 4,
     "note": {
-      "en": "Window managers, editors, reusable architecture and tools that make iteration faster.",
-      "ru": "Оконные менеджеры, редакторы, переиспользуемая архитектура и инструменты для быстрой итерации."
+      "en": "Window managers, pseudo-os for in-game computer, interaction system.",
+      "ru": "Оконные менеджеры, псевдо-ос для внутри-игрового компьютера, система взаимодействия."
     }
   },
   {
