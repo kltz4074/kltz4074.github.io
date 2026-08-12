@@ -1,3 +1,4 @@
+/* 01. Design tokens and global document rules */
 :root {
   --bg: #050505;
   --bg-raised: #0a0a0a;
@@ -8,8 +9,10 @@
   --line-strong: #555550;
   --inverse: #070707;
   --inverse-bg: #f0efe9;
-  --font-display: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --font-display:
+    "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:
+    "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   color-scheme: dark;
 }
 
@@ -29,7 +32,7 @@
   color: var(--fg);
   font-family: var(--font-display);
   font-size: clamp(30px, 5vw, 72px);
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
@@ -39,11 +42,21 @@
   place-items: center;
   color: var(--faint);
   background:
-    linear-gradient(135deg, transparent 49.7%, var(--line) 50%, transparent 50.3%),
-    linear-gradient(45deg, transparent 49.7%, var(--line) 50%, transparent 50.3%),
+    linear-gradient(
+      135deg,
+      transparent 49.7%,
+      var(--line) 50%,
+      transparent 50.3%
+    ),
+    linear-gradient(
+      45deg,
+      transparent 49.7%,
+      var(--line) 50%,
+      transparent 50.3%
+    ),
     var(--bg-raised);
   font-size: 11px;
-  letter-spacing: .18em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -56,8 +69,8 @@
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-    animation-duration: .01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
 }
@@ -89,8 +102,8 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px),
     var(--bg);
   background-size: 56px 56px;
   color: var(--fg);
@@ -115,6 +128,7 @@ a {
   background: var(--inverse-bg);
 }
 
+/* 02. Shared site shell: frame, header, navigation and transitions */
 .site-frame {
   width: min(100% - 24px, 1560px);
   min-height: calc(100vh - 24px);
@@ -143,7 +157,7 @@ a {
   font-family: var(--font-display);
   font-size: 30px;
   font-weight: 900;
-  letter-spacing: .16em;
+  letter-spacing: 0.16em;
 }
 
 .main-nav {
@@ -159,9 +173,9 @@ a {
   padding: 0 18px;
   color: var(--muted);
   font-size: 12px;
-  letter-spacing: .16em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  transition: color .2s ease;
+  transition: color 0.2s ease;
 }
 
 .nav-link::after {
@@ -173,7 +187,7 @@ a {
   content: "";
   background: var(--fg);
   transform: scaleX(0);
-  transition: transform .25s ease;
+  transition: transform 0.25s ease;
 }
 
 .nav-link:hover,
@@ -198,8 +212,10 @@ a {
   background: transparent;
   cursor: pointer;
   font-size: 11px;
-  letter-spacing: .12em;
-  transition: color .2s ease, background .2s ease;
+  letter-spacing: 0.12em;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 }
 
 .control-button:first-child {
@@ -217,7 +233,7 @@ a {
 
 .page {
   min-height: calc(100vh - 102px);
-  animation: page-enter .5s cubic-bezier(.22,.7,.24,1) both;
+  animation: page-enter 0.5s cubic-bezier(0.22, 0.7, 0.24, 1) both;
 }
 
 .page-transition {
@@ -236,7 +252,7 @@ a {
   background: var(--inverse-bg);
   transform: scaleY(0);
   transform-origin: center;
-  transition: transform .32s cubic-bezier(.76,0,.24,1);
+  transition: transform 0.32s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .page-transition span {
@@ -244,10 +260,10 @@ a {
   z-index: 1;
   color: var(--inverse);
   font-size: 12px;
-  letter-spacing: .24em;
+  letter-spacing: 0.24em;
   opacity: 0;
   text-transform: uppercase;
-  transition: opacity .12s ease .1s;
+  transition: opacity 0.12s ease 0.1s;
 }
 
 .page-transition.is-active {
@@ -262,9 +278,10 @@ a {
   opacity: 1;
 }
 
+/* 03. Home page */
 .hero {
   display: grid;
-  grid-template-columns: minmax(420px, .92fr) minmax(520px, 1.55fr);
+  grid-template-columns: minmax(420px, 0.92fr) minmax(520px, 1.55fr);
   min-height: calc(100vh - 178px);
 }
 
@@ -304,16 +321,28 @@ a {
   height: 13px;
 }
 
-.corner.tl { top: 8px; left: 8px; }
-.corner.tr { top: 8px; right: 8px; }
-.corner.bl { bottom: 8px; left: 8px; }
-.corner.br { right: 8px; bottom: 8px; }
+.corner.tl {
+  top: 8px;
+  left: 8px;
+}
+.corner.tr {
+  top: 8px;
+  right: 8px;
+}
+.corner.bl {
+  bottom: 8px;
+  left: 8px;
+}
+.corner.br {
+  right: 8px;
+  bottom: 8px;
+}
 
 .eyebrow {
   margin: 0 0 26px;
   color: var(--muted);
   font-size: 11px;
-  letter-spacing: .18em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 
@@ -324,8 +353,8 @@ a {
   font-size: clamp(64px, 7.1vw, 124px);
   font-stretch: condensed;
   font-weight: 950;
-  letter-spacing: -.065em;
-  line-height: .88;
+  letter-spacing: -0.065em;
+  line-height: 0.88;
   text-transform: uppercase;
 }
 
@@ -334,7 +363,7 @@ a {
   margin: 34px 0 0;
   color: var(--muted);
   font-size: clamp(12px, 1.15vw, 16px);
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   line-height: 1.7;
   text-transform: uppercase;
 }
@@ -355,9 +384,11 @@ a {
   padding: 0 20px;
   border: 1px solid var(--line-strong);
   font-size: 12px;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  transition: color .2s ease, background .2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
 }
 
 .outline-action:hover {
@@ -368,7 +399,7 @@ a {
 .outline-action .arrow {
   font-size: 24px;
   font-weight: 300;
-  transition: transform .2s ease;
+  transition: transform 0.2s ease;
 }
 
 .outline-action:hover .arrow {
@@ -385,7 +416,7 @@ a {
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   font-size: 10px;
-  letter-spacing: .11em;
+  letter-spacing: 0.11em;
   line-height: 1.7;
   text-transform: uppercase;
 }
@@ -406,9 +437,18 @@ a {
   min-height: 680px;
   overflow: hidden;
   background:
-    linear-gradient(90deg, transparent 49.92%, var(--line) 50%, transparent 50.08%),
+    linear-gradient(
+      90deg,
+      transparent 49.92%,
+      var(--line) 50%,
+      transparent 50.08%
+    ),
     linear-gradient(transparent 49.92%, var(--line) 50%, transparent 50.08%),
-    radial-gradient(circle at var(--x, 64%) var(--y, 38%), color-mix(in srgb, var(--fg) 9%, transparent), transparent 29%),
+    radial-gradient(
+      circle at var(--x, 64%) var(--y, 38%),
+      color-mix(in srgb, var(--fg) 9%, transparent),
+      transparent 29%
+    ),
     var(--bg);
 }
 
@@ -416,7 +456,11 @@ a {
   position: absolute;
   inset: 0;
   content: "";
-  background: repeating-linear-gradient(0deg, transparent 0 5px, rgba(255,255,255,.018) 6px);
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 5px,
+    rgba(255, 255, 255, 0.018) 6px
+  );
   pointer-events: none;
 }
 
@@ -426,7 +470,7 @@ a {
   z-index: 1;
   background: color-mix(in srgb, var(--fg) 44%, transparent);
   pointer-events: none;
-  transition: transform .12s linear;
+  transition: transform 0.12s linear;
 }
 
 .signal-axis-x {
@@ -453,7 +497,7 @@ a {
   justify-content: space-between;
   color: var(--faint);
   font-size: 10px;
-  letter-spacing: .13em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
@@ -474,7 +518,10 @@ a {
   min-height: 78px;
   border-bottom: 1px solid var(--line);
   color: var(--muted);
-  transition: color .2s ease, background .2s ease, padding .2s ease;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    padding 0.2s ease;
 }
 
 .signal-row:hover,
@@ -492,7 +539,7 @@ a {
   font-family: var(--font-display);
   font-size: clamp(30px, 3.4vw, 60px);
   font-weight: 900;
-  letter-spacing: -.04em;
+  letter-spacing: -0.04em;
   line-height: 1;
   text-transform: uppercase;
 }
@@ -500,7 +547,7 @@ a {
 .signal-status {
   justify-self: end;
   font-size: 9px;
-  letter-spacing: .13em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
@@ -514,13 +561,13 @@ a {
   justify-content: space-between;
   color: var(--faint);
   font-size: 9px;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .home-strip {
   display: grid;
-  grid-template-columns: 1.2fr .8fr .8fr;
+  grid-template-columns: 1.2fr 0.8fr 0.8fr;
   min-height: 94px;
   border-top: 1px solid var(--line);
 }
@@ -532,7 +579,7 @@ a {
   border-right: 1px solid var(--line);
   color: var(--muted);
   font-size: 10px;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   line-height: 1.5;
   text-transform: uppercase;
 }
@@ -546,9 +593,10 @@ a {
   color: var(--fg);
   font-family: var(--font-display);
   font-size: 36px;
-  letter-spacing: -.03em;
+  letter-spacing: -0.03em;
 }
 
+/* 04. Shared headers for archive pages */
 .page-head {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -562,7 +610,7 @@ a {
   margin: 0 0 18px;
   color: var(--muted);
   font-size: 11px;
-  letter-spacing: .16em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
@@ -571,18 +619,19 @@ a {
   font-family: var(--font-display);
   font-size: clamp(72px, 11vw, 176px);
   font-weight: 950;
-  letter-spacing: -.07em;
-  line-height: .78;
+  letter-spacing: -0.07em;
+  line-height: 0.78;
   text-transform: uppercase;
 }
 
 .page-count {
   color: var(--muted);
   font-size: 11px;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
 
+/* 05. Project archive */
 .filter-bar {
   display: flex;
   gap: 0;
@@ -599,7 +648,7 @@ a {
   background: transparent;
   cursor: pointer;
   font-size: 10px;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -619,7 +668,9 @@ a {
   min-height: 164px;
   padding: 22px clamp(24px, 4.5vw, 72px);
   border-bottom: 1px solid var(--line);
-  transition: background .2s ease, color .2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .project-card:hover {
@@ -643,8 +694,8 @@ a {
   font-family: var(--font-display);
   font-size: clamp(34px, 4vw, 66px);
   font-weight: 900;
-  letter-spacing: -.045em;
-  line-height: .9;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
   text-transform: uppercase;
 }
 
@@ -652,7 +703,7 @@ a {
   max-width: 520px;
   color: var(--muted);
   font-size: 11px;
-  letter-spacing: .04em;
+  letter-spacing: 0.04em;
   line-height: 1.7;
 }
 
@@ -660,7 +711,7 @@ a {
   justify-self: end;
   color: var(--muted);
   font-size: 9px;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -669,9 +720,10 @@ a {
   font-size: 28px;
 }
 
+/* 06. Individual project case study */
 .detail-hero {
   display: grid;
-  grid-template-columns: minmax(320px, .8fr) 1.2fr;
+  grid-template-columns: minmax(320px, 0.8fr) 1.2fr;
   min-height: 650px;
   border-bottom: 1px solid var(--line);
 }
@@ -689,8 +741,8 @@ a {
   font-family: var(--font-display);
   font-size: clamp(64px, 8vw, 136px);
   font-weight: 950;
-  letter-spacing: -.07em;
-  line-height: .82;
+  letter-spacing: -0.07em;
+  line-height: 0.82;
   text-transform: uppercase;
 }
 
@@ -733,16 +785,16 @@ a {
   position: absolute;
   inset: 0;
   content: "";
-  background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.72));
+  background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.72));
 }
 
 .visual-number {
   font-family: var(--font-display);
   font-size: clamp(180px, 30vw, 500px);
   font-weight: 950;
-  letter-spacing: -.1em;
-  line-height: .7;
-  opacity: .08;
+  letter-spacing: -0.1em;
+  line-height: 0.7;
+  opacity: 0.08;
 }
 
 .visual-status {
@@ -754,7 +806,7 @@ a {
   display: flex;
   justify-content: space-between;
   font-size: 10px;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -775,7 +827,7 @@ a {
   margin-bottom: 18px;
   color: var(--faint);
   font-size: 9px;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -807,7 +859,7 @@ a {
   font-family: var(--font-display);
   font-size: clamp(32px, 3.5vw, 58px);
   font-weight: 800;
-  letter-spacing: -.035em;
+  letter-spacing: -0.035em;
   line-height: 1.03;
 }
 
@@ -821,14 +873,14 @@ a {
 .case-study-notes small {
   color: var(--faint);
   font-size: 9px;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .case-study-stack strong {
   font-size: 11px;
   font-weight: 400;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   line-height: 1.7;
   text-transform: uppercase;
 }
@@ -871,9 +923,9 @@ a {
   font-family: var(--font-display);
   font-size: clamp(150px, 16vw, 260px);
   font-weight: 950;
-  letter-spacing: -.08em;
+  letter-spacing: -0.08em;
   line-height: 1;
-  opacity: .035;
+  opacity: 0.035;
 }
 
 .section-label {
@@ -885,7 +937,7 @@ a {
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   font-size: 9px;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -915,7 +967,9 @@ a {
   inset: 0;
   object-fit: cover;
   filter: grayscale(1);
-  transition: filter .4s ease, transform .7s ease;
+  transition:
+    filter 0.4s ease,
+    transform 0.7s ease;
 }
 
 .project-media-item:hover .project-media {
@@ -935,12 +989,13 @@ a {
   padding: 0 24px;
   align-items: center;
   color: #efeee8;
-  background: linear-gradient(transparent, rgba(0, 0, 0, .9));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
   font-size: 9px;
-  letter-spacing: .13em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
+/* 07. Skills page */
 .skill-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -963,7 +1018,7 @@ a {
   margin-bottom: 44px;
   color: var(--muted);
   font-size: 10px;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -972,8 +1027,8 @@ a {
   font-family: var(--font-display);
   font-size: clamp(42px, 5.5vw, 82px);
   font-weight: 900;
-  letter-spacing: -.05em;
-  line-height: .9;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
   text-transform: uppercase;
 }
 
@@ -1002,10 +1057,15 @@ a {
 
 .lab-head {
   background:
-    radial-gradient(circle at 82% 30%, color-mix(in srgb, var(--fg) 5%, transparent), transparent 24%),
+    radial-gradient(
+      circle at 82% 30%,
+      color-mix(in srgb, var(--fg) 5%, transparent),
+      transparent 24%
+    ),
     transparent;
 }
 
+/* 08. LAB / experiments page */
 .lab-grid {
   display: grid;
 }
@@ -1046,7 +1106,9 @@ a {
   inset: 0;
   object-fit: cover;
   filter: grayscale(1) contrast(1.08);
-  transition: filter .45s ease, transform .7s ease;
+  transition:
+    filter 0.45s ease,
+    transform 0.7s ease;
 }
 
 .lab-card:hover .lab-media {
@@ -1061,9 +1123,22 @@ a {
   place-items: center;
   overflow: hidden;
   background:
-    linear-gradient(90deg, transparent 49.9%, var(--line-strong) 50%, transparent 50.1%),
-    linear-gradient(transparent 49.9%, var(--line-strong) 50%, transparent 50.1%),
-    repeating-radial-gradient(circle at 50% 50%, transparent 0 54px, var(--line) 55px 56px),
+    linear-gradient(
+      90deg,
+      transparent 49.9%,
+      var(--line-strong) 50%,
+      transparent 50.1%
+    ),
+    linear-gradient(
+      transparent 49.9%,
+      var(--line-strong) 50%,
+      transparent 50.1%
+    ),
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0 54px,
+      var(--line) 55px 56px
+    ),
     var(--bg-raised);
 }
 
@@ -1098,9 +1173,9 @@ a {
   font-family: var(--font-display);
   font-size: clamp(120px, 19vw, 300px);
   font-weight: 950;
-  letter-spacing: -.08em;
-  line-height: .75;
-  opacity: .09;
+  letter-spacing: -0.08em;
+  line-height: 0.75;
+  opacity: 0.09;
 }
 
 .lab-schematic i {
@@ -1118,7 +1193,7 @@ a {
   bottom: 24px;
   font-size: 9px;
   font-weight: 400;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -1132,7 +1207,7 @@ a {
   color: var(--fg);
   background: color-mix(in srgb, var(--bg) 76%, transparent);
   font-size: 8px;
-  letter-spacing: .13em;
+  letter-spacing: 0.13em;
 }
 
 .lab-copy {
@@ -1150,7 +1225,7 @@ a {
   margin-bottom: auto;
   color: var(--faint);
   font-size: 9px;
-  letter-spacing: .13em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
@@ -1160,8 +1235,8 @@ a {
   font-family: var(--font-display);
   font-size: clamp(58px, 7vw, 112px);
   font-weight: 950;
-  letter-spacing: -.065em;
-  line-height: .82;
+  letter-spacing: -0.065em;
+  line-height: 0.82;
   text-transform: uppercase;
 }
 
@@ -1177,7 +1252,7 @@ a {
   margin-top: 34px;
   color: var(--fg);
   font-size: 9px;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -1187,10 +1262,11 @@ a {
   padding-bottom: 7px;
   border-bottom: 1px solid var(--line-strong);
   font-size: 9px;
-  letter-spacing: .13em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
 }
 
+/* 09. Gallery page */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -1258,7 +1334,9 @@ a {
   height: 100%;
   object-fit: cover;
   filter: grayscale(1);
-  transition: filter .45s ease, transform .7s ease;
+  transition:
+    filter 0.45s ease,
+    transform 0.7s ease;
 }
 
 .gallery-item:hover .gallery-media {
@@ -1272,15 +1350,23 @@ a {
   display: grid;
   place-items: center;
   background:
-    radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--fg) 8%, transparent), transparent 22%),
-    repeating-radial-gradient(circle at 50% 50%, transparent 0 36px, var(--line) 37px 38px);
+    radial-gradient(
+      circle at 50% 50%,
+      color-mix(in srgb, var(--fg) 8%, transparent),
+      transparent 22%
+    ),
+    repeating-radial-gradient(
+      circle at 50% 50%,
+      transparent 0 36px,
+      var(--line) 37px 38px
+    );
 }
 
 .gallery-placeholder span {
   font-family: var(--font-display);
   font-size: clamp(90px, 16vw, 250px);
   font-weight: 950;
-  opacity: .1;
+  opacity: 0.1;
 }
 
 .gallery-caption {
@@ -1295,9 +1381,9 @@ a {
   min-height: 70px;
   padding: 0 24px;
   color: #efeee8;
-  background: linear-gradient(transparent, rgba(0,0,0,.88));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.88));
   font-size: 10px;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -1311,6 +1397,7 @@ a {
   text-transform: uppercase;
 }
 
+/* 10. Footer and empty/loading states */
 .site-footer {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -1325,7 +1412,7 @@ a {
   padding: 28px 32px;
   color: var(--muted);
   font-size: 10px;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -1344,10 +1431,11 @@ a {
   place-items: center;
   color: var(--muted);
   font-size: 10px;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
+/* 11. Legacy editor styles kept for old bookmarked builds */
 .admin-page {
   min-height: calc(100vh - 76px);
   background: var(--bg);
@@ -1367,8 +1455,8 @@ a {
   font-family: var(--font-display);
   font-size: clamp(72px, 10vw, 150px);
   font-weight: 950;
-  letter-spacing: -.07em;
-  line-height: .75;
+  letter-spacing: -0.07em;
+  line-height: 0.75;
   text-transform: uppercase;
 }
 
@@ -1378,7 +1466,7 @@ a {
   justify-items: end;
   color: var(--muted);
   font-size: 9px;
-  letter-spacing: .11em;
+  letter-spacing: 0.11em;
   text-transform: uppercase;
 }
 
@@ -1413,7 +1501,7 @@ a {
   background: transparent;
   cursor: pointer;
   font-size: 10px;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-align: left;
   text-transform: uppercase;
 }
@@ -1455,8 +1543,8 @@ a {
   font-family: var(--font-display);
   font-size: clamp(48px, 6vw, 86px);
   font-weight: 900;
-  letter-spacing: -.055em;
-  line-height: .8;
+  letter-spacing: -0.055em;
+  line-height: 0.8;
   text-transform: uppercase;
 }
 
@@ -1470,7 +1558,7 @@ a {
   background: transparent;
   cursor: pointer;
   font-size: 10px;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -1506,7 +1594,7 @@ a {
 .editor-check > span {
   color: var(--muted);
   font-size: 9px;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -1522,7 +1610,7 @@ a {
   color: var(--fg);
   background: var(--bg-raised);
   font-size: 11px;
-  transition: border-color .2s ease;
+  transition: border-color 0.2s ease;
 }
 
 .editor-field input,
@@ -1583,7 +1671,7 @@ a {
 
 .github-import strong {
   font-size: 10px;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
 }
 
 .github-import small {
@@ -1605,12 +1693,12 @@ a {
   background: var(--inverse-bg);
   cursor: pointer;
   font-size: 10px;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .github-import button:disabled {
-  opacity: .45;
+  opacity: 0.45;
   cursor: default;
 }
 
@@ -1621,7 +1709,7 @@ a {
   padding: 20px clamp(24px, 4vw, 60px);
   color: var(--muted);
   font-size: 9px;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -1693,7 +1781,7 @@ a {
   border-bottom: 1px solid var(--line);
   color: var(--muted);
   font-size: 9px;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -1703,7 +1791,7 @@ a {
 }
 
 .upload-action.disabled {
-  opacity: .5;
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -1722,17 +1810,19 @@ a {
   background-size: 32px 32px;
   cursor: pointer;
   text-align: center;
-  transition: border-color .2s ease, background-color .2s ease;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .gallery-dropzone:hover,
 .gallery-dropzone.is-dragging {
   border-color: var(--fg);
-  background-color: rgba(255, 255, 255, .04);
+  background-color: rgba(255, 255, 255, 0.04);
 }
 
 .gallery-dropzone.disabled {
-  opacity: .5;
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -1750,14 +1840,14 @@ a {
 
 .gallery-dropzone strong {
   font-size: 11px;
-  letter-spacing: .08em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .gallery-dropzone small {
   color: var(--muted);
   font-size: 9px;
-  letter-spacing: .06em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -1812,7 +1902,7 @@ a {
   font-family: var(--font-display);
   font-size: 74px;
   font-weight: 900;
-  opacity: .12;
+  opacity: 0.12;
 }
 
 .editor-card-foot {
@@ -1844,7 +1934,7 @@ a {
   place-items: center;
   border-left: 1px solid var(--line);
   font-size: 10px;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
@@ -1871,22 +1961,41 @@ a {
 }
 
 .save-button:disabled {
-  opacity: .6;
+  opacity: 0.6;
 }
 
+/* 12. Motion and responsive layouts */
 @keyframes page-enter {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: .35; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes lab-scan {
-  0%, 100% { transform: translateY(-190px); opacity: .15; }
-  50% { transform: translateY(190px); opacity: .8; }
+  0%,
+  100% {
+    transform: translateY(-190px);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(190px);
+    opacity: 0.8;
+  }
 }
 
 @media (max-width: 1050px) {
@@ -2317,8 +2426,8 @@ a {
   *::before,
   *::after {
     scroll-behavior: auto !important;
-    animation-duration: .01ms !important;
+    animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: .01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

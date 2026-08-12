@@ -2,121 +2,143 @@ AI generated
 
 # KLTZQU Portfolio
 
-A permanent, fully static portfolio for KLTZQU — an independent game developer focused on atmospheric games, psychological horror and technical gameplay systems.
+Статическое портфолио на GitHub Pages. Сайт не требует фреймворка, сборки,
+сервера или базы данных: браузер загружает JSON из папки `content/` и собирает
+нужную страницу из небольших JavaScript-модулей.
 
-The site has no backend, database or build step. GitHub Pages serves the files directly, while the private-write admin interface updates the content files through the GitHub API.
-
-## What is included
-
-- dark theme by default, plus an optional light theme;
-- Russian and English content;
-- projects with `Released`, `In development`, `Paused` and `Prototype` statuses;
-- full case-study pages for every project;
-- LAB / Experiments;
-- adaptive image, GIF and video gallery;
-- smooth SPA navigation and GitHub Pages deep-link support;
-- content stored separately from the layout and code.
-
-## Admin panel
-
-Open [`/admin/`](https://kltz4074.github.io/admin/) and complete the one-time setup in your own browser.
-
-1. Create a fine-grained personal access token in GitHub.
-2. Limit it to the `kltz4074/kltz4074.github.io` repository only.
-3. Grant only `Contents: Read and write` repository permission.
-4. Paste the token into the admin panel and choose a long secret phrase (ideally 5–7 random words).
-
-The secret phrase is never stored. It derives a PBKDF2-SHA256 key that encrypts the token locally with AES-256-GCM. Only the encrypted vault is saved in this browser's `localStorage`; the decrypted token stays in the current tab's memory until the panel is locked or closed.
-
-The `/admin/` URL itself is public because GitHub Pages is static. Write access is protected by the repository-scoped GitHub token, not by hiding the URL. Never put a token or secret phrase into source files, screenshots or commits. If a device is lost, revoke the token in GitHub immediately.
-
-## Edit the main text
-
-Open [`content/site.json`](content/site.json). It contains the home-page text, download count and profile links.
-
-Every translated field uses this format:
-
-```json
-{
-  "en": "English text",
-  "ru": "Русский текст"
-}
-```
-
-## Add or edit a project
-
-1. Copy any file inside [`content/projects`](content/projects).
-2. Rename it to the new project slug, for example `my-game.json`.
-3. Edit its title, descriptions, status, links and other fields.
-4. Add `"my-game"` to [`content/projects/index.json`](content/projects/index.json).
-5. Put the project media inside `media/projects/my-game/`.
-
-The order in `index.json` is the order used on the Projects page.
-
-To show a project on the home page, set:
-
-```json
-"featured": true
-```
-
-Use one of these exact status values:
+## Структура проекта
 
 ```text
-Released
-In development
-Paused
-Prototype
+.
+├── index.html                 # HTML-оболочка публичного сайта
+├── 404.html                   # Поддержка прямых ссылок GitHub Pages
+├── assets/
+│   ├── app.js                 # Короткая точка входа
+│   ├── styles.css             # Внешний вид публичного сайта
+│   └── js/
+│       ├── app.js             # Роутинг, события и запуск приложения
+│       ├── config.js          # Маршруты и переводы статусов
+│       ├── state.js           # Текущее состояние интерфейса
+│       ├── content.js         # Загрузка JSON
+│       ├── components.js      # Общие HTML-компоненты
+│       ├── utils.js           # Безопасный HTML, URL и локализация
+│       └── views/             # Одна страница — один модуль
+│           ├── home.js
+│           ├── projects.js
+│           ├── project.js
+│           ├── skills.js
+│           ├── lab.js
+│           └── gallery.js
+├── content/
+│   ├── site.json              # Главная страница и ссылки
+│   ├── skills.json            # Навыки
+│   ├── experiments.json       # Карточки LAB
+│   ├── gallery.json           # Галерея
+│   └── projects/
+│       ├── index.json         # Порядок проектов
+│       └── <slug>.json        # Отдельный проект
+├── media/
+│   ├── experiments/           # Фото и видео для LAB
+│   ├── gallery/               # Фото и видео галереи
+│   └── projects/<slug>/       # Обложки и медиа проектов
+├── admin/
+│   ├── index.html             # Интерфейс админки
+│   ├── admin.css
+│   ├── admin.js               # Короткая точка входа
+│   └── js/
+│       ├── app.js             # Сохранение, загрузки и события
+│       ├── editor.js          # Отрисовка и чтение форм
+│       ├── github.js          # Все запросы к GitHub API
+│       ├── vault.js           # PBKDF2 + AES-GCM
+│       ├── dom.js             # Уведомления и DOM-ссылки
+│       ├── state.js
+│       ├── config.js
+│       └── utils.js
+└── docs/
+    ├── ARCHITECTURE.md         # Как код связан между собой
+    └── CONTENT.md              # Все форматы JSON и пути к медиа
 ```
 
-## Add gallery media
+## Самый простой способ редактирования
 
-1. Upload an image, GIF, MP4 or WebM into [`media/gallery`](media/gallery).
-2. Add an item to [`content/gallery.json`](content/gallery.json).
-3. Set `mediaType` to `image` or `video`.
-4. Optionally set `projectSlug` so the file also appears on that project's page.
+Открой [админку](https://kltz4074.github.io/admin/). Она редактирует JSON и
+создаёт обычные коммиты в `main`.
 
-Example:
+Для LAB:
+
+1. Открой раздел **LAB**.
+2. Создай или выбери эксперимент.
+3. Нажми **Загрузить медиа**.
+4. Админка положит файл в `media/experiments/` и сама заполнит поле
+   **Media path**.
+5. Нажми **Сохранить**, если после загрузки менял текст или остальные поля.
+
+Видео MP4/WebM поддерживаются до 100 МиБ. Изображения — до 25 МиБ.
+
+## Ручное добавление LAB-медиа
+
+Допустим, файл называется:
+
+```text
+media/experiments/floating-objects.mp4
+```
+
+Тогда в `content/experiments.json` нужно написать:
 
 ```json
 {
-  "id": "backos-window-drag",
-  "title": {
-    "en": "Window dragging",
-    "ru": "Перетаскивание окон"
-  },
-  "caption": {
-    "en": "BackOS running across three monitors.",
-    "ru": "BackOS работает на трёх мониторах."
-  },
-  "imageUrl": "media/gallery/backos-window-drag.webm",
-  "mediaType": "video",
-  "projectSlug": "backos"
+  "id": "water-buoyancy",
+  "title": "Object's floating physics",
+  "mediaUrl": "media/experiments/floating-objects.mp4",
+  "mediaType": "video"
 }
 ```
 
-The gallery automatically adapts its composition to the number of files.
+Путь указывается от корня репозитория:
 
-## Edit skills and experiments
+- правильно: `media/experiments/floating-objects.mp4`;
+- неправильно: `/media/experiments/floating-objects.mp4`;
+- неправильно: ссылка вида `github.com/.../blob/main/...`;
+- регистр букв важен: `Video.mp4` и `video.mp4` — разные файлы.
 
-- Skills: [`content/skills.json`](content/skills.json)
-- LAB: [`content/experiments.json`](content/experiments.json)
+Можно создавать вложенные папки, например
+`media/experiments/physics/floating-objects.mp4`. Тогда ровно этот путь нужно
+записать в `mediaUrl`.
 
-Experiment media belongs in [`media/experiments`](media/experiments).
+## Локальный запуск
 
-## Local preview
-
-Because the site loads JSON with `fetch`, do not open `index.html` through `file://`. Run any small local static server in the repository folder, for example:
+JSON нельзя надёжно загрузить через `file://`, поэтому запусти сервер из корня
+проекта:
 
 ```bash
-python -m http.server 8080
+npm install
+npm run dev
 ```
 
-Then open `http://localhost:8080`.
+После этого открой адрес, который покажет Vite.
 
-## Deployment
+## Где искать нужную логику
 
-The included GitHub Actions workflow deploys the repository to GitHub Pages after every push to `main`. Pages can also be redeployed manually from the Actions tab.
+| Задача                           | Файл                                         |
+| -------------------------------- | -------------------------------------------- |
+| Изменить маршруты                | `assets/js/config.js`                        |
+| Понять загрузку JSON             | `assets/js/content.js`                       |
+| Изменить внешний вид LAB         | `assets/js/views/lab.js`                     |
+| Изменить карточку проекта        | `assets/js/views/project.js`                 |
+| Изменить путь загрузки LAB-медиа | `admin/js/app.js`, функция `handleLabUpload` |
+| Изменить лимиты файлов           | `admin/js/config.js`                         |
+| Понять запросы к GitHub          | `admin/js/github.js`                         |
+| Понять шифрование токена         | `admin/js/vault.js`                          |
 
-## Rights
+Более подробная схема находится в [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md),
+а описание контента — в [docs/CONTENT.md](docs/CONTENT.md).
 
-Copyright © KLTZQU. No license is granted for reuse or redistribution of the design, code, text or media.
+## Публикация
+
+Workflow в `.github/workflows/pages.yml` публикует сайт после каждого push в
+`main`.
+
+## Права
+
+Copyright © KLTZQU. Разрешение на повторное использование дизайна, кода,
+текстов или медиа не предоставляется.
