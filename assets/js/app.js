@@ -63,7 +63,7 @@ function render() {
   document.documentElement.lang = state.language;
   document.documentElement.dataset.theme = state.theme;
   document.title =
-    path === "/" ? "KLTZQU — Game Developer" : `${destination} — KLTZQU`;
+    path === "/" ? "KLTZQU -- Partfolio Website" : `${destination} — KLTZQU`;
 
   app.className = "";
   app.innerHTML = `
