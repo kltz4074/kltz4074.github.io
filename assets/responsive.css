@@ -1,0 +1,519 @@
+/* Responsive fixes layered on top of the main portfolio stylesheet. */
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img,
+video,
+canvas,
+svg {
+  max-width: 100%;
+}
+
+.site-frame,
+.page,
+.hero,
+.hero-copy,
+.signal-field,
+.page-head,
+.project-list,
+.project-card,
+.detail-hero,
+.detail-copy,
+.project-visual,
+.detail-grid,
+.project-case-study,
+.case-study-intro,
+.case-study-notes,
+.project-media-grid,
+.project-media-item,
+.lab-card,
+.lab-visual,
+.lab-copy,
+.skill-grid,
+.skill-card,
+.gallery-grid,
+.gallery-item,
+.site-footer {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Project title always lives above the cover/grid rather than behind it. */
+.project-visual {
+  isolation: isolate;
+}
+
+.project-visual.has-image::after {
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 20%, rgba(0, 0, 0, 0.36) 58%, rgba(0, 0, 0, 0.88) 100%);
+}
+
+.project-visual-title {
+  position: absolute;
+  z-index: 3;
+  right: clamp(28px, 5vw, 78px);
+  bottom: clamp(70px, 8vw, 118px);
+  left: clamp(28px, 5vw, 78px);
+  width: auto;
+  max-width: 1100px;
+  margin: 0;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: clamp(64px, 8.5vw, 142px);
+  font-weight: 950;
+  letter-spacing: -0.075em;
+  line-height: 0.78;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+}
+
+.project-visual.has-image .project-visual-title {
+  color: #f0efe9;
+}
+
+.visual-status {
+  z-index: 4;
+}
+
+@media (max-width: 1050px) {
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .wordmark {
+    min-width: 0;
+  }
+
+  .header-controls {
+    min-width: 0;
+    flex-shrink: 0;
+  }
+
+  .detail-copy {
+    min-height: 320px;
+  }
+
+  .project-visual-title {
+    font-size: clamp(58px, 12vw, 112px);
+  }
+}
+
+@media (max-width: 700px) {
+  html {
+    min-width: 0;
+  }
+
+  body {
+    width: 100%;
+  }
+
+  .site-frame {
+    width: 100%;
+    min-height: 100svh;
+  }
+
+  .site-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    width: 100%;
+  }
+
+  .wordmark {
+    overflow: hidden;
+    padding: 0 14px;
+    border-right: 0;
+    font-size: 20px;
+    letter-spacing: 0.11em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .header-controls {
+    max-width: 58vw;
+  }
+
+  .control-button {
+    min-width: 44px;
+    padding: 0 9px;
+    font-size: 9px;
+    letter-spacing: 0.07em;
+  }
+
+  .mobile-nav {
+    max-height: calc(100svh - 64px);
+    overflow-y: auto;
+  }
+
+  .mobile-nav .nav-link {
+    width: 100%;
+    min-width: 0;
+    padding: 0 18px;
+  }
+
+  .hero-copy {
+    min-height: auto;
+    padding: 54px 18px 28px;
+  }
+
+  .eyebrow,
+  .page-kicker {
+    overflow-wrap: anywhere;
+  }
+
+  .display-title {
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(48px, 17vw, 78px);
+    letter-spacing: -0.055em;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+    margin-top: 26px;
+    font-size: 11px;
+    letter-spacing: 0.045em;
+  }
+
+  .hero-actions {
+    width: 100%;
+  }
+
+  .outline-action,
+  .hero-actions .outline-action,
+  .current-state {
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+  }
+
+  .current-state {
+    padding: 14px 18px;
+  }
+
+  .signal-field {
+    min-height: 440px;
+  }
+
+  .signal-meta,
+  .signal-caption {
+    right: 16px;
+    left: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 8px;
+  }
+
+  .signal-index {
+    right: 14px;
+    left: 14px;
+  }
+
+  .signal-row {
+    grid-template-columns: 28px minmax(0, 1fr);
+    min-height: 62px;
+  }
+
+  .signal-name {
+    min-width: 0;
+    font-size: clamp(24px, 9vw, 36px);
+    overflow-wrap: anywhere;
+  }
+
+  .home-strip {
+    width: 100%;
+  }
+
+  .strip-cell {
+    min-width: 0;
+    padding: 16px 18px;
+  }
+
+  .page-head {
+    min-height: 200px;
+    padding: 44px 18px 26px;
+  }
+
+  .page-title {
+    max-width: 100%;
+    font-size: clamp(54px, 18vw, 86px);
+    line-height: 0.82;
+    overflow-wrap: anywhere;
+  }
+
+  .filter-bar {
+    width: 100%;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: thin;
+  }
+
+  .filter-button {
+    flex: 0 0 auto;
+    padding: 0 17px;
+  }
+
+  .project-card {
+    grid-template-columns: 28px minmax(0, 1fr) 28px;
+    gap: 9px;
+    min-height: 112px;
+    padding: 16px 14px;
+  }
+
+  .project-index,
+  .project-arrow {
+    min-width: 0;
+  }
+
+  .project-name {
+    min-width: 0;
+    max-width: 100%;
+    font-size: clamp(30px, 11vw, 46px);
+    line-height: 0.88;
+    overflow-wrap: anywhere;
+  }
+
+  .detail-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-copy {
+    min-height: auto;
+    padding: 34px 18px 30px;
+  }
+
+  .detail-summary {
+    max-width: 100%;
+    margin-top: 0;
+    font-size: 11px;
+    line-height: 1.7;
+  }
+
+  .detail-actions {
+    width: 100%;
+    margin-top: 28px;
+  }
+
+  .detail-actions .outline-action {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .project-visual {
+    min-height: min(118vw, 520px);
+    background-size: 34px 34px;
+  }
+
+  .project-visual-title {
+    right: 18px;
+    bottom: 72px;
+    left: 18px;
+    max-width: calc(100% - 36px);
+    font-size: clamp(48px, 17vw, 82px);
+    letter-spacing: -0.06em;
+    line-height: 0.8;
+  }
+
+  .visual-status {
+    right: 18px;
+    bottom: 18px;
+    left: 18px;
+    gap: 12px;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+
+  .detail-grid {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detail-cell {
+    min-width: 0;
+    min-height: 94px;
+    padding: 22px 18px;
+  }
+
+  .detail-cell span {
+    overflow-wrap: anywhere;
+  }
+
+  .case-study-intro {
+    min-height: auto;
+    padding: 42px 18px;
+  }
+
+  .case-study-intro > p:not(.page-kicker) {
+    max-width: 100%;
+    font-size: clamp(28px, 9vw, 38px);
+    overflow-wrap: anywhere;
+  }
+
+  .case-study-stack {
+    min-width: 0;
+    margin-top: 46px;
+  }
+
+  .case-study-stack strong,
+  .case-study-notes p {
+    overflow-wrap: anywhere;
+  }
+
+  .case-study-notes article {
+    min-height: 240px;
+    padding: 34px 18px;
+  }
+
+  .section-label {
+    gap: 14px;
+    min-height: 58px;
+    padding: 0 16px;
+    font-size: 8px;
+  }
+
+  .project-media-item,
+  .project-media-item:nth-child(3n) {
+    min-height: min(118vw, 460px);
+  }
+
+  .project-media-caption,
+  .gallery-caption {
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 8px;
+    min-height: 62px;
+    padding: 0 14px;
+    font-size: 8px;
+  }
+
+  .project-media-caption span,
+  .gallery-caption span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .lab-card,
+  .lab-card:nth-child(even) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .lab-visual {
+    min-height: min(112vw, 430px);
+  }
+
+  .lab-copy {
+    min-width: 0;
+    min-height: auto;
+    padding: 38px 18px;
+  }
+
+  .lab-meta {
+    grid-template-columns: 34px minmax(0, 1fr) auto;
+    gap: 7px;
+  }
+
+  .lab-copy h2 {
+    max-width: 100%;
+    margin-top: 48px;
+    font-size: clamp(46px, 15vw, 74px);
+    overflow-wrap: anywhere;
+  }
+
+  .lab-copy p,
+  .lab-stack {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .skill-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .skill-card {
+    min-width: 0;
+    padding: 30px 18px;
+  }
+
+  .skill-name,
+  .skill-note {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .skill-name {
+    font-size: clamp(38px, 13vw, 64px);
+  }
+
+  .skill-meter {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .gallery-grid {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gallery-grid .gallery-item,
+  .gallery-grid.gallery-count-1 .gallery-item,
+  .gallery-grid.gallery-count-2 .gallery-item,
+  .gallery-grid.gallery-count-3 .gallery-item:first-child,
+  .gallery-grid.gallery-count-3 .gallery-item:not(:first-child),
+  .gallery-grid.gallery-count-many .gallery-item:nth-child(n) {
+    min-width: 0;
+    min-height: min(112vw, 430px);
+  }
+
+  .site-footer {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer-copy,
+  .footer-links {
+    min-width: 0;
+    padding: 22px 18px;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 390px) {
+  .wordmark {
+    font-size: 18px;
+    padding-inline: 10px;
+  }
+
+  .control-button {
+    min-width: 40px;
+    padding-inline: 7px;
+  }
+
+  .display-title {
+    font-size: clamp(44px, 16.5vw, 64px);
+  }
+
+  .page-title {
+    font-size: clamp(50px, 17vw, 72px);
+  }
+
+  .project-visual-title {
+    font-size: clamp(44px, 16vw, 68px);
+  }
+
+  .project-media-caption,
+  .gallery-caption {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+
+  .project-media-caption span:last-child,
+  .gallery-caption span:last-child {
+    display: none;
+  }
+}
