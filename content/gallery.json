@@ -12,5 +12,19 @@
     "imageUrl": "media/gallery/1786621472569-0-unity-yrrld6dmez.png",
     "mediaType": "image",
     "projectSlug": "the-dev-blog"
+  },
+  {
+    "id": "gallery-1786621831962-0",
+    "title": {
+      "en": "Unity EHBQI2diB7",
+      "ru": "Unity EHBQI2diB7"
+    },
+    "caption": {
+      "en": "",
+      "ru": ""
+    },
+    "imageUrl": "media/gallery/1786621829752-0-unity-ehbqi2dib7.png",
+    "mediaType": "image",
+    "projectSlug": ""
   }
 ]
