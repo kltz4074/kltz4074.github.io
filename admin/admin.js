@@ -3,7 +3,6 @@
  * Security, GitHub access and editor UI are separated under admin/js/.
  */
 import { CONFIG } from "./js/config.js";
-import "./js/app.js";
 
 globalThis.validateUploadSize = (file) => {
   const isVideo =
@@ -19,3 +18,5 @@ globalThis.validateUploadSize = (file) => {
     `${file.name} слишком большой. Максимальный размер: ${limitMiB} МБ.`,
   );
 };
+
+await import("./js/app.js");
