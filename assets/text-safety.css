@@ -1,0 +1,68 @@
+/* Typography safety overrides.
+   Keeps condensed display type while preventing Cyrillic/Latin glyph clipping. */
+
+.display-title,
+.page-title,
+.project-name,
+.detail-title,
+.project-visual-title,
+.skill-name,
+.lab-copy h2,
+.signal-name {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+.display-title {
+  line-height: 0.98;
+}
+
+.page-title {
+  line-height: 0.95;
+}
+
+.project-name,
+.skill-name,
+.signal-name {
+  line-height: 1;
+}
+
+.detail-title,
+.project-visual-title,
+.lab-copy h2 {
+  line-height: 0.96;
+}
+
+.hero-subtitle,
+.project-description,
+.detail-summary,
+.detail-cell span,
+.case-study-intro > p:not(.page-kicker),
+.case-study-notes p,
+.case-study-stack strong,
+.skill-note,
+.lab-copy p,
+.lab-stack,
+.gallery-caption span,
+.project-media-caption span,
+.strip-cell,
+.current-state {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+  .display-title,
+  .project-name,
+  .skill-name,
+  .signal-name {
+    line-height: 1;
+  }
+
+  .page-title,
+  .detail-title,
+  .project-visual-title,
+  .lab-copy h2 {
+    line-height: 0.98;
+  }
+}

@@ -4,9 +4,12 @@ import { escapeHTML, localize } from "../utils.js";
 
 /** Render the adaptive image/video archive. */
 export function renderGallery() {
-  const { gallery } = state.content;
-  const count = gallery.length;
+  const items = state.content.gallery.filter(
+    (item) => item.imageUrl || item.mediaUrl,
+  );
+  const count = items.length;
   const layout = count <= 3 ? `gallery-count-${count}` : "gallery-count-many";
+
   return `
     <main class="page">
       <header class="page-head">
@@ -22,32 +25,28 @@ export function renderGallery() {
         count
           ? `
             <section class="gallery-grid ${layout}" aria-label="Gallery">
-              ${gallery
+              ${items
                 .map((item, index) => {
-                  const hasMedia = Boolean(item.imageUrl || item.mediaUrl);
+                  const title = String(localize(item.title) || "").trim();
+                  const caption = String(localize(item.caption) || "").trim();
+                  const showCaption = Boolean(caption);
+
                   return `
                     <article class="gallery-item">
+                      ${mediaFrame(item, "gallery-media", title)}
                       ${
-                        hasMedia
-                          ? mediaFrame(
-                              item,
-                              "gallery-media",
-                              localize(item.title),
-                            )
-                          : `
-                            <div class="gallery-placeholder" aria-hidden="true">
-                              <span>${String(index + 1).padStart(2, "0")}</span>
+                        showCaption
+                          ? `
+                            <div class="gallery-caption">
+                              <span>/${String(index + 1).padStart(2, "0")}</span>
+                              <span>${escapeHTML(title)}</span>
+                              <span>
+                                ${escapeHTML((item.mediaType || "image").toUpperCase())} · ${escapeHTML(caption)}
+                              </span>
                             </div>
                           `
+                          : ""
                       }
-                      <div class="gallery-caption">
-                        <span>/${String(index + 1).padStart(2, "0")}</span>
-                        <span>${escapeHTML(localize(item.title))}</span>
-                        <span>
-                          ${hasMedia ? `${escapeHTML((item.mediaType || "image").toUpperCase())} · ` : ""}
-                          ${escapeHTML(localize(item.caption))}
-                        </span>
-                      </div>
                     </article>
                   `;
                 })
