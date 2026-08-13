@@ -8,13 +8,17 @@ export function renderHome() {
   const featured = content.projects
     .filter((project) => project.featured)
     .slice(0, 3);
+  const heroTitle = localize(content.hero.title);
+  const titleLength = Array.from(heroTitle.trim()).length;
+  const titleClass = titleLength > 32 ? " title-long" : titleLength > 22 ? " title-medium" : "";
+
   return `
     <main class="page">
       <section class="hero">
         <div class="hero-copy">
           ${cornerMarks()}
           <p class="eyebrow">${escapeHTML(localize(content.hero.eyebrow))}</p>
-          <h1 class="display-title">${escapeHTML(localize(content.hero.title))}</h1>
+          <h1 class="display-title${titleClass}">${escapeHTML(heroTitle)}</h1>
           <p class="hero-subtitle">${escapeHTML(localize(content.hero.subtitle))}</p>
           <div class="hero-actions">
             <a href="${routeHref("/projects")}" data-route="/projects" class="outline-action">
@@ -36,7 +40,6 @@ export function renderHome() {
           <div class="signal-axis-x"></div>
           <div class="signal-axis-y"></div>
           <div class="signal-meta">
-            <span>PROJECT SIGNAL / 2026</span>
             <span id="signal-coordinates">X 50 · Y 50</span>
           </div>
           <div class="signal-index">
