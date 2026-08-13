@@ -123,7 +123,7 @@ function render() {
       <footer class="site-footer">
         <div class="footer-copy">
           © ${new Date().getFullYear()} KLTZQU — ${
-            state.language === "ru" ? "Сделано вручную" : "Built by hand"
+            state.language === "ru" ? "Сделано с любовью" : "Made with love"
           }
         </div>
         <div class="footer-links">
