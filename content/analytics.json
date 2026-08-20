@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "ready": false,
+  "generatedAt": null,
+  "summary": {
+    "uniqueVisitors": 0,
+    "pageViews": 0,
+    "pagesPerVisitor": 0
+  },
+  "periods": {
+    "last7Days": {
+      "uniqueVisitors": 0,
+      "pageViews": 0
+    },
+    "last30Days": {
+      "uniqueVisitors": 0,
+      "pageViews": 0
+    }
+  },
+  "daily": [],
+  "pages": []
+}
