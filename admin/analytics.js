@@ -63,9 +63,12 @@ function installAnalyticsSection() {
         <span>06 / ANALYTICS</span>
         <h1>Статистика</h1>
       </div>
-      <div class="analytics-range" aria-label="Период статистики">
-        <button type="button" data-analytics-days="7">7 ДНЕЙ</button>
-        <button type="button" class="is-active" data-analytics-days="30">30 ДНЕЙ</button>
+      <div class="header-button-group">
+        <button class="secondary-button" type="button" data-analytics-refresh>↻ ОБНОВИТЬ</button>
+        <div class="analytics-range" aria-label="Период статистики">
+          <button type="button" data-analytics-days="7">7 ДНЕЙ</button>
+          <button type="button" class="is-active" data-analytics-days="30">30 ДНЕЙ</button>
+        </div>
       </div>
     </header>
 
@@ -141,7 +144,7 @@ function installAnalyticsSection() {
     </section>
 
     <p class="analytics-note">
-      Счётчик не хранит IP-адреса или браузерные данные в открытом виде. Снимок статистики обновляется GitHub Actions примерно раз в час.
+      «Обновить» перечитывает последний снимок без кеша. Сам снимок собирается GitHub Actions примерно раз в час.
     </p>
   `;
   securityPanel.parentElement.insertBefore(panel, securityPanel);
@@ -202,6 +205,7 @@ function drawChart(svg, points) {
 function initializeAnalyticsDashboard(panel) {
   let snapshot = null;
   let selectedDays = 30;
+  const refreshButton = panel.querySelector("[data-analytics-refresh]");
 
   const render = () => {
     if (!snapshot) return;
@@ -253,6 +257,10 @@ function initializeAnalyticsDashboard(panel) {
   async function loadSnapshot() {
     const status = panel.querySelector("[data-analytics-status]");
     status.textContent = "ЗАГРУЗКА…";
+    if (refreshButton) {
+      refreshButton.disabled = true;
+      refreshButton.textContent = "↻ ОБНОВЛЯЮ…";
+    }
     try {
       const response = await fetch(`${ANALYTICS_JSON_URL}?t=${Date.now()}`, {
         cache: "no-store",
@@ -263,6 +271,11 @@ function initializeAnalyticsDashboard(panel) {
     } catch (error) {
       console.error("Could not load analytics snapshot", error);
       status.textContent = "ОШИБКА ЗАГРУЗКИ";
+    } finally {
+      if (refreshButton) {
+        refreshButton.disabled = false;
+        refreshButton.textContent = "↻ ОБНОВИТЬ";
+      }
     }
   }
 
@@ -276,6 +289,7 @@ function initializeAnalyticsDashboard(panel) {
     });
   });
 
+  refreshButton?.addEventListener("click", loadSnapshot);
   loadSnapshot();
 }
 
