@@ -9,6 +9,7 @@ import {
   safeExternalUrl,
 } from "./utils.js";
 import { renderGallery } from "./views/gallery.js";
+import { renderGuestbook, hydrateGuestbook } from "./views/guestbook.js";
 import { renderHome } from "./views/home.js";
 import { renderExperiments } from "./views/lab.js";
 import { renderProject } from "./views/project.js";
@@ -31,6 +32,7 @@ function currentPage() {
   if (path === "/lab") return renderExperiments();
   if (path === "/skills") return renderSkills();
   if (path === "/gallery") return renderGallery();
+  if (path === "/guestbook") return renderGuestbook();
   return `
     <main class="page empty-state">
       <div>
@@ -259,6 +261,10 @@ function bindInteractions() {
           stack.textContent = projects[Number(row.dataset.signal)]?.stack || "";
       });
     });
+  }
+
+  if (routePath() === "/guestbook") {
+    hydrateGuestbook();
   }
 
   document.querySelectorAll("img, video").forEach((media) => {
