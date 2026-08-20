@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-08-20T15:50:49.532Z",
+  "generatedAt": "2026-08-20T16:53:13.877Z",
   "summary": {
-    "uniqueVisitors": 3,
-    "pageViews": 16,
-    "pagesPerVisitor": 5.333333333333333
+    "uniqueVisitors": 4,
+    "pageViews": 24,
+    "pagesPerVisitor": 6
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 3,
-      "pageViews": 16
+      "uniqueVisitors": 4,
+      "pageViews": 24
     },
     "last30Days": {
-      "uniqueVisitors": 3,
-      "pageViews": 16
+      "uniqueVisitors": 4,
+      "pageViews": 24
     }
   },
   "daily": [
@@ -136,33 +136,33 @@
     },
     {
       "date": "2026-08-20",
-      "views": 16
+      "views": 24
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 3,
-      "uniqueVisitors": 3
+      "views": 6,
+      "uniqueVisitors": 4
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 4,
+      "views": 5,
       "uniqueVisitors": 3
     },
     {
       "path": "/skills",
       "key": "skills",
-      "views": 2,
-      "uniqueVisitors": 2
+      "views": 3,
+      "uniqueVisitors": 3
     },
     {
       "path": "/lab",
       "key": "lab",
-      "views": 2,
-      "uniqueVisitors": 2
+      "views": 3,
+      "uniqueVisitors": 3
     },
     {
       "path": "/gallery",
@@ -173,13 +173,13 @@
     {
       "path": "/guestbook",
       "key": "guestbook",
-      "views": 1,
-      "uniqueVisitors": 1
+      "views": 2,
+      "uniqueVisitors": 2
     },
     {
       "path": "/projects/the-dev-blog",
       "key": "projects--the-dev-blog",
-      "views": 1,
+      "views": 2,
       "uniqueVisitors": 1
     },
     {
