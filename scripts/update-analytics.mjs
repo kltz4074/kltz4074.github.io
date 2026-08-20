@@ -37,7 +37,7 @@ async function readCounter(key, options = {}) {
 }
 
 async function loadRoutes() {
-  const routes = ["/", "/projects", "/skills", "/lab", "/gallery"];
+  const routes = ["/", "/projects", "/skills", "/lab", "/gallery", "/guestbook"];
   try {
     const index = JSON.parse(
       await fs.readFile(path.join(ROOT, "content", "projects", "index.json"), "utf8"),
