@@ -11,6 +11,7 @@ export const ROUTES = [
   { path: "/lab", en: "Lab", ru: "Эксперименты" },
   { path: "/skills", en: "Skills", ru: "Навыки" },
   { path: "/gallery", en: "Gallery", ru: "Галерея" },
+  { path: "/guestbook", en: "Guest Book", ru: "Гостевая" },
 ];
 
 export const STATUS_LABELS = {
