@@ -19,4 +19,5 @@ globalThis.validateUploadSize = (file) => {
   );
 };
 
+await import("./analytics.js");
 await import("./js/app.js");
