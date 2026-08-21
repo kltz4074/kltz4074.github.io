@@ -1,7 +1,7 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-08-21T11:45:08.697Z",
+  "generatedAt": "2026-08-21T13:13:28.717Z",
   "summary": {
     "uniqueVisitors": 7,
     "pageViews": 30,
@@ -132,11 +132,11 @@
     },
     {
       "date": "2026-08-20",
-      "views": 10
+      "views": 16
     },
     {
       "date": "2026-08-21",
-      "views": 20
+      "views": 14
     }
   ],
   "pages": [
