@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-08-22T04:52:17.537Z",
+  "generatedAt": "2026-08-22T05:44:56.908Z",
   "summary": {
-    "uniqueVisitors": 7,
-    "pageViews": 30,
-    "pagesPerVisitor": 4.285714285714286
+    "uniqueVisitors": 8,
+    "pageViews": 32,
+    "pagesPerVisitor": 4
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 7,
-      "pageViews": 30
+      "uniqueVisitors": 8,
+      "pageViews": 32
     },
     "last30Days": {
-      "uniqueVisitors": 7,
-      "pageViews": 30
+      "uniqueVisitors": 8,
+      "pageViews": 32
     }
   },
   "daily": [
@@ -136,21 +136,21 @@
     },
     {
       "date": "2026-08-22",
-      "views": 1
+      "views": 3
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 9,
-      "uniqueVisitors": 7
+      "views": 10,
+      "uniqueVisitors": 8
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 6,
-      "uniqueVisitors": 4
+      "views": 7,
+      "uniqueVisitors": 5
     },
     {
       "path": "/skills",
