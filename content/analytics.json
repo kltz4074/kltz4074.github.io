@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-08-24T09:07:10.678Z",
+  "generatedAt": "2026-08-24T10:06:35.342Z",
   "summary": {
-    "uniqueVisitors": 8,
-    "pageViews": 32,
-    "pagesPerVisitor": 4
+    "uniqueVisitors": 9,
+    "pageViews": 35,
+    "pagesPerVisitor": 3.888888888888889
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 8,
-      "pageViews": 32
+      "uniqueVisitors": 9,
+      "pageViews": 35
     },
     "last30Days": {
-      "uniqueVisitors": 8,
-      "pageViews": 32
+      "uniqueVisitors": 9,
+      "pageViews": 35
     }
   },
   "daily": [
@@ -120,11 +120,11 @@
     },
     {
       "date": "2026-08-20",
-      "views": 0
+      "views": 1
     },
     {
       "date": "2026-08-21",
-      "views": 29
+      "views": 28
     },
     {
       "date": "2026-08-22",
@@ -136,27 +136,27 @@
     },
     {
       "date": "2026-08-24",
-      "views": 0
+      "views": 3
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 10,
-      "uniqueVisitors": 8
+      "views": 11,
+      "uniqueVisitors": 9
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 7,
-      "uniqueVisitors": 5
+      "views": 8,
+      "uniqueVisitors": 6
     },
     {
       "path": "/skills",
       "key": "skills",
-      "views": 3,
-      "uniqueVisitors": 3
+      "views": 4,
+      "uniqueVisitors": 4
     },
     {
       "path": "/lab",
