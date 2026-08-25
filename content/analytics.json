@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-08-25T17:47:08.113Z",
+  "generatedAt": "2026-08-25T18:59:37.531Z",
   "summary": {
     "uniqueVisitors": 12,
-    "pageViews": 39,
-    "pagesPerVisitor": 3.25
+    "pageViews": 41,
+    "pagesPerVisitor": 3.4166666666666665
   },
   "periods": {
     "last7Days": {
       "uniqueVisitors": 12,
-      "pageViews": 39
+      "pageViews": 41
     },
     "last30Days": {
       "uniqueVisitors": 12,
-      "pageViews": 39
+      "pageViews": 41
     }
   },
   "daily": [
@@ -136,14 +136,14 @@
     },
     {
       "date": "2026-08-25",
-      "views": 1
+      "views": 3
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 14,
+      "views": 15,
       "uniqueVisitors": 12
     },
     {
@@ -179,8 +179,8 @@
     {
       "path": "/projects/the-dev-blog",
       "key": "projects--the-dev-blog",
-      "views": 2,
-      "uniqueVisitors": 1
+      "views": 3,
+      "uniqueVisitors": 2
     },
     {
       "path": "/projects/little-seeds",
