@@ -1,27 +1,23 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-08-27T20:33:25.932Z",
+  "generatedAt": "2026-08-28T05:26:34.375Z",
   "summary": {
-    "uniqueVisitors": 12,
-    "pageViews": 42,
-    "pagesPerVisitor": 3.5
+    "uniqueVisitors": 14,
+    "pageViews": 55,
+    "pagesPerVisitor": 3.9285714285714284
   },
   "periods": {
     "last7Days": {
       "uniqueVisitors": 8,
-      "pageViews": 18
+      "pageViews": 26
     },
     "last30Days": {
-      "uniqueVisitors": 12,
-      "pageViews": 42
+      "uniqueVisitors": 14,
+      "pageViews": 55
     }
   },
   "daily": [
-    {
-      "date": "2026-07-29",
-      "views": 0
-    },
     {
       "date": "2026-07-30",
       "views": 0
@@ -108,85 +104,89 @@
     },
     {
       "date": "2026-08-20",
-      "views": 24
+      "views": 0
     },
     {
       "date": "2026-08-21",
-      "views": 6
+      "views": 29
     },
     {
       "date": "2026-08-22",
-      "views": 2
-    },
-    {
-      "date": "2026-08-23",
-      "views": 0
-    },
-    {
-      "date": "2026-08-24",
-      "views": 6
-    },
-    {
-      "date": "2026-08-25",
-      "views": 3
-    },
-    {
-      "date": "2026-08-26",
       "views": 1
     },
     {
-      "date": "2026-08-27",
+      "date": "2026-08-23",
+      "views": 2
+    },
+    {
+      "date": "2026-08-24",
       "views": 0
+    },
+    {
+      "date": "2026-08-25",
+      "views": 6
+    },
+    {
+      "date": "2026-08-26",
+      "views": 3
+    },
+    {
+      "date": "2026-08-27",
+      "views": 1
+    },
+    {
+      "date": "2026-08-28",
+      "views": 13
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 16,
-      "uniqueVisitors": 12
+      "views": 18,
+      "uniqueVisitors": 14
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 9,
-      "uniqueVisitors": 7
+      "views": 11,
+      "uniqueVisitors": 9
     },
     {
       "path": "/skills",
       "key": "skills",
-      "views": 4,
-      "uniqueVisitors": 4
+      "views": 5,
+      "uniqueVisitors": 5
     },
     {
       "path": "/lab",
       "key": "lab",
-      "views": 3,
-      "uniqueVisitors": 3
+      "views": 5,
+      "uniqueVisitors": 5
     },
     {
       "path": "/gallery",
       "key": "gallery",
-      "views": 3,
-      "uniqueVisitors": 3
+      "views": 4,
+      "uniqueVisitors": 4
     },
     {
       "path": "/guestbook",
       "key": "guestbook",
-      "views": 2,
-      "uniqueVisitors": 2
+      "views": 3,
+      "uniqueVisitors": 3
     },
     {
       "path": "/projects/the-dev-blog",
       "key": "projects--the-dev-blog",
-      "views": 3,
-      "uniqueVisitors": 2
+      "views": 5,
+      "uniqueVisitors": 4
     },
     {
       "path": "/projects/little-seeds",
       "key": "projects--little-seeds",
-      "views": 1,
-      "uniqueVisitors": 1
+      "views": 2,
+      "uniqueVisitors": 2
     },
     {
       "path": "/projects/frozen-fries",
@@ -197,8 +197,8 @@
     {
       "path": "/projects/pillars",
       "key": "projects--pillars",
-      "views": 1,
-      "uniqueVisitors": 1
+      "views": 2,
+      "uniqueVisitors": 2
     }
   ]
 }
