@@ -1,27 +1,23 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-08-31T23:53:22.491Z",
+  "generatedAt": "2026-09-01T05:15:24.252Z",
   "summary": {
-    "uniqueVisitors": 14,
-    "pageViews": 55,
-    "pagesPerVisitor": 3.9285714285714284
+    "uniqueVisitors": 15,
+    "pageViews": 60,
+    "pagesPerVisitor": 4
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 4,
-      "pageViews": 17
+      "uniqueVisitors": 5,
+      "pageViews": 22
     },
     "last30Days": {
-      "uniqueVisitors": 14,
-      "pageViews": 55
+      "uniqueVisitors": 15,
+      "pageViews": 60
     }
   },
   "daily": [
-    {
-      "date": "2026-08-02",
-      "views": 0
-    },
     {
       "date": "2026-08-03",
       "views": 0
@@ -92,39 +88,39 @@
     },
     {
       "date": "2026-08-20",
-      "views": 26
+      "views": 0
     },
     {
       "date": "2026-08-21",
-      "views": 4
+      "views": 29
     },
     {
       "date": "2026-08-22",
-      "views": 2
-    },
-    {
-      "date": "2026-08-23",
-      "views": 0
-    },
-    {
-      "date": "2026-08-24",
-      "views": 6
-    },
-    {
-      "date": "2026-08-25",
-      "views": 3
-    },
-    {
-      "date": "2026-08-26",
       "views": 1
     },
     {
+      "date": "2026-08-23",
+      "views": 2
+    },
+    {
+      "date": "2026-08-24",
+      "views": 0
+    },
+    {
+      "date": "2026-08-25",
+      "views": 6
+    },
+    {
+      "date": "2026-08-26",
+      "views": 3
+    },
+    {
       "date": "2026-08-27",
-      "views": 13
+      "views": 1
     },
     {
       "date": "2026-08-28",
-      "views": 0
+      "views": 13
     },
     {
       "date": "2026-08-29",
@@ -137,20 +133,24 @@
     {
       "date": "2026-08-31",
       "views": 0
+    },
+    {
+      "date": "2026-09-01",
+      "views": 5
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 18,
-      "uniqueVisitors": 14
+      "views": 19,
+      "uniqueVisitors": 15
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 11,
-      "uniqueVisitors": 9
+      "views": 12,
+      "uniqueVisitors": 10
     },
     {
       "path": "/skills",
@@ -161,8 +161,8 @@
     {
       "path": "/lab",
       "key": "lab",
-      "views": 5,
-      "uniqueVisitors": 5
+      "views": 6,
+      "uniqueVisitors": 6
     },
     {
       "path": "/gallery",
@@ -179,14 +179,14 @@
     {
       "path": "/projects/the-dev-blog",
       "key": "projects--the-dev-blog",
-      "views": 5,
-      "uniqueVisitors": 4
+      "views": 6,
+      "uniqueVisitors": 5
     },
     {
       "path": "/projects/little-seeds",
       "key": "projects--little-seeds",
-      "views": 2,
-      "uniqueVisitors": 2
+      "views": 3,
+      "uniqueVisitors": 3
     },
     {
       "path": "/projects/frozen-fries",
