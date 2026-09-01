@@ -1,7 +1,7 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-01T14:56:35.901Z",
+  "generatedAt": "2026-09-01T18:35:10.215Z",
   "summary": {
     "uniqueVisitors": 15,
     "pageViews": 60,
@@ -9,8 +9,8 @@
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 5,
-      "pageViews": 22
+      "uniqueVisitors": 4,
+      "pageViews": 19
     },
     "last30Days": {
       "uniqueVisitors": 15,
@@ -88,11 +88,11 @@
     },
     {
       "date": "2026-08-20",
-      "views": 16
+      "views": 24
     },
     {
       "date": "2026-08-21",
-      "views": 14
+      "views": 6
     },
     {
       "date": "2026-08-22",
@@ -108,11 +108,11 @@
     },
     {
       "date": "2026-08-25",
-      "views": 0
+      "views": 3
     },
     {
       "date": "2026-08-26",
-      "views": 4
+      "views": 1
     },
     {
       "date": "2026-08-27",
