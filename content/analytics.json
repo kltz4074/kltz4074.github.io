@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-03T11:20:14.385Z",
+  "generatedAt": "2026-09-03T16:29:04.948Z",
   "summary": {
-    "uniqueVisitors": 15,
-    "pageViews": 60,
-    "pagesPerVisitor": 4
+    "uniqueVisitors": 16,
+    "pageViews": 65,
+    "pagesPerVisitor": 4.0625
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 3,
-      "pageViews": 18
+      "uniqueVisitors": 4,
+      "pageViews": 23
     },
     "last30Days": {
-      "uniqueVisitors": 15,
-      "pageViews": 60
+      "uniqueVisitors": 16,
+      "pageViews": 65
     }
   },
   "daily": [
@@ -80,11 +80,11 @@
     },
     {
       "date": "2026-08-20",
-      "views": 1
+      "views": 24
     },
     {
       "date": "2026-08-21",
-      "views": 29
+      "views": 6
     },
     {
       "date": "2026-08-22",
@@ -136,33 +136,33 @@
     },
     {
       "date": "2026-09-03",
-      "views": 0
+      "views": 5
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 19,
-      "uniqueVisitors": 15
+      "views": 20,
+      "uniqueVisitors": 16
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 12,
-      "uniqueVisitors": 10
+      "views": 13,
+      "uniqueVisitors": 11
     },
     {
       "path": "/skills",
       "key": "skills",
-      "views": 5,
-      "uniqueVisitors": 5
+      "views": 6,
+      "uniqueVisitors": 6
     },
     {
       "path": "/lab",
       "key": "lab",
-      "views": 6,
-      "uniqueVisitors": 6
+      "views": 7,
+      "uniqueVisitors": 7
     },
     {
       "path": "/gallery",
@@ -185,8 +185,8 @@
     {
       "path": "/projects/little-seeds",
       "key": "projects--little-seeds",
-      "views": 3,
-      "uniqueVisitors": 3
+      "views": 4,
+      "uniqueVisitors": 4
     },
     {
       "path": "/projects/frozen-fries",
