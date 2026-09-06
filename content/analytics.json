@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-06T13:41:43.977Z",
+  "generatedAt": "2026-09-06T17:06:25.108Z",
   "summary": {
-    "uniqueVisitors": 17,
-    "pageViews": 66,
-    "pagesPerVisitor": 3.8823529411764706
+    "uniqueVisitors": 18,
+    "pageViews": 72,
+    "pagesPerVisitor": 4
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 3,
-      "pageViews": 11
+      "uniqueVisitors": 4,
+      "pageViews": 17
     },
     "last30Days": {
-      "uniqueVisitors": 17,
-      "pageViews": 66
+      "uniqueVisitors": 18,
+      "pageViews": 72
     }
   },
   "daily": [
@@ -68,11 +68,11 @@
     },
     {
       "date": "2026-08-20",
-      "views": 16
+      "views": 24
     },
     {
       "date": "2026-08-21",
-      "views": 14
+      "views": 6
     },
     {
       "date": "2026-08-22",
@@ -88,11 +88,11 @@
     },
     {
       "date": "2026-08-25",
-      "views": 0
+      "views": 1
     },
     {
       "date": "2026-08-26",
-      "views": 4
+      "views": 3
     },
     {
       "date": "2026-08-27",
@@ -124,11 +124,11 @@
     },
     {
       "date": "2026-09-03",
-      "views": 0
+      "views": 5
     },
     {
       "date": "2026-09-04",
-      "views": 5
+      "views": 0
     },
     {
       "date": "2026-09-05",
@@ -136,21 +136,21 @@
     },
     {
       "date": "2026-09-06",
-      "views": 0
+      "views": 6
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 21,
-      "uniqueVisitors": 17
+      "views": 22,
+      "uniqueVisitors": 18
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 13,
-      "uniqueVisitors": 11
+      "views": 14,
+      "uniqueVisitors": 12
     },
     {
       "path": "/skills",
@@ -173,26 +173,26 @@
     {
       "path": "/guestbook",
       "key": "guestbook",
-      "views": 3,
-      "uniqueVisitors": 3
-    },
-    {
-      "path": "/projects/the-dev-blog",
-      "key": "projects--the-dev-blog",
-      "views": 6,
-      "uniqueVisitors": 5
-    },
-    {
-      "path": "/projects/little-seeds",
-      "key": "projects--little-seeds",
       "views": 4,
       "uniqueVisitors": 4
     },
     {
+      "path": "/projects/the-dev-blog",
+      "key": "projects--the-dev-blog",
+      "views": 7,
+      "uniqueVisitors": 6
+    },
+    {
+      "path": "/projects/little-seeds",
+      "key": "projects--little-seeds",
+      "views": 5,
+      "uniqueVisitors": 5
+    },
+    {
       "path": "/projects/frozen-fries",
       "key": "projects--frozen-fries",
-      "views": 0,
-      "uniqueVisitors": 0
+      "views": 1,
+      "uniqueVisitors": 1
     },
     {
       "path": "/projects/pillars",
