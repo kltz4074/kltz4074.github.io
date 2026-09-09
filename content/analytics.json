@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-09T06:01:23.268Z",
+  "generatedAt": "2026-09-09T11:29:11.304Z",
   "summary": {
-    "uniqueVisitors": 19,
-    "pageViews": 73,
-    "pagesPerVisitor": 3.8421052631578947
+    "uniqueVisitors": 20,
+    "pageViews": 77,
+    "pagesPerVisitor": 3.85
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 4,
-      "pageViews": 13
+      "uniqueVisitors": 5,
+      "pageViews": 17
     },
     "last30Days": {
-      "uniqueVisitors": 19,
-      "pageViews": 73
+      "uniqueVisitors": 20,
+      "pageViews": 77
     }
   },
   "daily": [
@@ -56,7 +56,7 @@
     },
     {
       "date": "2026-08-20",
-      "views": 0
+      "views": 1
     },
     {
       "date": "2026-08-21",
@@ -64,7 +64,7 @@
     },
     {
       "date": "2026-08-22",
-      "views": 3
+      "views": 2
     },
     {
       "date": "2026-08-23",
@@ -72,19 +72,19 @@
     },
     {
       "date": "2026-08-24",
-      "views": 0
-    },
-    {
-      "date": "2026-08-25",
       "views": 6
     },
     {
+      "date": "2026-08-25",
+      "views": 0
+    },
+    {
       "date": "2026-08-26",
-      "views": 3
+      "views": 4
     },
     {
       "date": "2026-08-27",
-      "views": 1
+      "views": 0
     },
     {
       "date": "2026-08-28",
@@ -136,27 +136,27 @@
     },
     {
       "date": "2026-09-09",
-      "views": 0
+      "views": 4
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 23,
-      "uniqueVisitors": 19
+      "views": 24,
+      "uniqueVisitors": 20
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 14,
-      "uniqueVisitors": 12
+      "views": 15,
+      "uniqueVisitors": 13
     },
     {
       "path": "/skills",
       "key": "skills",
-      "views": 6,
-      "uniqueVisitors": 6
+      "views": 7,
+      "uniqueVisitors": 7
     },
     {
       "path": "/lab",
@@ -191,8 +191,8 @@
     {
       "path": "/projects/frozen-fries",
       "key": "projects--frozen-fries",
-      "views": 1,
-      "uniqueVisitors": 1
+      "views": 2,
+      "uniqueVisitors": 2
     },
     {
       "path": "/projects/pillars",
