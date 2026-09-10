@@ -1,7 +1,7 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-10T19:44:33.799Z",
+  "generatedAt": "2026-09-10T22:37:59.394Z",
   "summary": {
     "uniqueVisitors": 21,
     "pageViews": 80,
@@ -52,11 +52,11 @@
     },
     {
       "date": "2026-08-20",
-      "views": 24
+      "views": 26
     },
     {
       "date": "2026-08-21",
-      "views": 6
+      "views": 4
     },
     {
       "date": "2026-08-22",
@@ -80,11 +80,11 @@
     },
     {
       "date": "2026-08-27",
-      "views": 0
+      "views": 13
     },
     {
       "date": "2026-08-28",
-      "views": 13
+      "views": 0
     },
     {
       "date": "2026-08-29",
@@ -132,11 +132,11 @@
     },
     {
       "date": "2026-09-09",
-      "views": 5
+      "views": 7
     },
     {
       "date": "2026-09-10",
-      "views": 2
+      "views": 0
     }
   ],
   "pages": [
