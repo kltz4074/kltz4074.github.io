@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-12T05:51:50.849Z",
+  "generatedAt": "2026-09-12T10:52:18.254Z",
   "summary": {
-    "uniqueVisitors": 21,
-    "pageViews": 80,
-    "pagesPerVisitor": 3.8095238095238093
+    "uniqueVisitors": 23,
+    "pageViews": 86,
+    "pagesPerVisitor": 3.739130434782609
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 5,
-      "pageViews": 15
+      "uniqueVisitors": 7,
+      "pageViews": 21
     },
     "last30Days": {
-      "uniqueVisitors": 21,
-      "pageViews": 80
+      "uniqueVisitors": 23,
+      "pageViews": 86
     }
   },
   "daily": [
@@ -44,7 +44,7 @@
     },
     {
       "date": "2026-08-20",
-      "views": 0
+      "views": 1
     },
     {
       "date": "2026-08-21",
@@ -52,7 +52,7 @@
     },
     {
       "date": "2026-08-22",
-      "views": 3
+      "views": 2
     },
     {
       "date": "2026-08-23",
@@ -60,19 +60,19 @@
     },
     {
       "date": "2026-08-24",
-      "views": 0
-    },
-    {
-      "date": "2026-08-25",
-      "views": 6
-    },
-    {
-      "date": "2026-08-26",
       "views": 3
     },
     {
+      "date": "2026-08-25",
+      "views": 3
+    },
+    {
+      "date": "2026-08-26",
+      "views": 4
+    },
+    {
       "date": "2026-08-27",
-      "views": 1
+      "views": 0
     },
     {
       "date": "2026-08-28",
@@ -124,11 +124,11 @@
     },
     {
       "date": "2026-09-09",
-      "views": 0
+      "views": 4
     },
     {
       "date": "2026-09-10",
-      "views": 7
+      "views": 3
     },
     {
       "date": "2026-09-11",
@@ -136,21 +136,21 @@
     },
     {
       "date": "2026-09-12",
-      "views": 0
+      "views": 6
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 26,
-      "uniqueVisitors": 21
+      "views": 28,
+      "uniqueVisitors": 23
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 15,
-      "uniqueVisitors": 13
+      "views": 16,
+      "uniqueVisitors": 14
     },
     {
       "path": "/skills",
@@ -167,20 +167,20 @@
     {
       "path": "/gallery",
       "key": "gallery",
-      "views": 4,
-      "uniqueVisitors": 4
+      "views": 5,
+      "uniqueVisitors": 5
     },
     {
       "path": "/guestbook",
       "key": "guestbook",
-      "views": 4,
-      "uniqueVisitors": 4
+      "views": 5,
+      "uniqueVisitors": 5
     },
     {
       "path": "/projects/the-dev-blog",
       "key": "projects--the-dev-blog",
-      "views": 8,
-      "uniqueVisitors": 7
+      "views": 9,
+      "uniqueVisitors": 8
     },
     {
       "path": "/projects/little-seeds",
