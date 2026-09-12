@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-12T10:52:18.254Z",
+  "generatedAt": "2026-09-12T14:11:12.890Z",
   "summary": {
-    "uniqueVisitors": 23,
-    "pageViews": 86,
-    "pagesPerVisitor": 3.739130434782609
+    "uniqueVisitors": 25,
+    "pageViews": 89,
+    "pagesPerVisitor": 3.56
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 7,
-      "pageViews": 21
+      "uniqueVisitors": 8,
+      "pageViews": 23
     },
     "last30Days": {
-      "uniqueVisitors": 23,
-      "pageViews": 86
+      "uniqueVisitors": 25,
+      "pageViews": 89
     }
   },
   "daily": [
@@ -44,11 +44,11 @@
     },
     {
       "date": "2026-08-20",
-      "views": 1
+      "views": 16
     },
     {
       "date": "2026-08-21",
-      "views": 29
+      "views": 14
     },
     {
       "date": "2026-08-22",
@@ -60,11 +60,11 @@
     },
     {
       "date": "2026-08-24",
-      "views": 3
+      "views": 6
     },
     {
       "date": "2026-08-25",
-      "views": 3
+      "views": 0
     },
     {
       "date": "2026-08-26",
@@ -100,19 +100,19 @@
     },
     {
       "date": "2026-09-03",
-      "views": 0
-    },
-    {
-      "date": "2026-09-04",
       "views": 5
     },
     {
-      "date": "2026-09-05",
+      "date": "2026-09-04",
       "views": 0
     },
     {
-      "date": "2026-09-06",
+      "date": "2026-09-05",
       "views": 1
+    },
+    {
+      "date": "2026-09-06",
+      "views": 0
     },
     {
       "date": "2026-09-07",
@@ -136,21 +136,21 @@
     },
     {
       "date": "2026-09-12",
-      "views": 6
+      "views": 9
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 28,
-      "uniqueVisitors": 23
+      "views": 30,
+      "uniqueVisitors": 25
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 16,
-      "uniqueVisitors": 14
+      "views": 17,
+      "uniqueVisitors": 15
     },
     {
       "path": "/skills",
