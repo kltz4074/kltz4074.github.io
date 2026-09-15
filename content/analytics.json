@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-15T13:36:53.260Z",
+  "generatedAt": "2026-09-15T18:14:37.558Z",
   "summary": {
-    "uniqueVisitors": 25,
-    "pageViews": 91,
-    "pagesPerVisitor": 3.64
+    "uniqueVisitors": 27,
+    "pageViews": 95,
+    "pagesPerVisitor": 3.5185185185185186
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 7,
-      "pageViews": 18
+      "uniqueVisitors": 9,
+      "pageViews": 22
     },
     "last30Days": {
-      "uniqueVisitors": 25,
-      "pageViews": 91
+      "uniqueVisitors": 27,
+      "pageViews": 95
     }
   },
   "daily": [
@@ -32,11 +32,11 @@
     },
     {
       "date": "2026-08-20",
-      "views": 16
+      "views": 24
     },
     {
       "date": "2026-08-21",
-      "views": 14
+      "views": 6
     },
     {
       "date": "2026-08-22",
@@ -52,11 +52,11 @@
     },
     {
       "date": "2026-08-25",
-      "views": 0
+      "views": 3
     },
     {
       "date": "2026-08-26",
-      "views": 4
+      "views": 1
     },
     {
       "date": "2026-08-27",
@@ -88,11 +88,11 @@
     },
     {
       "date": "2026-09-03",
-      "views": 0
+      "views": 5
     },
     {
       "date": "2026-09-04",
-      "views": 5
+      "views": 0
     },
     {
       "date": "2026-09-05",
@@ -100,23 +100,23 @@
     },
     {
       "date": "2026-09-06",
-      "views": 0
-    },
-    {
-      "date": "2026-09-07",
       "views": 6
     },
     {
-      "date": "2026-09-08",
+      "date": "2026-09-07",
       "views": 1
     },
     {
+      "date": "2026-09-08",
+      "views": 0
+    },
+    {
       "date": "2026-09-09",
-      "views": 4
+      "views": 5
     },
     {
       "date": "2026-09-10",
-      "views": 3
+      "views": 2
     },
     {
       "date": "2026-09-11",
@@ -136,21 +136,21 @@
     },
     {
       "date": "2026-09-15",
-      "views": 2
+      "views": 6
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 31,
-      "uniqueVisitors": 25
+      "views": 33,
+      "uniqueVisitors": 27
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 18,
-      "uniqueVisitors": 15
+      "views": 19,
+      "uniqueVisitors": 16
     },
     {
       "path": "/skills",
@@ -185,8 +185,8 @@
     {
       "path": "/projects/little-seeds",
       "key": "projects--little-seeds",
-      "views": 5,
-      "uniqueVisitors": 5
+      "views": 6,
+      "uniqueVisitors": 6
     },
     {
       "path": "/projects/frozen-fries",
