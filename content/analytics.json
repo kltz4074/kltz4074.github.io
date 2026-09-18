@@ -1,62 +1,58 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-17T22:13:19.865Z",
+  "generatedAt": "2026-09-18T00:25:11.260Z",
   "summary": {
-    "uniqueVisitors": 27,
-    "pageViews": 95,
-    "pagesPerVisitor": 3.5185185185185186
+    "uniqueVisitors": 28,
+    "pageViews": 96,
+    "pagesPerVisitor": 3.4285714285714284
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 6,
-      "pageViews": 15
+      "uniqueVisitors": 7,
+      "pageViews": 16
     },
     "last30Days": {
-      "uniqueVisitors": 27,
-      "pageViews": 95
+      "uniqueVisitors": 28,
+      "pageViews": 96
     }
   },
   "daily": [
     {
-      "date": "2026-08-19",
-      "views": 0
-    },
-    {
       "date": "2026-08-20",
-      "views": 26
+      "views": 0
     },
     {
       "date": "2026-08-21",
-      "views": 4
+      "views": 26
     },
     {
       "date": "2026-08-22",
-      "views": 2
+      "views": 4
     },
     {
       "date": "2026-08-23",
-      "views": 0
+      "views": 2
     },
     {
       "date": "2026-08-24",
-      "views": 6
+      "views": 0
     },
     {
       "date": "2026-08-25",
-      "views": 3
+      "views": 6
     },
     {
       "date": "2026-08-26",
-      "views": 1
+      "views": 3
     },
     {
       "date": "2026-08-27",
-      "views": 13
+      "views": 1
     },
     {
       "date": "2026-08-28",
-      "views": 0
+      "views": 13
     },
     {
       "date": "2026-08-29",
@@ -72,43 +68,43 @@
     },
     {
       "date": "2026-09-01",
-      "views": 5
+      "views": 0
     },
     {
       "date": "2026-09-02",
-      "views": 0
+      "views": 5
     },
     {
       "date": "2026-09-03",
-      "views": 5
+      "views": 0
     },
     {
       "date": "2026-09-04",
-      "views": 0
-    },
-    {
-      "date": "2026-09-05",
-      "views": 1
-    },
-    {
-      "date": "2026-09-06",
-      "views": 6
-    },
-    {
-      "date": "2026-09-07",
-      "views": 1
-    },
-    {
-      "date": "2026-09-08",
-      "views": 0
-    },
-    {
-      "date": "2026-09-09",
       "views": 5
     },
     {
+      "date": "2026-09-05",
+      "views": 0
+    },
+    {
+      "date": "2026-09-06",
+      "views": 1
+    },
+    {
+      "date": "2026-09-07",
+      "views": 6
+    },
+    {
+      "date": "2026-09-08",
+      "views": 1
+    },
+    {
+      "date": "2026-09-09",
+      "views": 0
+    },
+    {
       "date": "2026-09-10",
-      "views": 2
+      "views": 7
     },
     {
       "date": "2026-09-11",
@@ -116,35 +112,39 @@
     },
     {
       "date": "2026-09-12",
-      "views": 9
+      "views": 0
     },
     {
       "date": "2026-09-13",
-      "views": 0
+      "views": 9
     },
     {
       "date": "2026-09-14",
-      "views": 2
+      "views": 0
     },
     {
       "date": "2026-09-15",
-      "views": 4
+      "views": 2
     },
     {
       "date": "2026-09-16",
-      "views": 0
+      "views": 4
     },
     {
       "date": "2026-09-17",
       "views": 0
+    },
+    {
+      "date": "2026-09-18",
+      "views": 1
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 33,
-      "uniqueVisitors": 27
+      "views": 34,
+      "uniqueVisitors": 28
     },
     {
       "path": "/projects",
