@@ -1,7 +1,7 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-25T18:40:14.913Z",
+  "generatedAt": "2026-09-25T22:24:53.352Z",
   "summary": {
     "uniqueVisitors": 31,
     "pageViews": 99,
@@ -20,11 +20,11 @@
   "daily": [
     {
       "date": "2026-08-27",
-      "views": 0
+      "views": 13
     },
     {
       "date": "2026-08-28",
-      "views": 13
+      "views": 0
     },
     {
       "date": "2026-08-29",
@@ -92,11 +92,11 @@
     },
     {
       "date": "2026-09-14",
-      "views": 0
+      "views": 2
     },
     {
       "date": "2026-09-15",
-      "views": 6
+      "views": 4
     },
     {
       "date": "2026-09-16",
