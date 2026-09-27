@@ -1,7 +1,7 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-26T22:54:53.863Z",
+  "generatedAt": "2026-09-27T01:30:58.433Z",
   "summary": {
     "uniqueVisitors": 36,
     "pageViews": 108,
@@ -18,10 +18,6 @@
     }
   },
   "daily": [
-    {
-      "date": "2026-08-28",
-      "views": 0
-    },
     {
       "date": "2026-08-29",
       "views": 0
@@ -44,35 +40,35 @@
     },
     {
       "date": "2026-09-03",
-      "views": 5
+      "views": 0
     },
     {
       "date": "2026-09-04",
-      "views": 0
+      "views": 5
     },
     {
       "date": "2026-09-05",
-      "views": 1
+      "views": 0
     },
     {
       "date": "2026-09-06",
-      "views": 6
-    },
-    {
-      "date": "2026-09-07",
       "views": 1
     },
     {
+      "date": "2026-09-07",
+      "views": 6
+    },
+    {
       "date": "2026-09-08",
-      "views": 0
+      "views": 1
     },
     {
       "date": "2026-09-09",
-      "views": 7
+      "views": 0
     },
     {
       "date": "2026-09-10",
-      "views": 0
+      "views": 7
     },
     {
       "date": "2026-09-11",
@@ -80,23 +76,23 @@
     },
     {
       "date": "2026-09-12",
-      "views": 9
+      "views": 0
     },
     {
       "date": "2026-09-13",
-      "views": 0
+      "views": 9
     },
     {
       "date": "2026-09-14",
-      "views": 2
+      "views": 0
     },
     {
       "date": "2026-09-15",
-      "views": 4
+      "views": 2
     },
     {
       "date": "2026-09-16",
-      "views": 0
+      "views": 4
     },
     {
       "date": "2026-09-17",
@@ -120,23 +116,27 @@
     },
     {
       "date": "2026-09-22",
-      "views": 2
+      "views": 0
     },
     {
       "date": "2026-09-23",
-      "views": 0
+      "views": 2
     },
     {
       "date": "2026-09-24",
-      "views": 1
-    },
-    {
-      "date": "2026-09-25",
       "views": 0
     },
     {
+      "date": "2026-09-25",
+      "views": 1
+    },
+    {
       "date": "2026-09-26",
-      "views": 9
+      "views": 2
+    },
+    {
+      "date": "2026-09-27",
+      "views": 7
     }
   ],
   "pages": [
