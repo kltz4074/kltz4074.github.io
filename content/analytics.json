@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-09-28T06:59:36.684Z",
+  "generatedAt": "2026-09-28T15:33:17.026Z",
   "summary": {
-    "uniqueVisitors": 36,
-    "pageViews": 108,
-    "pagesPerVisitor": 3
+    "uniqueVisitors": 37,
+    "pageViews": 109,
+    "pagesPerVisitor": 2.945945945945946
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 8,
-      "pageViews": 12
+      "uniqueVisitors": 9,
+      "pageViews": 13
     },
     "last30Days": {
-      "uniqueVisitors": 22,
-      "pageViews": 53
+      "uniqueVisitors": 23,
+      "pageViews": 54
     }
   },
   "daily": [
@@ -36,35 +36,35 @@
     },
     {
       "date": "2026-09-03",
-      "views": 0
-    },
-    {
-      "date": "2026-09-04",
       "views": 5
     },
     {
-      "date": "2026-09-05",
+      "date": "2026-09-04",
       "views": 0
+    },
+    {
+      "date": "2026-09-05",
+      "views": 1
     },
     {
       "date": "2026-09-06",
-      "views": 1
-    },
-    {
-      "date": "2026-09-07",
       "views": 6
     },
     {
-      "date": "2026-09-08",
+      "date": "2026-09-07",
       "views": 1
     },
     {
-      "date": "2026-09-09",
+      "date": "2026-09-08",
       "views": 0
     },
     {
+      "date": "2026-09-09",
+      "views": 4
+    },
+    {
       "date": "2026-09-10",
-      "views": 7
+      "views": 3
     },
     {
       "date": "2026-09-11",
@@ -72,11 +72,11 @@
     },
     {
       "date": "2026-09-12",
-      "views": 4
+      "views": 9
     },
     {
       "date": "2026-09-13",
-      "views": 5
+      "views": 0
     },
     {
       "date": "2026-09-14",
@@ -128,23 +128,23 @@
     },
     {
       "date": "2026-09-26",
-      "views": 2
+      "views": 9
     },
     {
       "date": "2026-09-27",
-      "views": 7
+      "views": 0
     },
     {
       "date": "2026-09-28",
-      "views": 0
+      "views": 1
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 43,
-      "uniqueVisitors": 36
+      "views": 44,
+      "uniqueVisitors": 37
     },
     {
       "path": "/projects",
