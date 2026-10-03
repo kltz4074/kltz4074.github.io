@@ -1,7 +1,7 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-10-03T08:12:00.892Z",
+  "generatedAt": "2026-10-03T13:26:42.992Z",
   "summary": {
     "uniqueVisitors": 38,
     "pageViews": 110,
@@ -9,8 +9,8 @@
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 5,
-      "pageViews": 9
+      "uniqueVisitors": 2,
+      "pageViews": 2
     },
     "last30Days": {
       "uniqueVisitors": 23,
@@ -24,11 +24,11 @@
     },
     {
       "date": "2026-09-05",
-      "views": 0
+      "views": 1
     },
     {
       "date": "2026-09-06",
-      "views": 1
+      "views": 0
     },
     {
       "date": "2026-09-07",
@@ -40,11 +40,11 @@
     },
     {
       "date": "2026-09-09",
-      "views": 0
+      "views": 4
     },
     {
       "date": "2026-09-10",
-      "views": 7
+      "views": 3
     },
     {
       "date": "2026-09-11",
@@ -52,11 +52,11 @@
     },
     {
       "date": "2026-09-12",
-      "views": 4
+      "views": 9
     },
     {
       "date": "2026-09-13",
-      "views": 5
+      "views": 0
     },
     {
       "date": "2026-09-14",
@@ -108,19 +108,19 @@
     },
     {
       "date": "2026-09-26",
-      "views": 2
+      "views": 9
     },
     {
       "date": "2026-09-27",
-      "views": 7
-    },
-    {
-      "date": "2026-09-28",
       "views": 0
     },
     {
-      "date": "2026-09-29",
+      "date": "2026-09-28",
       "views": 1
+    },
+    {
+      "date": "2026-09-29",
+      "views": 0
     },
     {
       "date": "2026-09-30",
@@ -128,11 +128,11 @@
     },
     {
       "date": "2026-10-01",
-      "views": 0
+      "views": 1
     },
     {
       "date": "2026-10-02",
-      "views": 1
+      "views": 0
     },
     {
       "date": "2026-10-03",
