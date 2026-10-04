@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-10-04T13:15:03.613Z",
+  "generatedAt": "2026-10-04T17:38:31.459Z",
   "summary": {
-    "uniqueVisitors": 46,
-    "pageViews": 120,
-    "pagesPerVisitor": 2.608695652173913
+    "uniqueVisitors": 52,
+    "pageViews": 135,
+    "pagesPerVisitor": 2.5961538461538463
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 10,
-      "pageViews": 12
+      "uniqueVisitors": 16,
+      "pageViews": 27
     },
     "last30Days": {
-      "uniqueVisitors": 30,
-      "pageViews": 55
+      "uniqueVisitors": 36,
+      "pageViews": 70
     }
   },
   "daily": [
@@ -24,15 +24,15 @@
     },
     {
       "date": "2026-09-06",
-      "views": 0
-    },
-    {
-      "date": "2026-09-07",
       "views": 6
     },
     {
-      "date": "2026-09-08",
+      "date": "2026-09-07",
       "views": 1
+    },
+    {
+      "date": "2026-09-08",
+      "views": 0
     },
     {
       "date": "2026-09-09",
@@ -60,11 +60,11 @@
     },
     {
       "date": "2026-09-15",
-      "views": 2
+      "views": 6
     },
     {
       "date": "2026-09-16",
-      "views": 4
+      "views": 0
     },
     {
       "date": "2026-09-17",
@@ -88,11 +88,11 @@
     },
     {
       "date": "2026-09-22",
-      "views": 1
+      "views": 2
     },
     {
       "date": "2026-09-23",
-      "views": 1
+      "views": 0
     },
     {
       "date": "2026-09-24",
@@ -132,25 +132,25 @@
     },
     {
       "date": "2026-10-03",
-      "views": 0
+      "views": 3
     },
     {
       "date": "2026-10-04",
-      "views": 10
+      "views": 22
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 47,
-      "uniqueVisitors": 40
+      "views": 55,
+      "uniqueVisitors": 46
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 22,
-      "uniqueVisitors": 19
+      "views": 23,
+      "uniqueVisitors": 20
     },
     {
       "path": "/skills",
@@ -179,14 +179,14 @@
     {
       "path": "/projects/the-dev-blog",
       "key": "projects--the-dev-blog",
-      "views": 10,
-      "uniqueVisitors": 9
+      "views": 13,
+      "uniqueVisitors": 12
     },
     {
       "path": "/projects/little-seeds",
       "key": "projects--little-seeds",
-      "views": 8,
-      "uniqueVisitors": 8
+      "views": 10,
+      "uniqueVisitors": 10
     },
     {
       "path": "/projects/frozen-fries",
@@ -197,8 +197,8 @@
     {
       "path": "/projects/pillars",
       "key": "projects--pillars",
-      "views": 2,
-      "uniqueVisitors": 2
+      "views": 3,
+      "uniqueVisitors": 3
     }
   ]
 }
