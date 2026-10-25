@@ -22,18 +22,43 @@ function apiUrl(key, options = {}) {
   return `https://counterapi.com/api/${encodeURIComponent(NAMESPACE)}/${encodeURIComponent(ACTION)}/${encodeURIComponent(key)}?${params}`;
 }
 
+class CounterUnavailableError extends Error {}
+
 async function readCounter(key, options = {}) {
+  let lastError;
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      return await fetchCounter(key, options);
+    } catch (error) {
+      if (!(error instanceof CounterUnavailableError)) throw error;
+      lastError = error;
+      if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 500 * 2 ** attempt));
+    }
+  }
+  throw lastError;
+}
+
+async function fetchCounter(key, options) {
+  try {
   const response = await fetch(apiUrl(key, options), {
     headers: { Accept: "application/json" },
+    signal: AbortSignal.timeout(10_000),
   });
 
   if (response.status === 404) return 0;
   if (!response.ok) {
-    throw new Error(`CounterAPI ${response.status} for ${key}`);
+    throw new CounterUnavailableError(`CounterAPI ${response.status} for ${key}`);
   }
 
   const data = await response.json();
-  return Number(data.value) || 0;
+  const value = Number(data.value);
+  if (data.value === null || data.value === undefined || !Number.isFinite(value) || value < 0) {
+    throw new CounterUnavailableError(`Invalid CounterAPI value for ${key}`);
+  }
+  return value;
+  } catch (error) {
+    throw new CounterUnavailableError(`Could not read CounterAPI ${key}: ${error.message}`);
+  }
 }
 
 async function loadRoutes() {
@@ -72,6 +97,7 @@ function isoDateDaysAgo(daysAgo) {
   return date.toISOString().slice(0, 10);
 }
 
+async function updateSnapshot() {
 const routes = await loadRoutes();
 
 const [totalViews, totalUnique, views7, unique7, views30, unique30] =
@@ -129,3 +155,13 @@ const snapshot = {
 
 await fs.writeFile(OUTPUT, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
 console.log(`Analytics snapshot written: ${OUTPUT}`);
+}
+
+// A failed refresh must leave the last successful snapshot and its timestamp intact.
+// File-system and programming errors still fail the workflow.
+try {
+  await updateSnapshot();
+} catch (error) {
+  if (!(error instanceof CounterUnavailableError)) throw error;
+  console.warn(`::warning::Analytics refresh skipped; existing snapshot preserved. ${error.message}`);
+}
