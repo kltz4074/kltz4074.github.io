@@ -40,22 +40,22 @@ async function readCounter(key, options = {}) {
 
 async function fetchCounter(key, options) {
   try {
-  const response = await fetch(apiUrl(key, options), {
-    headers: { Accept: "application/json" },
-    signal: AbortSignal.timeout(10_000),
-  });
+    const response = await fetch(apiUrl(key, options), {
+      headers: { Accept: "application/json" },
+      signal: AbortSignal.timeout(10_000),
+    });
 
-  if (response.status === 404) return 0;
-  if (!response.ok) {
-    throw new CounterUnavailableError(`CounterAPI ${response.status} for ${key}`);
-  }
+    if (response.status === 404) return 0;
+    if (!response.ok) {
+      throw new CounterUnavailableError(`CounterAPI ${response.status} for ${key}`);
+    }
 
-  const data = await response.json();
-  const value = Number(data.value);
-  if (data.value === null || data.value === undefined || !Number.isFinite(value) || value < 0) {
-    throw new CounterUnavailableError(`Invalid CounterAPI value for ${key}`);
-  }
-  return value;
+    const data = await response.json();
+    const value = Number(data.value);
+    if (data.value === null || data.value === undefined || !Number.isFinite(value) || value < 0) {
+      throw new CounterUnavailableError(`Invalid CounterAPI value for ${key}`);
+    }
+    return value;
   } catch (error) {
     throw new CounterUnavailableError(`Could not read CounterAPI ${key}: ${error.message}`);
   }
@@ -98,63 +98,63 @@ function isoDateDaysAgo(daysAgo) {
 }
 
 async function updateSnapshot() {
-const routes = await loadRoutes();
+  const routes = await loadRoutes();
 
-const [totalViews, totalUnique, views7, unique7, views30, unique30] =
-  await Promise.all([
-    readCounter("any"),
-    readCounter("any", { unique: "true" }),
-    readCounter("any", { timeline: "7d" }),
-    readCounter("any", { timeline: "7d", unique: "true" }),
-    readCounter("any", { timeline: "30d" }),
-    readCounter("any", { timeline: "30d", unique: "true" }),
-  ]);
+  const [totalViews, totalUnique, views7, unique7, views30, unique30] =
+    await Promise.all([
+      readCounter("any"),
+      readCounter("any", { unique: "true" }),
+      readCounter("any", { timeline: "7d" }),
+      readCounter("any", { timeline: "7d", unique: "true" }),
+      readCounter("any", { timeline: "30d" }),
+      readCounter("any", { timeline: "30d", unique: "true" }),
+    ]);
 
-const cumulative = await mapWithConcurrency(
-  Array.from({ length: 30 }, (_, index) => index + 1),
-  6,
-  (days) => readCounter("any", { timeline: `${days}d` }),
-);
+  const cumulative = await mapWithConcurrency(
+    Array.from({ length: 30 }, (_, index) => index + 1),
+    6,
+    (days) => readCounter("any", { timeline: `${days}d` }),
+  );
 
-const daily = [];
-for (let daysAgo = 29; daysAgo >= 0; daysAgo -= 1) {
-  const window = daysAgo + 1;
-  const current = cumulative[window - 1] || 0;
-  const previous = window > 1 ? cumulative[window - 2] || 0 : 0;
-  daily.push({
-    date: isoDateDaysAgo(daysAgo),
-    views: Math.max(0, current - previous),
+  const daily = [];
+  for (let daysAgo = 29; daysAgo >= 0; daysAgo -= 1) {
+    const window = daysAgo + 1;
+    const current = cumulative[window - 1] || 0;
+    const previous = window > 1 ? cumulative[window - 2] || 0 : 0;
+    daily.push({
+      date: isoDateDaysAgo(daysAgo),
+      views: Math.max(0, current - previous),
+    });
+  }
+
+  const pages = await mapWithConcurrency(routes, 6, async (routePath) => {
+    const key = keyForPath(routePath);
+    const [views, uniqueVisitors] = await Promise.all([
+      readCounter(key),
+      readCounter(key, { unique: "true" }),
+    ]);
+    return { path: routePath, key, views, uniqueVisitors };
   });
-}
 
-const pages = await mapWithConcurrency(routes, 6, async (routePath) => {
-  const key = keyForPath(routePath);
-  const [views, uniqueVisitors] = await Promise.all([
-    readCounter(key),
-    readCounter(key, { unique: "true" }),
-  ]);
-  return { path: routePath, key, views, uniqueVisitors };
-});
+  const snapshot = {
+    version: 1,
+    ready: true,
+    generatedAt: new Date().toISOString(),
+    summary: {
+      uniqueVisitors: totalUnique,
+      pageViews: totalViews,
+      pagesPerVisitor: totalUnique > 0 ? totalViews / totalUnique : 0,
+    },
+    periods: {
+      last7Days: { uniqueVisitors: unique7, pageViews: views7 },
+      last30Days: { uniqueVisitors: unique30, pageViews: views30 },
+    },
+    daily,
+    pages,
+  };
 
-const snapshot = {
-  version: 1,
-  ready: true,
-  generatedAt: new Date().toISOString(),
-  summary: {
-    uniqueVisitors: totalUnique,
-    pageViews: totalViews,
-    pagesPerVisitor: totalUnique > 0 ? totalViews / totalUnique : 0,
-  },
-  periods: {
-    last7Days: { uniqueVisitors: unique7, pageViews: views7 },
-    last30Days: { uniqueVisitors: unique30, pageViews: views30 },
-  },
-  daily,
-  pages,
-};
-
-await fs.writeFile(OUTPUT, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
-console.log(`Analytics snapshot written: ${OUTPUT}`);
+  await fs.writeFile(OUTPUT, `${JSON.stringify(snapshot, null, 2)}\n`, "utf8");
+  console.log(`Analytics snapshot written: ${OUTPUT}`);
 }
 
 // A failed refresh must leave the last successful snapshot and its timestamp intact.
@@ -165,3 +165,4 @@ try {
   if (!(error instanceof CounterUnavailableError)) throw error;
   console.warn(`::warning::Analytics refresh skipped; existing snapshot preserved. ${error.message}`);
 }
+
