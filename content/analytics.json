@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-11-21T02:22:31.658Z",
+  "generatedAt": "2026-11-21T11:14:10.927Z",
   "summary": {
-    "uniqueVisitors": 58,
-    "pageViews": 148,
-    "pagesPerVisitor": 2.5517241379310347
+    "uniqueVisitors": 59,
+    "pageViews": 150,
+    "pagesPerVisitor": 2.542372881355932
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 0,
-      "pageViews": 0
+      "uniqueVisitors": 1,
+      "pageViews": 2
     },
     "last30Days": {
-      "uniqueVisitors": 0,
-      "pageViews": 0
+      "uniqueVisitors": 1,
+      "pageViews": 2
     }
   },
   "daily": [
@@ -136,15 +136,15 @@
     },
     {
       "date": "2026-11-21",
-      "views": 0
+      "views": 2
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 62,
-      "uniqueVisitors": 52
+      "views": 63,
+      "uniqueVisitors": 53
     },
     {
       "path": "/projects",
@@ -185,8 +185,8 @@
     {
       "path": "/projects/little-seeds",
       "key": "projects--little-seeds",
-      "views": 12,
-      "uniqueVisitors": 12
+      "views": 13,
+      "uniqueVisitors": 13
     },
     {
       "path": "/projects/frozen-fries",
