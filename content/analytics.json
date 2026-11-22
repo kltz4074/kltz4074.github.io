@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-11-22T06:57:10.510Z",
+  "generatedAt": "2026-11-22T15:24:15.720Z",
   "summary": {
-    "uniqueVisitors": 59,
-    "pageViews": 150,
-    "pagesPerVisitor": 2.542372881355932
+    "uniqueVisitors": 60,
+    "pageViews": 153,
+    "pagesPerVisitor": 2.55
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 1,
-      "pageViews": 2
+      "uniqueVisitors": 2,
+      "pageViews": 5
     },
     "last30Days": {
-      "uniqueVisitors": 1,
-      "pageViews": 2
+      "uniqueVisitors": 2,
+      "pageViews": 5
     }
   },
   "daily": [
@@ -132,25 +132,25 @@
     },
     {
       "date": "2026-11-21",
-      "views": 0
+      "views": 2
     },
     {
       "date": "2026-11-22",
-      "views": 2
+      "views": 3
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 63,
-      "uniqueVisitors": 53
+      "views": 64,
+      "uniqueVisitors": 54
     },
     {
       "path": "/projects",
       "key": "projects",
-      "views": 25,
-      "uniqueVisitors": 22
+      "views": 26,
+      "uniqueVisitors": 23
     },
     {
       "path": "/skills",
@@ -191,8 +191,8 @@
     {
       "path": "/projects/frozen-fries",
       "key": "projects--frozen-fries",
-      "views": 4,
-      "uniqueVisitors": 4
+      "views": 5,
+      "uniqueVisitors": 5
     },
     {
       "path": "/projects/pillars",
