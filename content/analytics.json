@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-11-24T11:00:06.123Z",
+  "generatedAt": "2026-11-24T21:17:04.166Z",
   "summary": {
-    "uniqueVisitors": 61,
-    "pageViews": 156,
-    "pagesPerVisitor": 2.557377049180328
+    "uniqueVisitors": 62,
+    "pageViews": 157,
+    "pagesPerVisitor": 2.532258064516129
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 3,
-      "pageViews": 8
+      "uniqueVisitors": 4,
+      "pageViews": 9
     },
     "last30Days": {
-      "uniqueVisitors": 3,
-      "pageViews": 8
+      "uniqueVisitors": 4,
+      "pageViews": 9
     }
   },
   "daily": [
@@ -128,23 +128,23 @@
     },
     {
       "date": "2026-11-22",
-      "views": 0
+      "views": 3
     },
     {
       "date": "2026-11-23",
-      "views": 3
+      "views": 0
     },
     {
       "date": "2026-11-24",
-      "views": 3
+      "views": 4
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 65,
-      "uniqueVisitors": 55
+      "views": 66,
+      "uniqueVisitors": 56
     },
     {
       "path": "/projects",
