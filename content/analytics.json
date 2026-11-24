@@ -1,27 +1,23 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-11-23T12:57:18.968Z",
+  "generatedAt": "2026-11-24T00:57:13.549Z",
   "summary": {
-    "uniqueVisitors": 60,
-    "pageViews": 153,
-    "pagesPerVisitor": 2.55
+    "uniqueVisitors": 61,
+    "pageViews": 156,
+    "pagesPerVisitor": 2.557377049180328
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 2,
-      "pageViews": 5
+      "uniqueVisitors": 3,
+      "pageViews": 8
     },
     "last30Days": {
-      "uniqueVisitors": 2,
-      "pageViews": 5
+      "uniqueVisitors": 3,
+      "pageViews": 8
     }
   },
   "daily": [
-    {
-      "date": "2026-10-25",
-      "views": 0
-    },
     {
       "date": "2026-10-26",
       "views": 0
@@ -128,14 +124,18 @@
     },
     {
       "date": "2026-11-21",
-      "views": 2
-    },
-    {
-      "date": "2026-11-22",
       "views": 0
     },
     {
+      "date": "2026-11-22",
+      "views": 2
+    },
+    {
       "date": "2026-11-23",
+      "views": 3
+    },
+    {
+      "date": "2026-11-24",
       "views": 3
     }
   ],
@@ -143,8 +143,8 @@
     {
       "path": "/",
       "key": "home",
-      "views": 64,
-      "uniqueVisitors": 54
+      "views": 65,
+      "uniqueVisitors": 55
     },
     {
       "path": "/projects",
@@ -179,14 +179,14 @@
     {
       "path": "/projects/the-dev-blog",
       "key": "projects--the-dev-blog",
-      "views": 14,
-      "uniqueVisitors": 13
+      "views": 15,
+      "uniqueVisitors": 14
     },
     {
       "path": "/projects/little-seeds",
       "key": "projects--little-seeds",
-      "views": 13,
-      "uniqueVisitors": 13
+      "views": 14,
+      "uniqueVisitors": 14
     },
     {
       "path": "/projects/frozen-fries",
