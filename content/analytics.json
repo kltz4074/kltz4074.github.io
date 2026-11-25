@@ -1,20 +1,20 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-11-25T04:20:42.980Z",
+  "generatedAt": "2026-11-25T15:41:16.067Z",
   "summary": {
-    "uniqueVisitors": 62,
-    "pageViews": 157,
-    "pagesPerVisitor": 2.532258064516129
+    "uniqueVisitors": 64,
+    "pageViews": 165,
+    "pagesPerVisitor": 2.578125
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 4,
-      "pageViews": 9
+      "uniqueVisitors": 6,
+      "pageViews": 17
     },
     "last30Days": {
-      "uniqueVisitors": 4,
-      "pageViews": 9
+      "uniqueVisitors": 6,
+      "pageViews": 17
     }
   },
   "daily": [
@@ -120,15 +120,15 @@
     },
     {
       "date": "2026-11-21",
-      "views": 0
-    },
-    {
-      "date": "2026-11-22",
       "views": 2
     },
     {
-      "date": "2026-11-23",
+      "date": "2026-11-22",
       "views": 3
+    },
+    {
+      "date": "2026-11-23",
+      "views": 0
     },
     {
       "date": "2026-11-24",
@@ -136,15 +136,15 @@
     },
     {
       "date": "2026-11-25",
-      "views": 1
+      "views": 9
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 66,
-      "uniqueVisitors": 56
+      "views": 68,
+      "uniqueVisitors": 58
     },
     {
       "path": "/projects",
@@ -155,8 +155,8 @@
     {
       "path": "/skills",
       "key": "skills",
-      "views": 7,
-      "uniqueVisitors": 7
+      "views": 8,
+      "uniqueVisitors": 8
     },
     {
       "path": "/lab",
@@ -167,32 +167,32 @@
     {
       "path": "/gallery",
       "key": "gallery",
-      "views": 6,
-      "uniqueVisitors": 6
+      "views": 7,
+      "uniqueVisitors": 7
     },
     {
       "path": "/guestbook",
       "key": "guestbook",
-      "views": 6,
-      "uniqueVisitors": 6
+      "views": 7,
+      "uniqueVisitors": 7
     },
     {
       "path": "/projects/the-dev-blog",
       "key": "projects--the-dev-blog",
-      "views": 15,
-      "uniqueVisitors": 14
+      "views": 16,
+      "uniqueVisitors": 15
     },
     {
       "path": "/projects/little-seeds",
       "key": "projects--little-seeds",
-      "views": 14,
-      "uniqueVisitors": 14
+      "views": 15,
+      "uniqueVisitors": 15
     },
     {
       "path": "/projects/frozen-fries",
       "key": "projects--frozen-fries",
-      "views": 5,
-      "uniqueVisitors": 5
+      "views": 6,
+      "uniqueVisitors": 6
     },
     {
       "path": "/projects/pillars",
