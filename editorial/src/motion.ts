@@ -28,7 +28,6 @@ let stageObserver: IntersectionObserver | undefined;
 
 const tick = (time: number) => lenis?.raf(time * 1000);
 const reduced = () => root.hasAttribute('data-reduced') || preference.matches;
-const russian = () => root.lang === 'ru';
 
 if (shots.length > 1) {
   shots[0].parentElement!.hidden = false;
@@ -114,7 +113,8 @@ function configureMotion() {
         scrollTrigger: { trigger: '.work', start: 'top 88%', end: 'top 62%', scrub: true },
       });
     }
-    document.querySelectorAll<HTMLElement>('.project-media').forEach(media => {
+    document.querySelectorAll<HTMLElement>('.work .project-media').forEach(media => {
+      const windowElement = media.parentElement!;
       const reel = media.querySelector('.project-reel');
       if (!reel) return;
       const article = media.closest('.project')!;
@@ -123,7 +123,7 @@ function configureMotion() {
         scrollTrigger: { trigger: media, start: 'top 98%', end: 'top 48%', scrub: .24 },
         defaults: { ease: 'none' },
       }).from(reel, { scale: 1.095, xPercent: side * 1.8, yPercent: 1.5 }, 0)
-        .from(media, { y: 22 }, 0);
+        .from(windowElement, { y: 22 }, 0);
     });
     if (document.querySelector('.contact-title-line')) {
       gsap.from('.contact-title-line', {
@@ -187,59 +187,6 @@ function configureMotion() {
     stageObserver = observer;
   }
   ScrollTrigger.refresh();
-}
-
-for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) {
-  const controls = gallery.querySelector<HTMLElement>('.frame-picker');
-  const live = gallery.querySelector<HTMLElement>('[data-frame-status]');
-  if (!controls || !live) continue;
-  const buttons = [...controls.querySelectorAll('button')];
-  const images = [...gallery.querySelectorAll('img')];
-  let current = 0;
-  let revision = 0;
-  let swap: gsap.core.Tween | undefined;
-  controls.hidden = false;
-
-  buttons.forEach((button, index) => button.addEventListener('click', async () => {
-    const request = ++revision;
-    if (index === current) return;
-    const incoming = images[index];
-    incoming.loading = 'eager';
-    try {
-      await incoming.decode();
-    } catch {
-      if (request === revision) live.textContent = russian() ? 'Кадр не загрузился.' : 'The image could not load.';
-      return;
-    }
-    if (swap) await swap;
-    if (request !== revision) return;
-
-    const outgoing = images[current];
-    const forward = index > current;
-    const finish = () => {
-      outgoing.hidden = true;
-      incoming.classList.remove('frame-incoming');
-      swap = undefined;
-      outgoing.removeAttribute('aria-hidden');
-    };
-    buttons[current].setAttribute('aria-pressed', 'false');
-    button.setAttribute('aria-pressed', 'true');
-    outgoing.setAttribute('aria-hidden', 'true');
-    incoming.hidden = false;
-    current = index;
-    live.textContent = russian() ? `Кадр ${index + 1} из ${images.length}.` : `Image ${index + 1} of ${images.length}. ${incoming.alt}.`;
-    if (reduced()) {
-      finish();
-    } else {
-      incoming.classList.add('frame-incoming');
-      swap = gsap.fromTo(incoming, {
-        clipPath: forward ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)',
-      }, {
-        clipPath: 'inset(0 0 0 0)',
-        duration: .42, ease: 'power3.inOut', clearProps: 'clipPath', onComplete: finish,
-      });
-    }
-  }));
 }
 
 document.addEventListener('portfolio:motion', configureMotion);
