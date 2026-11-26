@@ -367,9 +367,8 @@ function render() {
   if (section === 'Appearance') panel.append(
     plain('Site name', site.name, value => { site.name = value; }),
     addAssetField('Avatar', site.avatar, value => { site.avatar = value; }),
-    addAssetField('Hero image', site.hero, value => { site.hero = value; }),
-    addAssetField('Mobile hero image', site.heroMobile, value => { site.heroMobile = value || undefined; }),
-    checkbox('Show Alive', site.alive, edited(value => { site.alive = value; })),
+    addAssetField('Fallback hero image', site.hero, value => { site.hero = value; }),
+    addAssetField('Fallback mobile hero image', site.heroMobile, value => { site.heroMobile = value || undefined; }),
     plain('Footer text', site.footer, value => { site.footer = value; }),
     translated('Home introduction', site.intro, value => { site.intro = value; }),
   );
