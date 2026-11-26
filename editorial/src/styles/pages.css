@@ -83,7 +83,16 @@
   .detail-lead, .lab-grid, .media-grid { grid-template-columns: 1fr; }
 }
 .contact-row { position: relative; }
-.contact-row:has(button) > a { padding-right: 4rem; }
+.contact-row:has(button) > :is(a, .contact-value) { padding-right: 4rem; }
+.contact-value {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) auto;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.25rem 0;
+}
+.contact-value > span { color: var(--ink-muted); overflow-wrap: anywhere; }
+@media (max-width: 700px) { .contact-value { grid-template-columns: minmax(0, 1fr); gap: .35rem; } }
 .contact-row > button {
   position: absolute;
   inset-inline-end: 0;

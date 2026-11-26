@@ -10,7 +10,9 @@ import { site, sectionEnabled } from '../lib/portfolio';
       {site.collaboration?.en && <Copy copy={site.collaboration} rich />}
       <ul class="index-list">
         {site.contacts.map(link => <li class="contact-row">
-          <a href={link.url}><strong>{link.label}</strong><span>{link.value || new URL(link.url, Astro.site).hostname}</span><span aria-hidden="true">↗</span></a>
+          {link.url
+            ? <a href={link.url}><strong>{link.label}</strong><span>{link.value || new URL(link.url, Astro.site).hostname}</span><span aria-hidden="true">↗</span></a>
+            : <div class="contact-value"><strong>{link.label}</strong><span>{link.value}</span></div>}
           {link.value && <button type="button" data-copy-contact={link.value} aria-label={'Copy ' + link.label}>Copy</button>}
         </li>)}
       </ul>

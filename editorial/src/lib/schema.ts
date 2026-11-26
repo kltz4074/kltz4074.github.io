@@ -21,6 +21,8 @@ export const assetUrl = z.string().refine(value => value.startsWith('/media/') &
 const slug = z.string().regex(slugPattern).max(80);
 const seo = z.object({ title: z.string().optional(), description: z.string().optional(), image: assetUrl.optional() });
 const link = z.object({ label: z.string().min(1), url: linkUrl, value: z.string().optional() });
+const contact = link.extend({ url: linkUrl.optional() })
+  .refine(value => !!(value.url || value.value?.trim()), 'Enter a URL or a contact value.');
 const frame = z.object({ src: assetUrl, alt: z.string() });
 const base = z.object({
   slug, title: z.string().optional(), body: localized.optional(), cover: assetUrl.or(z.literal('')).optional(),
@@ -40,7 +42,7 @@ export const portfolioSchema = z.object({
     name: z.string().min(1).max(16), intro: localized, about: localized, avatar: assetUrl,
     hero: assetUrl, heroMobile: assetUrl.optional(), alive: z.boolean(), footer: z.string(),
     categories: z.array(z.string().min(1)), statuses: z.array(z.string().min(1)),
-    contacts: z.array(link), collaboration: localized.optional(), navigation: z.array(link), seo,
+    contacts: z.array(contact), collaboration: localized.optional(), navigation: z.array(link), seo,
     pageSeo: z.record(z.string(), seo).optional(), languages: z.array(z.string().regex(/^[a-z]{2}(?:-[A-Z]{2})?$/)),
     aboutMedia: z.array(frame).optional(), sectionVisibility: z.record(z.string(), z.boolean()).optional(),
   }),
