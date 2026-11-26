@@ -95,8 +95,8 @@ function configureMotion() {
 
     if (document.querySelector('.work-word > span')) {
       gsap.from('.work-word > span', {
-        yPercent: 68, ease: 'none',
-        scrollTrigger: { trigger: '.work', start: 'top 93%', end: 'top 61%', scrub: true },
+        y: 19, opacity: .74, ease: 'none',
+        scrollTrigger: { trigger: '.work', start: 'top 88%', end: 'top 62%', scrub: true },
       });
     }
     document.querySelectorAll<HTMLElement>('.project-media').forEach(media => {
