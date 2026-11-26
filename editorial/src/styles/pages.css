@@ -2,7 +2,8 @@
 .detail-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.8rem; }
 .detail-links a, .back-link { font-weight: 700; text-underline-offset: .25em; }
 .detail-links a:hover, .back-link:hover { text-decoration: underline; }
-.detail-cover { display: block; width: 100%; aspect-ratio: 1.88; overflow: clip; margin-block: clamp(1.5rem, 4vw, 4.5rem); background: var(--paper-light); border-radius: var(--radius-media); }
+.project-gallery--detail { margin-block: clamp(1.5rem, 4vw, 4.5rem); }
+.detail-cover { display: block; width: 100%; aspect-ratio: 1.88; overflow: clip; background: var(--paper-light); border-radius: var(--radius-media); }
 .detail-cover img { width: 100%; height: 100%; object-fit: cover; }
 .detail-next { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem 2rem; padding-top: 1.4rem; border-top: 1px solid var(--paper-rule); margin-top: 3rem; }
 .detail-next .arrow { color: var(--accent); }
@@ -84,3 +85,8 @@
 .media-grid--secondary > :first-child { grid-column: auto; }
 .lab-entry:nth-child(even) { margin-top: clamp(0rem, 3vw, 4rem); }
 @media (max-width: 700px) { .lab-entry:nth-child(even) { margin-top: 0; } }
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-reduced]) .lightbox[open] { animation: .24s cubic-bezier(.16,1,.3,1) both viewer-enter; }
+  @keyframes viewer-enter { from { transform: translateY(10px) scale(.99); opacity: .72; } }
+}
