@@ -38,6 +38,11 @@ const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': h
     <slot name="head" />
   </head>
   <body id="top">
+    <script is:inline>
+      try {
+        document.documentElement.toggleAttribute('data-reduced', matchMedia('(prefers-reduced-motion: reduce)').matches || localStorage.getItem('kltzqu-reduced-motion') === 'true');
+      } catch {}
+    </script>
     <Nav />
     <slot />
     <Footer full={home} />
