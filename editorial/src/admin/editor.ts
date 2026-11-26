@@ -11,6 +11,7 @@ type Copy = Record<string, string>;
 type MediaItem = { path: string; bytes: number; sha?: string; file?: Blob };
 type Entry = Portfolio['lab'][number];
 type Link = Portfolio['site']['navigation'][number];
+type Contact = Portfolio['site']['contacts'][number];
 
 const select = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const panel = select('panel');
@@ -355,7 +356,7 @@ function render() {
   if (section === 'Now') panel.append(translated('Current work', data.now.body, value => { data.now.body = value; }, true),
     field('Last updated', data.now.updated ?? '', edited(value => { data.now.updated = value; }), { type: 'date' }));
   if (section === 'Contacts') panel.append(
-    rows(site.contacts, item => item.label, item => [
+    rows<Contact>(site.contacts, item => item.label, item => [
       plain('Label', item.label, value => { item.label = value; }),
       plain('URL (optional)', item.url, value => { item.url = value.trim() || undefined; }),
       plain('Display value', item.value, value => { item.value = value; }),
