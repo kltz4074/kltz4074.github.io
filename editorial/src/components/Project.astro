@@ -4,6 +4,7 @@ import type { Project } from '../lib/schema';
 import { isVideo } from '../lib/portfolio';
 import { label } from '../lib/labels';
 import Copy from './Copy.astro';
+import ProjectGallery from './ProjectGallery.astro';
 
 interface Props { project: Project; reverse: boolean }
 const { project, reverse } = Astro.props;
@@ -18,18 +19,5 @@ const url = '/projects/' + slug + '/';
     <p class="project-description"><Copy copy={summary} /></p>
     <a class="action project-action" href={url}><Copy copy={label('View project', 'Открыть проект')} /><Arrow moving /></a>
   </div>
-  {frames.length > 0 && <figure class="project-gallery" data-gallery>
-    <a class="project-media" href={url} id={slug + '-frames'} aria-label={title} style={`view-transition-name: project-${slug}`}>
-      <div class="project-reel">
-        {frames.map(({ src, alt }, index) => <img src={src} alt={alt} width="1440" height="810" loading="lazy" decoding="async" hidden={index !== 0} />)}
-      </div>
-    </a>
-    {frames.length > 1 && <figcaption>
-      <span class="project-caption" aria-hidden="true"><Copy copy={label('Gallery', 'Галерея')} /></span>
-      <div class="frame-picker" aria-label={title + ' gallery'} data-label-ru={'Галерея ' + title} role="group" hidden>
-        {frames.map((frame, index) => <button type="button" aria-label={`Show image ${index + 1}: ${frame.alt}`} data-label-ru={`Кадр ${index + 1}`} aria-pressed={index === 0} aria-controls={slug + '-frames'}>{String(index + 1).padStart(2, '0')}</button>)}
-      </div>
-      <span class="sr-only" aria-live="polite" data-frame-status></span>
-    </figcaption>}
-  </figure>}
+  <ProjectGallery {frames} {title} {slug} {url} tilt={category === 'Games'} />
 </article>

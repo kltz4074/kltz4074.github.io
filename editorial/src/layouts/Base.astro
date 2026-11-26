@@ -18,6 +18,7 @@ const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': h
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <style is:inline>@view-transition { navigation: auto; }</style>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
@@ -42,10 +43,38 @@ const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': h
       try {
         document.documentElement.toggleAttribute('data-reduced', matchMedia('(prefers-reduced-motion: reduce)').matches || localStorage.getItem('kltzqu-reduced-motion') === 'true');
       } catch {}
-      // Cross-document transitions can be skipped by the browser, for example when opening the editor.
+      function sharedCover(activation) {
+        const projectPath = /^\/projects\/([a-z0-9-]+)\/?$/;
+        const slug = [activation?.entry?.url, activation?.from?.url]
+          .map(url => url && new URL(url).pathname.match(projectPath)?.[1])
+          .find(Boolean);
+        if (!slug) return;
+
+        const cover = document.querySelector('[data-project-cover="' + slug + '"]');
+        const stage = document.querySelector('.hero-stage');
+        const active = document.querySelector('[data-reel-link]')?.pathname;
+        const onScreen = element => {
+          if (!element) return false;
+          const bounds = element.getBoundingClientRect();
+          return bounds.bottom > 0 && bounds.top < innerHeight;
+        };
+        const chosen = onScreen(cover) ? cover : active === '/projects/' + slug + '/' && onScreen(stage) ? stage : null;
+        if (!chosen) return;
+        chosen.style.viewTransitionName = 'selected-project';
+        return () => { chosen.style.viewTransitionName = ''; };
+      }
+
       for (const phase of ['pageswap', 'pagereveal']) {
         window.addEventListener(phase, event => {
-          event.viewTransition?.ready.catch(() => {});
+          const transition = event.viewTransition;
+          if (!transition) return;
+          transition.ready.catch(() => {});
+          if (document.documentElement.hasAttribute('data-reduced')) {
+            transition.skipTransition();
+            return;
+          }
+          const reset = sharedCover(event.activation ?? window.navigation?.activation);
+          if (reset) transition.finished.then(reset, reset);
         });
       }
     </script>
