@@ -8,9 +8,15 @@ import { projects, devlog, lab, english, isVideo, sectionEnabled } from '../../l
 import { label } from '../../lib/labels';
 import type { Project } from '../../lib/schema';
 export function getStaticPaths() {
-  return sectionEnabled('projects') ? projects.map(project => ({ params: { slug: project.slug }, props: { project } })) : [];
+  if (!sectionEnabled('projects')) return [];
+  const pages = projects.map(project => ({ params: { slug: project.slug }, props: { project } }));
+  if (!projects.some(project => project.slug === 'backos') && projects.some(project => project.slug === 'the-dev-blog')) {
+    return [...pages, { params: { slug: 'backos' }, props: { project: null } }];
+  }
+  return pages;
 }
-const { project }: { project: Project } = Astro.props;
+const { project }: { project: Project | null } = Astro.props;
+if (!project) return Astro.redirect('/projects/the-dev-blog/', 301);
 const frames = [...project.media ?? [], ...lab.filter(entry => entry.project === project.slug).flatMap(entry => entry.media ?? [])];
 if (project.cover && !frames.some(frame => frame.src === project.cover)) frames.unshift({ src: project.cover, alt: project.title });
 const cover = frames.find(frame => frame.src === project.cover && !isVideo(frame.src)) ?? frames.find(frame => !isVideo(frame.src));
@@ -19,7 +25,6 @@ const videos = frames.filter(frame => isVideo(frame.src));
 const posts = sectionEnabled('devlog') ? devlog.filter(post => post.project === project.slug) : [];
 const queue = projects.filter(item => !item.archived);
 const next = queue.length > 1 ? queue[(queue.findIndex(item => item.slug === project.slug) + 1) % queue.length] : undefined;
-const related = projects.find(item => ({ 'the-dev-blog': 'backos', backos: 'the-dev-blog' })[project.slug] === item.slug);
 const url = (slug: string) => '/projects/' + slug + '/';
 ---
 <Base title={project.title} description={english(project.summary)} seo={{ image: cover?.src, ...project.seo }}>
@@ -38,7 +43,7 @@ const url = (slug: string) => '/projects/' + slug + '/';
         {project.tags?.length && <div><dt><Copy copy={label('Tags', 'Теги')} /></dt><dd>{project.tags.join(', ')}</dd></div>}
       </dl>
     </div>
-    {(project.links?.length || related) && <nav class="detail-links" aria-label="Project links" data-label-ru="Ссылки на проект">{project.links?.map(link => <a class="action" href={link.url}><Copy copy={label(link.label)} /><Arrow /></a>)}{related && <a class="action" href={url(related.slug)}>{related.title}<Arrow /></a>}</nav>}
+    {!!project.links?.length && <nav class="detail-links" aria-label="Project links" data-label-ru="Ссылки на проект">{project.links.map(link => <a class="action" href={link.url}><Copy copy={label(link.label)} /><Arrow /></a>)}</nav>}
     <ProjectGallery frames={stills} title={project.title} slug={project.slug} tilt={project.category === 'Games'} />
     {english(project.body) && <section class="prose"><h2><Copy copy={label('About the project', 'О проекте')} /></h2><Copy copy={project.body} rich /></section>}
     <Media frames={videos} secondary={!!cover} />
