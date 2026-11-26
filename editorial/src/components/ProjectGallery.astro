@@ -1,0 +1,42 @@
+---
+import type { Frame } from '../lib/schema';
+
+interface Props {
+  frames: Frame[];
+  title: string;
+  slug: string;
+  url?: string;
+  tilt?: boolean;
+}
+const { frames, title, slug, url, tilt = false } = Astro.props;
+const detail = !url;
+const first = frames[0];
+const target = slug + '-frames';
+---
+{first && <figure class:list={['project-gallery', { 'project-gallery--detail': detail }]} data-gallery>
+  <div class="gallery-window" data-tilt={tilt ? '' : undefined}>
+    <a class:list={['project-media', { 'detail-cover': detail }]} href={url ?? first.src} id={target}
+      data-project-cover={slug} data-lightbox={detail ? '' : undefined}
+      aria-label={detail ? 'Open image: ' + first.alt : title} data-label-ru={detail ? 'Открыть изображение' : undefined}>
+      <div class="project-reel">
+        {frames.map(({ src, alt }, index) => <div class="project-frame" hidden={index !== 0}>
+          <img src={src} alt={alt} width="1440" height="810"
+            loading={detail && !index ? 'eager' : 'lazy'} fetchpriority={detail && !index ? 'high' : undefined} decoding="async" />
+        </div>)}
+      </div>
+    </a>
+  </div>
+  {frames.length > 1 && <figcaption>
+    <div class="frame-picker" aria-label={title + ' images'} data-label-ru={'Кадры ' + title} role="group" hidden>
+      {frames.map(({ src, alt }, index) => <button type="button"
+        aria-label={`Show image ${index + 1}: ${alt}`} data-label-ru={`Кадр ${index + 1}`}
+        aria-pressed={index === 0} aria-controls={target}>
+        <img src={src} alt="" width="68" height="44" loading="lazy" decoding="async" />
+      </button>)}
+    </div>
+    <span class="sr-only" aria-live="polite" data-frame-status></span>
+  </figcaption>}
+</figure>}
+<script>
+  import '../lib/project-gallery';
+</script>

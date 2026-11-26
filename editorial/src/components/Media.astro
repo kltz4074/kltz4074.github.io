@@ -32,7 +32,7 @@ const { frames, secondary = false } = Astro.props;
       link.addEventListener('click', event => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
-        image.alt = link.querySelector('img')?.alt ?? '';
+        image.alt = (link.querySelector<HTMLImageElement>('.project-frame:not([aria-hidden]):not([hidden]) img') ?? link.querySelector('img'))?.alt ?? '';
         image.src = link.href;
         dialog.showModal();
       });
