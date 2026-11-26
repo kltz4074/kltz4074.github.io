@@ -40,7 +40,8 @@ for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) 
   const frames = [...gallery.querySelectorAll<HTMLElement>('.project-frame')];
   let current = 0;
   let revision = 0;
-  let swap: gsap.core.Timeline | undefined;
+  let swap: Promise<void> | undefined;
+  let animations: Animation[] = [];
   controls.hidden = false;
 
   async function select(index: number) {
@@ -77,6 +78,7 @@ for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) 
       outgoing.hidden = true;
       outgoing.removeAttribute('aria-hidden');
       incoming.classList.remove('frame-incoming');
+      animations = [];
       swap = undefined;
     }
 
@@ -88,9 +90,12 @@ for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) 
     // Keep a complete frame beneath the incoming mask for the entire transition.
     incoming.classList.add('frame-incoming');
     const mask = forward ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)';
-    swap = gsap.timeline({ defaults: { ease: 'power3.inOut' }, onComplete: finish })
-      .fromTo(incoming, { clipPath: mask }, { clipPath: 'inset(0 0 0 0)', duration: .51, clearProps: 'clipPath' }, 0)
-      .fromTo(image, { scale: 1.088, xPercent: forward ? 3 : -3 }, { scale: 1, xPercent: 0, duration: .57, clearProps: 'transform' }, 0);
+    const options = { duration: 460, easing: 'cubic-bezier(.65, 0, .35, 1)' };
+    animations = [
+      incoming.animate([{ clipPath: mask }, { clipPath: 'inset(0)' }], { ...options, fill: 'backwards' }),
+      image.animate([{ transform: forward ? 'translateX(3%) scale(1.088)' : 'translateX(-3%) scale(1.088)' }, { transform: 'none' }], options),
+    ];
+    swap = Promise.allSettled(animations.map(animation => animation.finished)).then(finish);
   }
 
   buttons.forEach((button, index) => button.addEventListener('click', () => void select(index)));
@@ -104,6 +109,6 @@ for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) 
     void select(index);
   });
   document.addEventListener('portfolio:motion', () => {
-    if (reduced()) swap?.progress(1);
+    if (reduced()) animations.forEach(animation => animation.finish());
   });
 }
