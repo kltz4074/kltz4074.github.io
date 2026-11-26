@@ -1,27 +1,23 @@
 {
   "version": 1,
   "ready": true,
-  "generatedAt": "2026-11-25T15:41:16.067Z",
+  "generatedAt": "2026-11-26T00:26:50.652Z",
   "summary": {
-    "uniqueVisitors": 64,
-    "pageViews": 165,
-    "pagesPerVisitor": 2.578125
+    "uniqueVisitors": 65,
+    "pageViews": 168,
+    "pagesPerVisitor": 2.5846153846153848
   },
   "periods": {
     "last7Days": {
-      "uniqueVisitors": 6,
-      "pageViews": 17
+      "uniqueVisitors": 7,
+      "pageViews": 20
     },
     "last30Days": {
-      "uniqueVisitors": 6,
-      "pageViews": 17
+      "uniqueVisitors": 7,
+      "pageViews": 20
     }
   },
   "daily": [
-    {
-      "date": "2026-10-27",
-      "views": 0
-    },
     {
       "date": "2026-10-28",
       "views": 0
@@ -120,15 +116,15 @@
     },
     {
       "date": "2026-11-21",
-      "views": 2
+      "views": 0
     },
     {
       "date": "2026-11-22",
-      "views": 3
+      "views": 2
     },
     {
       "date": "2026-11-23",
-      "views": 0
+      "views": 3
     },
     {
       "date": "2026-11-24",
@@ -136,15 +132,19 @@
     },
     {
       "date": "2026-11-25",
-      "views": 9
+      "views": 1
+    },
+    {
+      "date": "2026-11-26",
+      "views": 11
     }
   ],
   "pages": [
     {
       "path": "/",
       "key": "home",
-      "views": 68,
-      "uniqueVisitors": 58
+      "views": 69,
+      "uniqueVisitors": 59
     },
     {
       "path": "/projects",
@@ -179,14 +179,14 @@
     {
       "path": "/projects/the-dev-blog",
       "key": "projects--the-dev-blog",
-      "views": 16,
-      "uniqueVisitors": 15
+      "views": 17,
+      "uniqueVisitors": 16
     },
     {
       "path": "/projects/little-seeds",
       "key": "projects--little-seeds",
-      "views": 15,
-      "uniqueVisitors": 15
+      "views": 16,
+      "uniqueVisitors": 16
     },
     {
       "path": "/projects/frozen-fries",
