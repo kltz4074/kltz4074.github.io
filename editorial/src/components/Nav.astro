@@ -1,20 +1,25 @@
 ---
 import { navigation, site } from '../lib/portfolio';
+import { label } from '../lib/labels';
+import Copy from './Copy.astro';
 ---
-<a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header page-gutter">
-  <a class="brand" href="/" aria-label={site.name + ' home'}>
-    <img src={site.avatar} alt="" width="32" height="32" />
+<a class="skip-link" href="#main"><Copy copy={label('Skip to content', 'К содержимому')} /></a>
+<header class="site-header page-gutter" data-menu-header>
+  <a class="brand" href="/" aria-label={site.name + ' home'} data-label-ru={site.name + ' — главная'}>
+    <img src={site.avatar} alt="" width="24" height="24" />
     <span>{site.name}</span>
   </a>
-  <nav aria-label="Main" class="main-nav">
-    {navigation.filter(link => link.url !== '/contact/').map(link => <a href={link.url} aria-current={Astro.url.pathname === link.url ? 'page' : undefined}>{link.label}</a>)}
+  <nav id="main-navigation" aria-label="Main navigation" data-label-ru="Основная навигация" class="main-nav">
+    {navigation.map(link => <a class:list={{ 'nav-contact': link.url === '/contact/' }} href={link.url} aria-current={Astro.url.pathname === link.url ? 'page' : undefined}><Copy copy={label(link.label)} /></a>)}
   </nav>
   <div class="header-actions">
-    {navigation.filter(link => link.url === '/contact/').map(link => <a class="header-contact" href={link.url}>{link.label}</a>)}
-    {site.languages.length > 1 && <label class="language"><span class="sr-only">Content language</span><select data-language>{site.languages.map(lang => <option value={lang}>{lang.toUpperCase()}</option>)}</select></label>}
+    {site.languages.length > 1 && <label class="language"><span class="sr-only"><Copy copy={label('Language', 'Язык')} /></span><select data-language>{site.languages.map(lang => <option value={lang}>{lang.toUpperCase()}</option>)}</select></label>}
+    <button class="mobile-menu-button" type="button" aria-expanded="false" aria-controls="main-navigation" data-menu-button>
+      <Copy copy={label('Menu', 'Меню')} /><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 5h12M2 11h12" stroke="currentColor" stroke-width="1.4"/></svg>
+    </button>
   </div>
 </header>
 <script>
   import '../lib/language';
+  import '../lib/public-ui';
 </script>

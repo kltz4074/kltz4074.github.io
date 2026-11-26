@@ -1,0 +1,47 @@
+---
+import Arrow from './Arrow.astro';
+import Copy from './Copy.astro';
+import { isVideo, site } from '../lib/portfolio';
+import { label } from '../lib/labels';
+import type { Project } from '../lib/schema';
+
+interface Props { projects: Project[] }
+const { projects } = Astro.props;
+const shots = projects.flatMap(project => {
+  const src = project.cover && !isVideo(project.cover) ? project.cover : project.media?.find(frame => !isVideo(frame.src))?.src;
+  return src && !isVideo(src) ? [{ project, src }] : [];
+}).slice(0, 3);
+const first = shots[0];
+---
+<section class="hero page-gutter" aria-labelledby="masthead" data-hero>
+  <div class="hero-composition">
+    <div class="hero-type">
+      <h1 id="masthead" class="hero-title" style={`--word-scale: ${Math.min(1, 6 / site.name.length)}`}><span>{site.name}</span></h1>
+      <p class="hero-intro"><Copy copy={site.intro} /></p>
+      {projects.length > 0 && <a class="action hero-scroll" href="#work"><Copy copy={label('Explore my work', 'Смотреть проекты')} /><Arrow direction="down" moving /></a>}
+    </div>
+    <div class="hero-visual">
+      <div class="hero-stage" aria-hidden="true">
+        <div class="stage-screen">
+          {first
+            ? <img data-stage-still src={first.src} width="1440" height="810" alt="" fetchpriority="high" />
+            : <picture>
+                {site.heroMobile && <source media="(max-width: 700px)" srcset={site.heroMobile} />}
+                <img src={site.hero} alt="" width="1536" height="615" fetchpriority="high" />
+              </picture>}
+        </div>
+        {shots.length > 1 && <div class="stage-edge stage-edge--back"></div>}
+        {first && <canvas data-stage-canvas></canvas>}
+      </div>
+      {first && <div class="hero-reel">
+        <a class="reel-project" data-reel-link href={`/projects/${first.project.slug}/`}>
+          <span data-reel-title>{first.project.title}</span><Arrow />
+        </a>
+        {shots.length > 1 && <div class="reel-controls" role="group" aria-label="Project preview" data-label-ru="Превью проектов" hidden>
+          {shots.map(({ project, src }, index) => <button type="button" data-shot={src} data-title={project.title} data-url={`/projects/${project.slug}/`} aria-label={project.title} aria-pressed={index === 0}>{String(index + 1).padStart(2, '0')}</button>)}
+        </div>}
+        {shots.length === 1 && <span data-shot={first.src} hidden></span>}
+      </div>}
+    </div>
+  </div>
+</section>
