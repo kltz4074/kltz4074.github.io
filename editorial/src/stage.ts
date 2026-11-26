@@ -1,143 +1,153 @@
-import {
-  BoxGeometry, Color, Group, HemisphereLight, MathUtils, Mesh, MeshBasicMaterial,
-  MeshStandardMaterial, PerspectiveCamera, PlaneGeometry, PointLight, Scene,
-  SRGBColorSpace, Texture, TextureLoader, WebGLRenderer,
-} from 'three';
+import { Color, MathUtils, Mesh, PerspectiveCamera, PlaneGeometry, Scene, ShaderMaterial, SRGBColorSpace, TextureLoader, Vector2, WebGLRenderer, type Texture } from 'three';
 
-const frameWidth = 6.5;
-const frameHeight = 3.68;
-const lightTints = [0xe9efb4, 0xffc88a, 0xb7c9e0];
+type Shot = Texture<HTMLImageElement>;
+
+const vertexShader = `
+  varying vec2 frameUv;
+
+  void main() {
+    frameUv = uv;
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+  }
+`;
+
+const fragmentShader = `
+  uniform sampler2D previousShot;
+  uniform sampler2D nextShot;
+  uniform vec2 previousCrop;
+  uniform vec2 nextCrop;
+  uniform vec3 spill;
+  uniform float progress;
+  uniform float direction;
+  varying vec2 frameUv;
+
+  vec3 sampleShot(sampler2D shot, vec2 uv, vec2 crop) {
+    return texture2D(shot, (uv - 0.5) * crop + 0.5).rgb;
+  }
+
+  void main() {
+    vec2 uv = frameUv;
+    float axis = direction > 0.0 ? uv.x : 1.0 - uv.x;
+    float edge = mix(-0.25, 1.25, progress) - axis + (uv.y - 0.5) * 0.16;
+    float reveal = smoothstep(-0.1, 0.1, edge);
+    float sweep = exp(-abs(edge) * 20.0) * sin(progress * 3.14159);
+    vec2 bend = vec2(sweep * 0.035 * direction, sweep * (uv.y - 0.5) * 0.03);
+    vec3 previous = sampleShot(previousShot, uv + bend, previousCrop);
+    vec3 next = sampleShot(nextShot, uv - bend, nextCrop);
+    float vignette = 1.13 - 0.31 * dot(uv - 0.5, uv - 0.5);
+    gl_FragColor = vec4(mix(previous, next, reveal) * vignette + spill * sweep * 0.09, 1.0);
+    #include <colorspace_fragment>
+  }
+`;
 
 export async function createStage(canvas: HTMLCanvasElement, sources: string[], initial: number) {
   const stage = canvas.parentElement!;
-  const context = canvas.getContext('webgl2', { powerPreference: 'low-power', alpha: true, antialias: window.devicePixelRatio < 2 });
+  const context = canvas.getContext('webgl2', { powerPreference: 'low-power', alpha: false, antialias: false });
   if (!context) return;
 
-  const renderer = new WebGLRenderer({ canvas, context, alpha: true });
+  const renderer = new WebGLRenderer({ canvas, context, alpha: false });
   const scene = new Scene();
-  const camera = new PerspectiveCamera(34, 1, .1, 40);
-  const shell = new BoxGeometry(frameWidth, frameHeight, .17);
-  const aperture = new PlaneGeometry(frameWidth - .2, frameHeight - .2);
+  const camera = new PerspectiveCamera(36, 1, .1, 30);
+  const geometry = new PlaneGeometry();
   const loader = new TextureLoader();
-  const light = new PointLight(lightTints[0], 31, 13);
-  const matte = new Color(0x77735d);
-  const shotLights = lightTints.map(tint => new Color(tint));
-  light.position.set(-3.2, 3.6, 3.5);
-  scene.add(new HemisphereLight(0xf8f1d6, 0x404936, 1.8), light);
-  const frames = sources.map(() => {
-    const group = new Group();
-    const edge = new MeshStandardMaterial({ color: matte, roughness: .65, metalness: .18 });
-    const face = new MeshBasicMaterial({ color: 0x272d20 });
-    const screen = new Mesh(aperture, face);
-    screen.position.z = .091;
-    group.add(new Mesh(shell, edge), screen);
-    scene.add(group);
-    return { group, face, edge };
-  });
-  let active = initial;
-  let progress = 0;
-  let horizontal = 0;
-  let vertical = 0;
-  let targetX = 0;
-  let targetY = 0;
+  const uniforms = {
+    previousShot: { value: null as Shot | null },
+    nextShot: { value: null as Shot | null },
+    previousCrop: { value: new Vector2(1, 1) },
+    nextCrop: { value: new Vector2(1, 1) },
+    spill: { value: new Color('#cfb8ff') },
+    progress: { value: 1 },
+    direction: { value: 1 },
+  };
+  const material = new ShaderMaterial({ uniforms, vertexShader, fragmentShader, toneMapped: false });
+  const screen = new Mesh(geometry, material);
+  scene.add(screen);
+
+  const textures = new Map<number, Promise<Shot>>();
+  const loaded = new Set<Shot>();
+  const cursor = new Vector2();
+  const target = new Vector2();
+  const distance = 5.6;
+  let selected = initial;
+  let revision = 0;
+  let start = 0;
+  let travel = 0;
+  let destination = 0;
+  let previousTime = 0;
   let raf = 0;
   let visible = true;
   let disposed = false;
   let lost = false;
-  let initialized = false;
-  let cutStart = 0;
-  let cutDirection = 1;
-  let previousTime = 0;
-  let mobile = false;
-  let quality = 1.35;
-  let slowFrames = 0;
-  const textures = new Map<number, Promise<Texture>>();
 
   function texture(index: number) {
     if (!textures.has(index)) {
       textures.set(index, loader.loadAsync(sources[index]).then(map => {
         if (disposed) {
           map.dispose();
-          return map;
+        } else {
+          map.colorSpace = SRGBColorSpace;
+          loaded.add(map);
         }
-        map.colorSpace = SRGBColorSpace;
-        const ratio = map.image.width / map.image.height / ((frameWidth - .2) / (frameHeight - .2));
-        map.repeat.set(Math.min(1, 1 / ratio), Math.min(1, ratio));
-        map.offset.set((1 - map.repeat.x) / 2, (1 - map.repeat.y) / 2);
-        frames[index].face.map = map;
-        frames[index].face.color.setRGB(1.43, 1.43, 1.43);
-        frames[index].face.needsUpdate = true;
-        requestFrame();
         return map;
+      }).catch(error => {
+        textures.delete(index);
+        throw error;
       }));
     }
     return textures.get(index)!;
   }
 
+  function updateCrop(map: Shot | null, crop: Vector2) {
+    if (!map) return;
+    const ratio = map.image.width / map.image.height / camera.aspect;
+    crop.set(Math.min(1, 1 / ratio), Math.min(1, ratio));
+  }
+
   function resize() {
     const { clientWidth: width, clientHeight: height } = stage;
-    if (width === 0 || height === 0) return;
-    mobile = width < 525;
+    if (!width || !height) return;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1 : quality, Math.sqrt(1_000_000 / (width * height)));
-    renderer.setPixelRatio(pixelRatio);
+    const fieldHeight = 2 * distance * Math.tan(MathUtils.degToRad(camera.fov / 2));
+    screen.scale.set(fieldHeight * camera.aspect * 1.09, fieldHeight * 1.09, 1);
+    updateCrop(uniforms.previousShot.value, uniforms.previousCrop.value);
+    updateCrop(uniforms.nextShot.value, uniforms.nextCrop.value);
+    const ratio = Math.min(devicePixelRatio || 1, width < 525 ? 1.2 : 1.45, Math.sqrt(950_000 / (width * height)));
+    renderer.setPixelRatio(ratio);
     renderer.setSize(width, height, false);
     requestFrame();
   }
 
   function requestFrame() {
-    if (!raf && visible && !document.hidden && !disposed && !lost) {
-      previousTime = 0;
-      raf = requestAnimationFrame(draw);
-    }
+    if (raf || !visible || document.hidden || disposed || lost) return;
+    previousTime = 0;
+    raf = requestAnimationFrame(draw);
   }
 
   function draw(now: number) {
     raf = 0;
     if (!visible || document.hidden || disposed || lost) return;
 
-    const dt = previousTime ? now - previousTime : 16.7;
+    const dt = previousTime ? Math.min(now - previousTime, 40) : 16.7;
     previousTime = now;
-    const smoothing = 1 - Math.exp(-Math.min(40, dt) / 82);
-    horizontal = MathUtils.lerp(horizontal, targetX, smoothing);
-    vertical = MathUtils.lerp(vertical, targetY, smoothing);
-    const restDistance = Math.max(9.25, 13.25 / camera.aspect);
-    const cut = cutStart ? Math.min(1, (now - cutStart) / 520) : 1;
-    const swing = Math.sin(cut * Math.PI) * (1 - cut);
-    camera.position.set(
-      horizontal * .48 - progress * .32 + swing * cutDirection * .88,
-      vertical * .34 + progress * .22 + swing * .26,
-      restDistance - progress * (mobile ? 1.1 : 2.1) + swing * .42,
-    );
-    camera.lookAt(.25 - progress * .63, .12 + progress * .2, 0);
-    let settling = cut < 1 || Math.abs(horizontal - targetX) > .001 || Math.abs(vertical - targetY) > .001;
-    frames.forEach(({ group, face }, index) => {
-      const offset = (index - active + frames.length) % frames.length;
-      const destination = offset ? 1.08 + offset * .43 : -.25;
-      const depth = offset ? -offset * 1.35 : .1;
-      const angle = offset ? -.44 : -.29 + progress * .23;
-      const factor = initialized ? smoothing : 1;
-      group.position.x = MathUtils.lerp(group.position.x, destination, factor);
-      group.position.y = MathUtils.lerp(group.position.y, offset ? .45 + offset * .31 : .12, factor);
-      group.position.z = MathUtils.lerp(group.position.z, depth, factor);
-      group.rotation.y = MathUtils.lerp(group.rotation.y, angle, factor);
-      group.rotation.z = MathUtils.lerp(group.rotation.z, offset ? .12 : .072 * (1 - progress), factor);
-      group.rotation.x = -.035;
-      if (face.map) face.color.setScalar(offset ? .53 : 1.62);
-      settling ||= Math.abs(group.position.x - destination) + Math.abs(group.position.z - depth) > .008;
-    });
-    light.color.lerp(shotLights[active], initialized ? smoothing : 1);
-    renderer.render(scene, camera);
+    const damping = 1 - Math.exp(-dt / 88);
+    cursor.lerp(target, damping);
+    travel = MathUtils.lerp(travel, destination, damping);
+    const cut = start ? MathUtils.clamp((now - start) / 690, 0, 1) : 1;
+    const ease = MathUtils.smootherstep(cut, 0, 1);
+    const swing = Math.sin(cut * Math.PI);
+    uniforms.progress.value = ease;
 
-    if (dt > 25 && initialized && !mobile) slowFrames += 1;
-    else slowFrames = Math.max(0, slowFrames - 1);
-    if (slowFrames > 16 && quality > 1) {
-      quality = 1;
-      resize();
+    camera.position.set(
+      cursor.x * .175 + swing * uniforms.direction.value * .23 + travel * .14,
+      cursor.y * .12 - travel * .13,
+      distance - travel * .92 - swing * .19,
+    );
+    camera.lookAt(cursor.x * .045, 0, 0);
+    renderer.render(scene, camera);
+    if (cut < 1 || cursor.distanceToSquared(target) > .000003 || Math.abs(travel - destination) > .002) {
+      raf = requestAnimationFrame(draw);
     }
-    initialized = true;
-    if (settling && !raf) raf = requestAnimationFrame(draw);
   }
 
   const observer = new IntersectionObserver(([entry]) => {
@@ -150,7 +160,7 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
     lost = true;
     stage.removeAttribute('data-rendered');
   };
-  const dispose = () => {
+  function dispose() {
     if (disposed) return;
     disposed = true;
     stage.removeAttribute('data-rendered');
@@ -159,48 +169,60 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
     dimensions.disconnect();
     document.removeEventListener('visibilitychange', visibility);
     canvas.removeEventListener('webglcontextlost', loseContext);
-    for (const { face, edge } of frames) {
-      face.map?.dispose();
-      face.dispose();
-      edge.dispose();
-    }
-    shell.dispose();
-    aperture.dispose();
+    for (const map of loaded) map.dispose();
+    geometry.dispose();
+    material.dispose();
     renderer.dispose();
-  };
+  }
 
   try {
-    await texture(active);
+    const photo = await texture(initial);
+    uniforms.previousShot.value = photo;
+    uniforms.nextShot.value = photo;
     resize();
     renderer.compile(scene, camera);
-    stage.setAttribute('data-rendered', '');
     observer.observe(stage);
     dimensions.observe(stage);
     canvas.addEventListener('webglcontextlost', loseContext);
     document.addEventListener('visibilitychange', visibility);
-    sources.forEach((_, index) => { if (index !== active) void texture(index).catch(() => {}); });
+    // Let the still image remain visible until the first composited shot is ready.
+    cancelAnimationFrame(raf);
+    draw(performance.now());
+    stage.setAttribute('data-rendered', '');
+    sources.forEach((_, index) => { if (index !== initial) void texture(index).catch(() => {}); });
   } catch {
     dispose();
     return;
   }
 
   return {
-    select(index: number) {
-      if (active !== index) {
-        cutStart = performance.now();
-        cutDirection = index > active ? 1 : -1;
-        active = index;
+    async select(index: number) {
+      const currentRequest = ++revision;
+      if (index === selected) return;
+      try {
+        const photo = await texture(index);
+        if (disposed || lost || currentRequest !== revision) return;
+        const current = uniforms.progress.value >= .5 ? uniforms.nextShot.value : uniforms.previousShot.value;
+        uniforms.previousShot.value = current;
+        uniforms.nextShot.value = photo;
+        uniforms.direction.value = index > selected ? 1 : -1;
+        uniforms.spill.value.set(getComputedStyle(stage).getPropertyValue('--scene-accent').trim());
+        updateCrop(current, uniforms.previousCrop.value);
+        updateCrop(photo, uniforms.nextCrop.value);
+        selected = index;
+        start = performance.now();
+        stage.setAttribute('data-rendered', '');
+        requestFrame();
+      } catch {
+        if (!disposed && currentRequest === revision) stage.removeAttribute('data-rendered');
       }
-      void texture(index).catch(() => stage.removeAttribute('data-rendered'));
-      requestFrame();
     },
     pointer(x: number, y: number) {
-      targetX = x;
-      targetY = y;
+      target.set(x, y);
       requestFrame();
     },
     scroll(value: number) {
-      progress = value;
+      destination = value;
       requestFrame();
     },
     dispose,
