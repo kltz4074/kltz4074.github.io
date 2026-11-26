@@ -1,0 +1,327 @@
+{
+  "site": {
+    "name": "KLTZQU",
+    "intro": {
+      "en": "I’m Eugene. I make horror games and build tools.",
+      "ru": "Я Юджин. Делаю хоррор-игры и инструменты."
+    },
+    "about": {
+      "en": "I’m Eugene. I like making horror games set in familiar places. I made Frozen Fries on my own and worked on Little Seeds with a team of four. I also build tools like BackOS, a computer that runs inside my Unity game.",
+      "ru": "Я Юджин. Мне нравится делать хоррор-игры в знакомых местах. Frozen Fries я сделал сам, а Little Seeds — с командой из четырёх человек. Ещё я делаю инструменты, например BackOS — компьютер внутри моей игры на Unity."
+    },
+    "avatar": "/media/mark.webp",
+    "hero": "/media/hero.webp",
+    "heroMobile": "/media/hero-small.webp",
+    "alive": true,
+    "footer": "KLTZQU",
+    "categories": [
+      "Games",
+      "Applications",
+      "Websites",
+      "Tools",
+      "Experiments",
+      "Other"
+    ],
+    "statuses": [
+      "In development",
+      "Released",
+      "Prototype",
+      "On hold",
+      "Archived"
+    ],
+    "contacts": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/kltz4074"
+      },
+      {
+        "label": "itch.io",
+        "url": "https://kltzqu.itch.io/"
+      },
+      {
+        "label": "Discord",
+        "value": "@kltzqu"
+      },
+      {
+        "label": "Telegram",
+        "url": "https://t.me/kltzqqu"
+      },
+      {
+        "label": "Email",
+        "value": "kltzqu@gmail.com",
+        "url": "mailto:kltzqu@gmail.com"
+      }
+    ],
+    "navigation": [
+      {
+        "label": "Work",
+        "url": "/projects/"
+      },
+      {
+        "label": "Lab",
+        "url": "/lab/"
+      },
+      {
+        "label": "About",
+        "url": "/about/"
+      },
+      {
+        "label": "Now",
+        "url": "/now/"
+      },
+      {
+        "label": "Devlog",
+        "url": "/devlog/"
+      },
+      {
+        "label": "Contact",
+        "url": "/contact/"
+      }
+    ],
+    "seo": {
+      "title": "KLTZQU — Portfolio",
+      "description": "Games, tools and experiments by Eugene, an independent developer."
+    },
+    "languages": [
+      "en",
+      "ru"
+    ]
+  },
+  "projects": [
+    {
+      "slug": "little-seeds",
+      "title": "Little Seeds",
+      "summary": {
+        "en": "I made this horror game for My First Game Jam with a team of four. You take orders at a computer, grow plants and deliver them. Then the plants start acting strange.",
+        "ru": "Спокойная игра о выращивании растений, которая незаметно превращается в хоррор."
+      },
+      "body": {
+        "en": "Made for My First Game Jam with a small team. You accept orders through a terminal, grow plants and deliver them — until the routine reveals what it has been hiding.",
+        "ru": "Сделана небольшой командой для My First Game Jam. Ты принимаешь заказы через терминал, выращиваешь растения и отправляешь их — пока рутина не показывает, что она скрывала."
+      },
+      "status": "Released",
+      "category": "Games",
+      "tech": [
+        "Unity",
+        "C#"
+      ],
+      "role": "Lead developer / game design",
+      "created": "March 2026",
+      "featured": true,
+      "cover": "/media/seeds-01.webp",
+      "media": [
+        {
+          "src": "/media/seeds-01.webp",
+          "alt": "A dirt road between rows of trees at dusk"
+        },
+        {
+          "src": "/media/seeds-02.webp",
+          "alt": "A watering can beside a glowing computer"
+        },
+        {
+          "src": "/media/seeds-03.webp",
+          "alt": "A close-up of the computer screen"
+        }
+      ],
+      "links": [
+        {
+          "label": "Play on itch.io",
+          "url": "https://kltzqu.itch.io/little-seeds"
+        }
+      ]
+    },
+    {
+      "slug": "frozen-fries",
+      "title": "Frozen Fries",
+      "summary": {
+        "en": "My first released game started with a dream someone posted on Reddit. I spent most of 2025 turning it into a short horror game about a bag of frozen fries.",
+        "ru": "Короткий атмосферный хоррор о замороженной картошке фри, родившийся из странного сна."
+      },
+      "body": {
+        "en": "My first released game, developed from early 2025 to January 2026. What began as a story about someone isolated in a small room became a retro horror about an ordinary bag of frozen fries.",
+        "ru": "Моя первая выпущенная игра, которую я разрабатывал с начала 2025 года до января 2026-го. История об изолированном человеке в маленькой комнате превратилась в ретро-хоррор об обычной пачке замороженной картошки."
+      },
+      "status": "Released",
+      "category": "Games",
+      "tech": [
+        "Unity",
+        "C#",
+        "Blender"
+      ],
+      "role": "Solo developer / game design",
+      "created": "2025 — January 2026",
+      "featured": true,
+      "cover": "/media/fries-01.webp",
+      "media": [
+        {
+          "src": "/media/fries-01.webp",
+          "alt": "A television full of static in an amber-lit room"
+        },
+        {
+          "src": "/media/fries-02.webp",
+          "alt": "A dark forest path under streetlights"
+        },
+        {
+          "src": "/media/fries-03.webp",
+          "alt": "A doorway in near-total darkness"
+        }
+      ],
+      "links": [
+        {
+          "label": "Play on itch.io",
+          "url": "https://kltzqu.itch.io/frozen-fries"
+        }
+      ]
+    },
+    {
+      "slug": "the-dev-blog",
+      "title": "The Dev Blog",
+      "summary": {
+        "en": "A psychological horror about responsibility and isolation.",
+        "ru": "Психологический хоррор об ответственности и изоляции."
+      },
+      "body": {
+        "en": "",
+        "ru": ""
+      },
+      "status": "In development",
+      "category": "Games",
+      "tech": [
+        "Unity",
+        "C#",
+        "HDRP"
+      ],
+      "role": "Game direction / code",
+      "created": "2026 — Now",
+      "featured": false,
+      "cover": "",
+      "media": [],
+      "links": []
+    },
+    {
+      "slug": "backos",
+      "title": "BackOS",
+      "summary": {
+        "en": "A fully interactive in-game operating system built around windows, apps and physical screens.",
+        "ru": "Полностью интерактивная внутриигровая ОС с окнами, приложениями и физическими мониторами."
+      },
+      "body": {
+        "en": "A reusable computer system for The Dev Blog: multiple physical displays, draggable windows, app definitions, cursor input and a camera that reacts to the interface.",
+        "ru": "Переиспользуемая компьютерная система для The Dev Blog: несколько физических мониторов, перетаскиваемые окна, приложения, курсор и камера, реагирующая на интерфейс."
+      },
+      "status": "In development",
+      "category": "Tools",
+      "tech": [
+        "Unity",
+        "C#",
+        "UGUI"
+      ],
+      "role": "Systems / UI",
+      "created": "July 2026 — Now",
+      "featured": false,
+      "cover": "",
+      "media": [],
+      "links": []
+    },
+    {
+      "slug": "pillars",
+      "title": "Pillars",
+      "summary": {
+        "en": "A Minecraft map editor and match system designed for repeatable multiplayer arenas.",
+        "ru": "Редактор карт и система матчей Minecraft для переиспользуемых многопользовательских арен."
+      },
+      "body": {
+        "en": "A Paper plugin with isolated build worlds, anchors, automatic floors, schematic exports, undo/redo and a parallel match-world strategy.",
+        "ru": "Paper-плагин с изолированными мирами строительства, якорями, автоматическим полом, экспортом схем, undo/redo и системой параллельных матчей."
+      },
+      "status": "Released",
+      "category": "Tools",
+      "tech": [
+        "Paper",
+        "Java",
+        "Maven"
+      ],
+      "role": "Plugin architecture",
+      "created": "2026",
+      "featured": false,
+      "cover": "",
+      "media": [],
+      "links": []
+    },
+    {
+      "slug": "pointengine",
+      "title": "PointEngine",
+      "summary": {
+        "en": "A 3D game engine I’m building in C++ and OpenGL."
+      },
+      "status": "In development",
+      "category": "Tools",
+      "tech": [
+        "C++",
+        "OpenGL"
+      ],
+      "links": [
+        {
+          "label": "View source",
+          "url": "https://github.com/kltz4074/PointEngine"
+        }
+      ]
+    },
+    {
+      "slug": "klpocket",
+      "title": "KLPocket",
+      "summary": {
+        "en": "I built KLPocket to keep track of my spending, savings and budgets across currencies.",
+        "ru": "Я сделал KLPocket, чтобы следить за расходами, сбережениями и бюджетами в разных валютах."
+      },
+      "status": "In development",
+      "category": "Applications",
+      "links": [
+        {
+          "label": "Open KLPocket",
+          "url": "https://klpocket.com/"
+        }
+      ]
+    }
+  ],
+  "lab": [
+    {
+      "slug": "gallery-1786621474669-0",
+      "media": [
+        {
+          "src": "/media/gallery/1786621472569-0-unity-yrrld6dmez.png",
+          "alt": "Unity development screenshot"
+        }
+      ],
+      "project": "the-dev-blog"
+    },
+    {
+      "slug": "gallery-1786621831962-0",
+      "media": [
+        {
+          "src": "/media/gallery/1786621829752-0-unity-ehbqi2dib7.png",
+          "alt": "Unity development screenshot"
+        }
+      ],
+      "project": ""
+    },
+    {
+      "slug": "ps1-visuals",
+      "title": "PS1 Visual Study",
+      "body": {
+        "en": "Vertex snapping, pixelization and post-processing.",
+        "ru": "Дрожание вершин, пикселизация и постобработка."
+      }
+    },
+    {
+      "slug": "water-buoyancy",
+      "title": "Object's floating physics",
+      "body": {
+        "en": "Multi-point buoyancy, damping and debug tools for objects that need to feel heavy in water.",
+        "ru": "Многоточечная плавучесть, демпфирование и отладка для объектов, которые должны ощущаться тяжёлыми в воде."
+      }
+    }
+  ],
+  "devlog": [],
+  "now": {}
+}

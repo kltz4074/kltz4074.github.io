@@ -1,0 +1,16 @@
+---
+import { site, sectionEnabled } from '../lib/portfolio';
+const email = site.contacts.find(link => link.url?.startsWith('mailto:'));
+const { full = false } = Astro.props;
+---
+<footer class:list={['contact', 'page-gutter', { 'contact-compact': !full }]} id="contact">
+  {full && sectionEnabled('contact') && <div class="contact-main">
+    <h2 class="contact-title-mask"><span class="contact-title-line">Say <em>hello.</em></span></h2>
+    {email?.url && <a class="contact-email action" href={email.url}>{email.value || email.url.slice(7)}<span class="arrow" aria-hidden="true">↗</span></a>}
+  </div>}
+  <div class="contact-foot">
+    <p class="eyebrow">{site.footer}</p>
+    {sectionEnabled('contact') && <nav aria-label="Social">{site.contacts.map(link => <a href={link.url || '/contact/'}>{link.label}</a>)}</nav>}
+    {full ? <button class="motion-toggle eyebrow" type="button" aria-pressed="false" hidden>Reduce motion</button> : <a href="/#top">Back to top ↑</a>}
+  </div>
+</footer>

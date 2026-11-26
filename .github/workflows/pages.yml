@@ -1,53 +1,59 @@
 name: Deploy portfolio to GitHub Pages
 
 on:
+  pull_request:
+    branches: [main]
+    paths:
+      - editorial/**
+      - .github/workflows/pages.yml
   push:
     branches: [main]
     paths:
-      - editorial-source.tar.gz
+      - editorial/**
       - .github/workflows/pages.yml
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: editorial
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: editorial/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+      - run: npm run check:links
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        with:
+          path: editorial/dist
   deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-      - name: Extract Editorial source
-        run: |
-          mkdir editorial
-          tar -xzf editorial-source.tar.gz -C editorial
-      - name: Build Editorial portfolio
-        working-directory: editorial
-        run: |
-          npm ci --no-audit --no-fund
-          npm run build
-          test -f dist/index.html
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - name: Upload Editorial build
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: editorial/dist
-      - name: Deploy
+      - uses: actions/deploy-pages@v4
         id: deployment
-        uses: actions/deploy-pages@v4

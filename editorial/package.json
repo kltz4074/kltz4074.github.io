@@ -1,0 +1,32 @@
+{
+  "name": "kltzqu-editorial",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "astro build",
+    "preview": "astro preview",
+    "develop": "astro dev",
+    "check": "astro check",
+    "test": "node --import ./tests/register.mjs --test tests/*.test.ts",
+    "check:links": "node scripts/check-links.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@fontsource-variable/instrument-sans": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "astro": "^7.4.13",
+    "gsap": "^3.15.1",
+    "markdown-it": "^15.0.3",
+    "zod": "^4.6.7"
+  },
+  "private": true,
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@types/markdown-it": "^14.2.0",
+    "typescript": "^6.0.3"
+  }
+}

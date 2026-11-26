@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import Copy from '../../components/Copy.astro';
+import Media from '../../components/Media.astro';
+import { devlog, projects, english, sectionEnabled } from '../../lib/portfolio';
+import type { Portfolio } from '../../lib/schema';
+export function getStaticPaths() {
+  return sectionEnabled('devlog') ? devlog.map(post => ({ params: { slug: post.slug }, props: { post } })) : [];
+}
+const { post }: { post: Portfolio['devlog'][number] } = Astro.props;
+const project = sectionEnabled('projects') && projects.find(item => item.slug === post.project);
+const frames = [...post.media ?? []];
+if (post.cover && !frames.some(frame => frame.src === post.cover)) frames.unshift({ src: post.cover, alt: post.title });
+---
+<Base title={post.title} description={english(post.body).slice(0, 155)} seo={{ image: post.cover || undefined, ...post.seo }}>
+  <main id="main" class="page-gutter interior">
+    <a class="back-link" href="/devlog/">← Devlog</a>
+    <h1>{post.title}</h1>
+    <div class="detail-links"><time datetime={post.date}>{post.date}</time>{project && <a href={'/projects/' + project.slug + '/'}>{project.title} ↗</a>}{post.tags?.join(' · ')}</div>
+    <Media frames={frames} />
+    <article class="prose"><Copy copy={post.body} rich /></article>
+  </main>
+</Base>

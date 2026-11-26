@@ -1,37 +1,19 @@
-name: Update portfolio analytics
+name: Validate legacy analytics snapshot
 
 on:
-  schedule:
-    - cron: "17 * * * *"
   workflow_dispatch:
 
 permissions:
-  contents: write
-
-concurrency:
-  group: portfolio-analytics
-  cancel-in-progress: true
+  contents: read
 
 jobs:
-  snapshot:
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          ref: main
-
-      - name: Update analytics snapshot
-        run: node scripts/update-analytics.mjs
-
-      - name: Commit snapshot when changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- content/analytics.json
-          if git diff --cached --quiet; then
-            echo "Analytics snapshot did not change."
-            exit 0
-          fi
-          git commit -m "Update portfolio analytics snapshot"
-          git push origin main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test scripts/update-analytics.test.mjs
