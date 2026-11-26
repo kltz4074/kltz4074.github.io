@@ -1,15 +1,14 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
 import Lenis from 'lenis';
 import type { createStage } from './stage';
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger);
 
 const root = document.documentElement;
 const hero = document.querySelector<HTMLElement>('[data-hero]');
 const canvas = hero?.querySelector<HTMLCanvasElement>('[data-stage-canvas]');
-const still = hero?.querySelector<HTMLImageElement>('[data-stage-still]');
+let still = hero?.querySelector<HTMLImageElement>('[data-stage-still]');
 const reelLink = hero?.querySelector<HTMLAnchorElement>('[data-reel-link]');
 const reelTitle = hero?.querySelector<HTMLElement>('[data-reel-title]');
 const shots = [...document.querySelectorAll<HTMLElement>('[data-shot]')];
@@ -39,15 +38,17 @@ if (shots.length > 1) {
       shots[active].setAttribute('aria-pressed', 'false');
       active = index;
       hero?.setAttribute('data-light', button.dataset.light!);
-      still.src = button.dataset.shot!;
+      const image = still.cloneNode() as HTMLImageElement;
+      image.src = button.dataset.shot!;
+      void image.decode().then(() => {
+        if (active !== index || !still) return;
+        still.replaceWith(image);
+        still = image;
+      }).catch(() => {});
       reelLink.href = button.dataset.url!;
       reelTitle.textContent = button.dataset.title!;
       button.setAttribute('aria-pressed', 'true');
       void stage?.select(index);
-      if (!reduced()) {
-        gsap.fromTo(reelTitle, { y: 9, opacity: .25 }, { y: 0, opacity: 1, duration: .34, ease: 'power3.out', overwrite: true, clearProps: 'transform,opacity' });
-        if (!stage) gsap.fromTo(still, { scale: 1.06, opacity: .72 }, { scale: 1, opacity: 1, duration: .37, ease: 'power3.out', overwrite: true, clearProps: 'transform,opacity' });
-      }
     });
   });
 }
@@ -82,13 +83,11 @@ function configureMotion() {
 
   view = gsap.context(() => {
     const title = hero?.querySelector('.hero-title > span');
-    let lettering: SplitText | undefined;
     if (title && !introPlayed && !location.hash && window.scrollY < 70) {
-      lettering = SplitText.create(title, { type: 'chars', aria: 'auto' });
-      gsap.timeline({ defaults: { ease: 'expo.out' }, onComplete: () => lettering?.revert() })
-        .fromTo(lettering.chars, { yPercent: 39, opacity: .24, rotateX: -30 }, { yPercent: 0, opacity: 1, rotateX: 0, duration: .66, stagger: .032 }, 0)
-        .from('.hero-stage', { scale: .91, y: 20, clipPath: 'inset(9% 5% 9% 5% round var(--radius-media))', duration: .83, clearProps: 'transform,clipPath' }, .03)
-        .from('.hero-intro, .hero-scroll, .hero-reel', { y: 17, opacity: .42, duration: .64, stagger: .07, clearProps: 'transform,opacity' }, .14);
+      gsap.timeline({ defaults: { ease: 'power3.out' } })
+        .from(title, { y: 15, duration: .55, clearProps: 'transform' }, 0)
+        .from('.hero-stage', { y: 18, duration: .68, clearProps: 'transform' }, .04)
+        .from('.hero-intro, .hero-scroll, .hero-reel', { y: 10, duration: .5, stagger: .048, clearProps: 'transform' }, .1);
       introPlayed = true;
     }
 
@@ -98,8 +97,8 @@ function configureMotion() {
         scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom 22%', scrub: .28 },
         defaults: { ease: 'none' },
       })
-        .to('.hero-type', { y: -58, opacity: .38 }, 0)
-        .to('.hero-visual', { y: 48, scale: .955 }, 0)
+        .to('.hero-type', { y: -32 }, 0)
+        .to('.hero-visual', { y: 36, scale: .974 }, 0)
         .to(cameraTravel, {
           value: 1,
           onUpdate: () => {
@@ -111,7 +110,7 @@ function configureMotion() {
 
     if (document.querySelector('.work-word > span')) {
       gsap.from('.work-word > span', {
-        y: 19, opacity: .74, ease: 'none',
+        y: 15, ease: 'none',
         scrollTrigger: { trigger: '.work', start: 'top 88%', end: 'top 62%', scrub: true },
       });
     }
@@ -123,8 +122,8 @@ function configureMotion() {
       gsap.timeline({
         scrollTrigger: { trigger: media, start: 'top 98%', end: 'top 48%', scrub: .24 },
         defaults: { ease: 'none' },
-      }).from(reel, { scale: 1.17, xPercent: side * 3, yPercent: 3 }, 0)
-        .from(media, { y: 33, opacity: .62 }, 0);
+      }).from(reel, { scale: 1.095, xPercent: side * 1.8, yPercent: 1.5 }, 0)
+        .from(media, { y: 22 }, 0);
     });
     if (document.querySelector('.contact-title-line')) {
       gsap.from('.contact-title-line', {
@@ -153,10 +152,7 @@ function configureMotion() {
         });
       }
     }
-    return () => {
-      unregister.forEach(cleanup => cleanup());
-      lettering?.revert();
-    };
+    return () => unregister.forEach(cleanup => cleanup());
   });
 
   if (canvas && shots.length && !canvasUsed) {
@@ -201,7 +197,7 @@ for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) 
   const images = [...gallery.querySelectorAll('img')];
   let current = 0;
   let revision = 0;
-  let swap: gsap.core.Timeline | undefined;
+  let swap: gsap.core.Tween | undefined;
   controls.hidden = false;
 
   buttons.forEach((button, index) => button.addEventListener('click', async () => {
@@ -215,14 +211,15 @@ for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) 
       if (request === revision) live.textContent = russian() ? 'Кадр не загрузился.' : 'The image could not load.';
       return;
     }
+    if (swap) await swap;
     if (request !== revision) return;
-    swap?.progress(1);
 
     const outgoing = images[current];
     const forward = index > current;
     const finish = () => {
       outgoing.hidden = true;
-      outgoing.classList.remove('frame-outgoing');
+      incoming.classList.remove('frame-incoming');
+      swap = undefined;
       outgoing.removeAttribute('aria-hidden');
     };
     buttons[current].setAttribute('aria-pressed', 'false');
@@ -234,15 +231,13 @@ for (const gallery of document.querySelectorAll<HTMLElement>('[data-gallery]')) 
     if (reduced()) {
       finish();
     } else {
-      outgoing.classList.add('frame-outgoing');
-      const sequence = gsap.timeline({ onComplete: finish });
-      sequence.to(outgoing, {
+      incoming.classList.add('frame-incoming');
+      swap = gsap.fromTo(incoming, {
         clipPath: forward ? 'inset(0 100% 0 0)' : 'inset(0 0 0 100%)',
-        duration: .56, ease: 'power3.inOut', clearProps: 'clipPath',
-      }, 0).fromTo(incoming,
-        { scale: 1.095, xPercent: forward ? 2 : -2 },
-        { scale: 1, xPercent: 0, duration: .65, ease: 'power3.out', clearProps: 'transform' }, 0);
-      swap = sequence;
+      }, {
+        clipPath: 'inset(0 0 0 0)',
+        duration: .42, ease: 'power3.inOut', clearProps: 'clipPath', onComplete: finish,
+      });
     }
   }));
 }

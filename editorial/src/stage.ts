@@ -68,9 +68,14 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
   const cursor = new Vector2();
   const target = new Vector2();
   const distance = 5.6;
+  const cutDuration = 480;
   let selected = initial;
   let revision = 0;
-  let start = 0;
+  let pending: { index: number; photo: Shot; accent: string } | undefined;
+  let start: number | undefined;
+  let width = 0;
+  let height = 0;
+  let pixelRatio = 0;
   let travel = 0;
   let destination = 0;
   let previousTime = 0;
@@ -104,18 +109,24 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
   }
 
   function resize() {
-    const { clientWidth: width, clientHeight: height } = stage;
-    if (!width || !height) return;
+    const { clientWidth, clientHeight } = stage;
+    if (!clientWidth || !clientHeight || disposed || lost) return;
+    const ratio = Math.min(devicePixelRatio || 1, clientWidth < 525 ? 1.2 : 1.45, Math.sqrt(950_000 / (clientWidth * clientHeight)));
+    if (width === clientWidth && height === clientHeight && pixelRatio === ratio) return;
+    width = clientWidth;
+    height = clientHeight;
+    pixelRatio = ratio;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     const fieldHeight = 2 * distance * Math.tan(MathUtils.degToRad(camera.fov / 2));
     screen.scale.set(fieldHeight * camera.aspect * 1.09, fieldHeight * 1.09, 1);
     updateCrop(uniforms.previousShot.value, uniforms.previousCrop.value);
     updateCrop(uniforms.nextShot.value, uniforms.nextCrop.value);
-    const ratio = Math.min(devicePixelRatio || 1, width < 525 ? 1.2 : 1.45, Math.sqrt(950_000 / (width * height)));
-    renderer.setPixelRatio(ratio);
-    renderer.setSize(width, height, false);
-    requestFrame();
+
+    // Changing the drawing buffer clears it. Repaint in this callback before it can be presented.
+    renderer.setDrawingBufferSize(width, height, pixelRatio);
+    cancelAnimationFrame(raf);
+    draw(performance.now(), true);
   }
 
   function requestFrame() {
@@ -124,16 +135,34 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
     raf = requestAnimationFrame(draw);
   }
 
-  function draw(now: number) {
+  function draw(now: number, resizing = false) {
     raf = 0;
-    if (!visible || document.hidden || disposed || lost) return;
+    if ((!visible && !resizing) || document.hidden || disposed || lost) return;
 
-    const dt = previousTime ? Math.min(now - previousTime, 40) : 16.7;
+    // Finish the outgoing cut before starting the latest request. Swapping either texture
+    // halfway through a cut makes the visible image jump back to a full frame.
+    if (start !== undefined && now - start >= cutDuration) start = undefined;
+    if (start === undefined && pending) {
+      const { index, photo, accent } = pending;
+      pending = undefined;
+      if (index !== selected) {
+        uniforms.previousShot.value = uniforms.nextShot.value;
+        uniforms.previousCrop.value.copy(uniforms.nextCrop.value);
+        uniforms.nextShot.value = photo;
+        updateCrop(photo, uniforms.nextCrop.value);
+        uniforms.direction.value = index > selected ? 1 : -1;
+        uniforms.spill.value.set(accent);
+        selected = index;
+        start = now;
+      }
+    }
+
+    const dt = previousTime ? MathUtils.clamp(now - previousTime, 0, 40) : 16.7;
     previousTime = now;
     const damping = 1 - Math.exp(-dt / 88);
     cursor.lerp(target, damping);
     travel = MathUtils.lerp(travel, destination, damping);
-    const cut = start ? MathUtils.clamp((now - start) / 690, 0, 1) : 1;
+    const cut = start === undefined ? 1 : MathUtils.clamp((now - start) / cutDuration, 0, 1);
     const ease = MathUtils.smootherstep(cut, 0, 1);
     const swing = Math.sin(cut * Math.PI);
     uniforms.progress.value = ease;
@@ -145,7 +174,8 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
     );
     camera.lookAt(cursor.x * .045, 0, 0);
     renderer.render(scene, camera);
-    if (cut < 1 || cursor.distanceToSquared(target) > .000003 || Math.abs(travel - destination) > .002) {
+    if (!stage.hasAttribute('data-rendered')) stage.setAttribute('data-rendered', '');
+    if (visible && (cut < 1 || cursor.distanceToSquared(target) > .000003 || Math.abs(travel - destination) > .002)) {
       raf = requestAnimationFrame(draw);
     }
   }
@@ -180,15 +210,10 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
     uniforms.previousShot.value = photo;
     uniforms.nextShot.value = photo;
     resize();
-    renderer.compile(scene, camera);
     observer.observe(stage);
     dimensions.observe(stage);
     canvas.addEventListener('webglcontextlost', loseContext);
     document.addEventListener('visibilitychange', visibility);
-    // Let the still image remain visible until the first composited shot is ready.
-    cancelAnimationFrame(raf);
-    draw(performance.now());
-    stage.setAttribute('data-rendered', '');
     sources.forEach((_, index) => { if (index !== initial) void texture(index).catch(() => {}); });
   } catch {
     dispose();
@@ -198,23 +223,15 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
   return {
     async select(index: number) {
       const currentRequest = ++revision;
-      if (index === selected) return;
+      pending = undefined;
+      if (index === selected && stage.hasAttribute('data-rendered')) return;
       try {
         const photo = await texture(index);
         if (disposed || lost || currentRequest !== revision) return;
-        const current = uniforms.progress.value >= .5 ? uniforms.nextShot.value : uniforms.previousShot.value;
-        uniforms.previousShot.value = current;
-        uniforms.nextShot.value = photo;
-        uniforms.direction.value = index > selected ? 1 : -1;
-        uniforms.spill.value.set(getComputedStyle(stage).getPropertyValue('--scene-accent').trim());
-        updateCrop(current, uniforms.previousCrop.value);
-        updateCrop(photo, uniforms.nextCrop.value);
-        selected = index;
-        start = performance.now();
-        stage.setAttribute('data-rendered', '');
+        pending = { index, photo, accent: getComputedStyle(stage).getPropertyValue('--scene-accent').trim() };
         requestFrame();
       } catch {
-        if (!disposed && currentRequest === revision) stage.removeAttribute('data-rendered');
+        // The current WebGL frame still covers the screen if a later texture fails.
       }
     },
     pointer(x: number, y: number) {
