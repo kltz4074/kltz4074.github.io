@@ -3,6 +3,7 @@ import Arrow from '../../components/Arrow.astro';
 import Base from '../../layouts/Base.astro';
 import Copy from '../../components/Copy.astro';
 import Media from '../../components/Media.astro';
+import ProjectGallery from '../../components/ProjectGallery.astro';
 import { projects, devlog, lab, english, isVideo, sectionEnabled } from '../../lib/portfolio';
 import { label } from '../../lib/labels';
 import type { Project } from '../../lib/schema';
@@ -13,6 +14,8 @@ const { project }: { project: Project } = Astro.props;
 const frames = [...project.media ?? [], ...lab.filter(entry => entry.project === project.slug).flatMap(entry => entry.media ?? [])];
 if (project.cover && !frames.some(frame => frame.src === project.cover)) frames.unshift({ src: project.cover, alt: project.title });
 const cover = frames.find(frame => frame.src === project.cover && !isVideo(frame.src)) ?? frames.find(frame => !isVideo(frame.src));
+const stills = cover ? [cover, ...frames.filter(frame => frame !== cover && frame.src !== cover.src && !isVideo(frame.src))] : [];
+const videos = frames.filter(frame => isVideo(frame.src));
 const posts = sectionEnabled('devlog') ? devlog.filter(post => post.project === project.slug) : [];
 const queue = projects.filter(item => !item.archived);
 const next = queue.length > 1 ? queue[(queue.findIndex(item => item.slug === project.slug) + 1) % queue.length] : undefined;
@@ -36,11 +39,9 @@ const url = (slug: string) => '/projects/' + slug + '/';
       </dl>
     </div>
     {(project.links?.length || related) && <nav class="detail-links" aria-label="Project links" data-label-ru="Ссылки на проект">{project.links?.map(link => <a class="action" href={link.url}><Copy copy={label(link.label)} /><Arrow /></a>)}{related && <a class="action" href={url(related.slug)}>{related.title}<Arrow /></a>}</nav>}
-    {cover && <a class="detail-cover" href={cover.src} data-lightbox style={`view-transition-name: project-${project.slug}`} aria-label={'Open image: ' + cover.alt} data-label-ru="Открыть изображение">
-      <img src={cover.src} alt={cover.alt} width="1440" height="810" fetchpriority="high" />
-    </a>}
+    <ProjectGallery frames={stills} title={project.title} slug={project.slug} tilt={project.category === 'Games'} />
     {english(project.body) && <section class="prose"><h2><Copy copy={label('About the project', 'О проекте')} /></h2><Copy copy={project.body} rich /></section>}
-    <Media frames={frames.filter(frame => frame !== cover)} secondary={!!cover} />
+    <Media frames={videos} secondary={!!cover} />
     {english(project.updates) && <section class="prose"><h2><Copy copy={label('Updates', 'Обновления')} /></h2><Copy copy={project.updates} rich /></section>}
     {posts.length > 0 && <section class="prose"><h2><Copy copy={label('Devlog')} /></h2><ul>{posts.map(post => <li><a href={'/devlog/' + post.slug + '/'}>{post.title}</a></li>)}</ul></section>}
     {next && <div class="detail-next"><a class="action" href="/projects/">← <Copy copy={label('All projects', 'Все проекты')} /></a><a class="action" href={url(next.slug)}>{next.title}<Arrow moving /></a></div>}
