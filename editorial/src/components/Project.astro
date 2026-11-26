@@ -19,8 +19,8 @@ const url = '/projects/' + slug + '/';
     <a class="action project-action" href={url}><Copy copy={label('View project', 'Открыть проект')} /><Arrow moving /></a>
   </div>
   {frames.length > 0 && <figure class="project-gallery" data-gallery>
-    <a class="project-media" href={url} id={slug + '-frames'} aria-label={title}>
-      <div class="project-reel" style={`view-transition-name: project-${slug}`}>
+    <a class="project-media" href={url} id={slug + '-frames'} aria-label={title} style={`view-transition-name: project-${slug}`}>
+      <div class="project-reel">
         {frames.map(({ src, alt }, index) => <img src={src} alt={alt} width="1440" height="810" loading="lazy" decoding="async" hidden={index !== 0} />)}
       </div>
     </a>

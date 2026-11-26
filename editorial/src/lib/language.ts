@@ -37,7 +37,6 @@ function displayLanguage(language: string) {
 }
 
 if (selector) {
-  let transition: Animation | undefined;
   try {
     const language = localStorage.getItem('portfolio-language');
     if (language && [...selector.options].some(option => option.value === language)) selector.value = language;
@@ -46,10 +45,7 @@ if (selector) {
   selector.addEventListener('change', () => {
     displayLanguage(selector.value);
     try { localStorage.setItem('portfolio-language', selector.value); } catch { /* Optional preference. */ }
-    transition?.cancel();
-    if (!root.hasAttribute('data-reduced')) {
-      transition = document.querySelector('main')?.animate([{ opacity: .72 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
-    }
+
   });
 }
 
