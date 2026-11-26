@@ -1,12 +1,13 @@
 ---
+import { label } from '../lib/labels';
 import Base from '../layouts/Base.astro';
 import Copy from '../components/Copy.astro';
 import Media from '../components/Media.astro';
 import { site, sectionEnabled } from '../lib/portfolio';
 ---
 <Base title="About" seo={site.pageSeo?.about} noindex={!sectionEnabled('about')}>
-  <main id="main" class="page-gutter interior">
-    <h1>About <em>me.</em></h1>
+  <main id="main" class="page-gutter interior" tabindex="-1">
+    <h1><Copy copy={label("About me", "Обо мне")} /></h1>
     {sectionEnabled('about') && <>
       <img class="profile-photo" src={site.avatar} width="128" height="128" alt={site.name} />
       <section class="prose"><Copy copy={site.about} rich /></section>

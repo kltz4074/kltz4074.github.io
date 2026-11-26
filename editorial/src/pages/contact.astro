@@ -1,19 +1,21 @@
 ---
+import Arrow from '../components/Arrow.astro';
+import { label } from '../lib/labels';
 import Base from '../layouts/Base.astro';
 import Copy from '../components/Copy.astro';
 import { site, sectionEnabled } from '../lib/portfolio';
 ---
 <Base title="Contact" seo={site.pageSeo?.contact} noindex={!sectionEnabled('contact')}>
-  <main id="main" class="page-gutter interior">
-    <h1>Say <em>hello.</em></h1>
+  <main id="main" class="page-gutter interior" tabindex="-1">
+    <h1><Copy copy={label("Contact")} /></h1>
     {sectionEnabled('contact') && <>
       {site.collaboration?.en && <Copy copy={site.collaboration} rich />}
       <ul class="index-list">
         {site.contacts.map(link => <li class="contact-row">
           {link.url
-            ? <a href={link.url}><strong>{link.label}</strong><span>{link.value || new URL(link.url, Astro.site).hostname}</span><span aria-hidden="true">↗</span></a>
-            : <div class="contact-value"><strong>{link.label}</strong><span>{link.value}</span></div>}
-          {link.value && <button type="button" data-copy-contact={link.value} aria-label={'Copy ' + link.label}>Copy</button>}
+            ? <a href={link.url}><strong><Copy copy={label(link.label)} /></strong><span>{link.value || new URL(link.url, Astro.site).hostname}</span><Arrow /></a>
+            : <div class="contact-value"><strong><Copy copy={label(link.label)} /></strong><span>{link.value}</span></div>}
+          {link.value && <button type="button" data-copy-contact={link.value} aria-label={'Copy ' + link.label} data-label-ru={'Скопировать ' + link.label}><Copy copy={label("Copy", "Копировать")} /></button>}
         </li>)}
       </ul>
       <p data-copy-status role="status"></p>
@@ -26,9 +28,9 @@ import { site, sectionEnabled } from '../lib/portfolio';
       const status = document.querySelector('[data-copy-status]')!;
       try {
         await navigator.clipboard.writeText(button.dataset.copyContact!);
-        status.textContent = 'Copied to clipboard.';
+        status.textContent = document.documentElement.lang === 'ru' ? 'Скопировано.' : 'Copied.';
       } catch {
-        status.textContent = 'Clipboard access is unavailable. Select and copy the contact text.';
+        status.textContent = document.documentElement.lang === 'ru' ? 'Выделите и скопируйте контакт вручную.' : 'Select and copy the contact text.';
       }
     });
   }
