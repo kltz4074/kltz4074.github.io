@@ -106,7 +106,7 @@ em { font-style: normal; }
 .work { background: var(--cream); color: #20211c; color-scheme: light; --ink-muted: #55574a; --paper-rule: #b3b2a2; padding-block: clamp(2.5rem, 6vw, 6.5rem) clamp(3.5rem, 9vw, 9rem); }
 .work-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .55rem 1.5rem; padding-bottom: clamp(1.3rem, 3vw, 3.1rem); border-bottom: 1px solid var(--paper-rule); }
 .work-heading h2, .about h2, .contact-main h2, .home-index h2 { font-family: var(--display); font-size: clamp(2.2rem, 5.5vw, 6.7rem); line-height: 1.06; font-weight: 650; letter-spacing: -.047em; }
-.work-word { display: block; overflow: clip; padding-bottom: .11em; }
+.work-word { display: block; padding-bottom: .11em; }
 .work-word > span { display: block; }
 .project { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 2.05fr); column-gap: clamp(28px, 6vw, 120px); align-items: center; padding-block: clamp(2.4rem, 6.7vw, 7.5rem); border-bottom: 1px solid var(--paper-rule); }
 .project--reverse { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); }
@@ -183,6 +183,9 @@ html[data-reduced]::view-transition-old(*), html[data-reduced]::view-transition-
   .project-description { margin-block: .65rem .35rem; }
   .about { grid-template-columns: 1fr; gap: 1rem; }
   .contact-foot { gap: .35rem 1.2rem; }
+}
+@media (min-width: 375px) and (max-width: 700px) {
+  .hero-scroll { white-space: nowrap; }
 }
 @media (max-width: 340px) {
   .hero-type { grid-template-columns: 1fr; }
