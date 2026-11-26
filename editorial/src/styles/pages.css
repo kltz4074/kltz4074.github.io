@@ -2,7 +2,7 @@
 .detail-links { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.8rem; }
 .detail-links a, .back-link { font-weight: 700; text-underline-offset: .25em; }
 .detail-links a:hover, .back-link:hover { text-decoration: underline; }
-.detail-cover { display: block; width: 100%; aspect-ratio: 1.88; overflow: clip; margin-block: clamp(1.5rem, 4vw, 4.5rem); background: var(--paper-light); }
+.detail-cover { display: block; width: 100%; aspect-ratio: 1.88; overflow: clip; margin-block: clamp(1.5rem, 4vw, 4.5rem); background: var(--paper-light); border-radius: var(--radius-media); }
 .detail-cover img { width: 100%; height: 100%; object-fit: cover; }
 .detail-next { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem 2rem; padding-top: 1.4rem; border-top: 1px solid var(--paper-rule); margin-top: 3rem; }
 .detail-next .arrow { color: var(--accent); }
@@ -22,7 +22,7 @@
 .index-list a > :nth-child(2) { color: var(--ink-muted); overflow-wrap: anywhere; }
 .filters { display: flex; flex-wrap: wrap; gap: 1rem; margin-block: 1.5rem; }
 .filters label { display: grid; gap: .4rem; font-size: .875rem; }
-.filters input, .filters select { padding: .75rem; border: 1px solid var(--paper-rule); background: var(--paper-light); color: inherit; font: inherit; max-width: 100%; border-radius: 2px; }
+.filters input, .filters select { padding: .75rem; border: 1px solid var(--paper-rule); background: var(--paper-light); color: inherit; font: inherit; max-width: 100%; border-radius: var(--radius-control); }
 .detail-lead { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: start; }
 .facts { display: grid; gap: .6rem; margin: 0; }
 .facts div { display: grid; grid-template-columns: minmax(5.5rem, auto) 1fr; gap: .3rem; }
@@ -31,7 +31,7 @@
 .detail-links { margin-block: 1.5rem; }
 .media-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-block: 2rem; align-items: start; }
 .media-grid > :first-child { grid-column: 1 / -1; }
-.media-grid img, .media-grid video { width: 100%; height: auto; background: #202020; }
+.media-grid img, .media-grid video { border-radius: var(--radius-media); width: 100%; height: auto; background: #202020; }
 .prose { margin-block: 2rem; max-width: 70ch; line-height: 1.65; overflow-wrap: anywhere; }
 .prose h2 { font-size: clamp(1.65rem, 3vw, 3rem); line-height: 1.05; margin-bottom: 1rem; }
 .prose p { margin-bottom: 1em; }
@@ -44,10 +44,10 @@
 .lab-entry { border-top: 1px solid var(--paper-rule); padding-top: 1rem; }
 .lab-entry .media-grid { margin-top: 0; }
 .lab-entry h2 { line-height: 1; font-size: clamp(1.6rem, 4vw, 3.6rem); }
-.lightbox { border: 0; padding: 1rem; background: var(--paper-light); color: var(--ink); max-width: 96vw; max-height: 96vh; }
+.lightbox { border: 0; border-radius: var(--radius-media); padding: 1rem; background: var(--paper-light); color: var(--ink); max-width: 96vw; max-height: 96vh; }
 .lightbox::backdrop { background: #000d; }
-.lightbox img { max-height: 82vh; max-width: 100%; margin: auto; object-fit: contain; }
-.lightbox button { display: block; margin: 0 0 .7rem auto; padding: .45rem .8rem; }
+.lightbox img { border-radius: var(--radius-control); max-height: 82vh; max-width: 100%; margin: auto; object-fit: contain; }
+.lightbox button { display: block; margin: 0 0 .7rem auto; padding: .45rem .8rem; border: 1px solid var(--paper-rule); border-radius: var(--radius-pill); background: var(--paper); }
 @media (max-width: 700px) {
   .index-list a { grid-template-columns: 1fr auto; gap: .6rem; }
   .index-list a > :nth-child(2) { grid-row: 2; grid-column: 1 / -1; }
