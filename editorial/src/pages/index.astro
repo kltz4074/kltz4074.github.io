@@ -1,63 +1,44 @@
 ---
+import Arrow from '../components/Arrow.astro';
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
 import Project from '../components/Project.astro';
 import Copy from '../components/Copy.astro';
 import { site, projects, devlog, portfolio, showNow, sectionEnabled } from '../lib/portfolio';
-import displayFont from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url';
+import { label } from '../lib/labels';
 
-const featured = projects.filter(project => project.featured && !project.archived);
-const active = projects.filter(project => project.status === 'In development' && !project.archived).slice(0, 3);
-const quickLinks = site.contacts.filter(link => ['GitHub', 'itch.io', 'Discord'].includes(link.label));
+const visible = sectionEnabled('projects') ? projects.filter(project => !project.archived) : [];
+const featured = visible.filter(project => project.featured);
+const other = visible.filter(project => !project.featured);
 ---
-<Base title="KLTZQU — Portfolio" seo={site.seo} home>
-  <link slot="head" rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin="anonymous" />
+<Base title={site.name + ' — Portfolio'} seo={site.seo} home>
   <main id="main" tabindex="-1">
-    <section class="hero page-gutter" aria-labelledby="masthead">
-      <div class="hero-type">
-        <h1 class="hero-title" id="masthead" aria-label={site.name} style={`--hero-scale: ${Math.min(1, 6 / site.name.length)}`}>
-          <span class="hero-mask" aria-hidden="true"><span class="hero-name">{site.name.toLowerCase()}</span><span class="hero-period">.</span></span>
-        </h1>
-        <p class="hero-intro"><Copy copy={site.intro} /></p>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="hero-art-frame">
-          <picture>
-            {site.heroMobile && <source media="(max-width: 700px)" srcset={site.heroMobile} />}
-            <img src={site.hero} alt="" width="1600" height="660" fetchpriority="high" />
-          </picture>
-        </div>
-        <span class="hero-art-line"></span>
-      </div>
-      <div class="hero-rail">
-        {site.alive && <span class="eyebrow alive"><span class="status-dot"></span>Alive</span>}
-        {sectionEnabled('contact') && <nav class="quick-links" aria-label="Profiles">{quickLinks.map(link => <a href={link.url || '/contact/'}>{link.label}</a>)}</nav>}
-        {sectionEnabled('projects') && featured.length > 0 && <a class="action hero-scroll" href="#work">Explore work <span class="arrow" aria-hidden="true">↓</span></a>}
-      </div>
-    </section>
-    {sectionEnabled('projects') && featured.length > 0 && <section class="work page-gutter" id="work" aria-labelledby="work-title">
-      <div class="work-heading">
-        <h2 id="work-title"><span class="work-word"><span>Selected</span></span> <em class="work-word"><span>work.</span></em></h2>
-        <nav aria-label="Featured projects" class="work-index">
-          {featured.map(project => <a href={'#' + project.slug}>{project.title} <span aria-hidden="true">↘</span></a>)}
-        </nav>
-      </div>
-      {featured.map(project => <Project project={project} />)}
-      <a class="action all-work" href="/projects/">All projects <span class="arrow" aria-hidden="true">↗</span></a>
-    </section>}
-    {sectionEnabled('projects') && active.length > 0 && <section class="page-gutter home-index">
-      <h2>In <em>development.</em></h2>
-      <ul class="index-list">{active.map(project => <li><a href={'/projects/' + project.slug + '/'}><strong>{project.title}</strong><span><Copy copy={project.summary} /></span><span aria-hidden="true">↗</span></a></li>)}</ul>
+    <Hero projects={featured.length ? featured : visible} />
+    {visible.length > 0 && <section class="work page-gutter" id="work" aria-labelledby="work-title">
+      <header class="work-heading">
+        <h2 id="work-title"><span class="work-word"><Copy copy={featured.length ? label('Selected work', 'Избранные проекты') : label('Projects')} /></span></h2>
+        <a class="action" href="/projects/"><Copy copy={label('All projects', 'Все проекты')} /><Arrow moving /></a>
+      </header>
+      {featured.map((project, index) => <Project project={project} reverse={index % 2 === 1} />)}
+      {other.length > 0 && <div class="work-directory">
+        {featured.length > 0 && <h3><Copy copy={label('More projects', 'Другие проекты')} /></h3>}
+        <ul class="index-list">
+          {other.map(project => <li><a href={'/projects/' + project.slug + '/'}>
+            <strong>{project.title}</strong><span><Copy copy={project.summary} /></span>
+            <span class="directory-end"><Copy copy={label(project.category)} /><Arrow /></span>
+          </a></li>)}
+        </ul>
+      </div>}
     </section>}
     {sectionEnabled('about') && site.about.en && <section id="about" class="about page-gutter" aria-labelledby="about-title">
-      <div>
-        <h2 id="about-title">About <em>me.</em></h2>
+      <h2 id="about-title"><Copy copy={label('About me', 'Обо мне')} /></h2>
+      <div class="about-copy">
         <Copy copy={site.about} rich />
-        <a class="action" href="/about/">More about me <span class="arrow" aria-hidden="true">↗</span></a>
+        <a class="action" href="/about/"><Copy copy={label('More about me', 'Подробнее обо мне')} /><Arrow moving /></a>
       </div>
-      <img class="about-mark" src={site.avatar} width="120" height="120" alt="" loading="lazy" />
     </section>}
-    {showNow && <section class="home-index page-gutter"><h2><a href="/now/">Now <em>↗</em></a></h2><Copy copy={portfolio.now.body} rich /></section>}
-    {sectionEnabled('devlog') && devlog.length > 0 && <section class="home-index page-gutter"><h2><a href="/devlog/">Devlog <em>↗</em></a></h2><ul class="index-list">{devlog.slice(0, 3).map(post => <li><a href={'/devlog/' + post.slug + '/'}><strong>{post.title}</strong><time datetime={post.date}>{post.date}</time><span aria-hidden="true">↗</span></a></li>)}</ul></section>}
+    {showNow && <section class="home-index page-gutter"><h2><a href="/now/"><Copy copy={label('Now')} /> ↗</a></h2><Copy copy={portfolio.now.body} rich /></section>}
+    {sectionEnabled('devlog') && devlog.length > 0 && <section class="home-index page-gutter"><h2><a href="/devlog/"><Copy copy={label('Devlog')} /> ↗</a></h2><ul class="index-list">{devlog.slice(0, 3).map(post => <li><a href={'/devlog/' + post.slug + '/'}><strong>{post.title}</strong><time datetime={post.date}>{post.date}</time><Arrow /></a></li>)}</ul></section>}
   </main>
   <script>
     import '../motion';

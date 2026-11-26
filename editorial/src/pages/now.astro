@@ -1,4 +1,5 @@
 ---
+import { label } from '../lib/labels';
 import Base from '../layouts/Base.astro';
 import Copy from '../components/Copy.astro';
 import { portfolio, site, showNow } from '../lib/portfolio';
@@ -6,8 +7,8 @@ const { now } = portfolio;
 export const prerender = true;
 ---
 <Base title="Now" seo={site.pageSeo?.now} noindex={!showNow}>
-  <main id="main" class="page-gutter interior">
-    <h1>Now<span>.</span></h1>
-    {showNow ? <section class="prose">{now.updated && <p>Updated <time datetime={now.updated}>{now.updated}</time></p>}<Copy copy={now.body} rich /></section> : <a href="/projects/">Browse projects ↗</a>}
+  <main id="main" class="page-gutter interior" tabindex="-1">
+    <h1><Copy copy={label("Now")} /></h1>
+    {showNow ? <section class="prose">{now.updated && <p><Copy copy={label("Updated", "Обновлено")} /> <time datetime={now.updated}>{now.updated}</time></p>}<Copy copy={now.body} rich /></section> : <a href="/projects/"><Copy copy={label("Browse projects", "Смотреть проекты")} /> ↗</a>}
   </main>
 </Base>

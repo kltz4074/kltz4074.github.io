@@ -1,16 +1,19 @@
 ---
+import Arrow from './Arrow.astro';
 import { site, sectionEnabled } from '../lib/portfolio';
+import { label } from '../lib/labels';
+import Copy from './Copy.astro';
 const email = site.contacts.find(link => link.url?.startsWith('mailto:'));
 const { full = false } = Astro.props;
 ---
 <footer class:list={['contact', 'page-gutter', { 'contact-compact': !full }]} id="contact">
   {full && sectionEnabled('contact') && <div class="contact-main">
-    <h2 class="contact-title-mask"><span class="contact-title-line">Say <em>hello.</em></span></h2>
-    {email?.url && <a class="contact-email action" href={email.url}>{email.value || email.url.slice(7)}<span class="arrow" aria-hidden="true">↗</span></a>}
+    <h2 class="contact-title-mask"><span class="contact-title-line"><Copy copy={label('Get in touch', 'На связи')} /></span></h2>
+    {email?.url && <a class="contact-email action" href={email.url}>{email.value || email.url.slice(7)}<Arrow moving /></a>}
   </div>}
   <div class="contact-foot">
-    <p class="eyebrow">{site.footer}</p>
-    {sectionEnabled('contact') && <nav aria-label="Social">{site.contacts.map(link => <a href={link.url || '/contact/'}>{link.label}</a>)}</nav>}
-    {full ? <button class="motion-toggle eyebrow" type="button" aria-pressed="false" hidden>Reduce motion</button> : <a href="/#top">Back to top ↑</a>}
+    <p>{site.footer}</p>
+    {sectionEnabled('contact') && <nav aria-label="Contact links" data-label-ru="Контакты">{site.contacts.map(link => <a href={link.url || '/contact/'}><Copy copy={label(link.label)} /></a>)}</nav>}
+    <button class="motion-toggle" type="button" aria-pressed="false" hidden data-motion><Copy copy={label('Reduce motion', 'Уменьшить анимацию')} /></button>
   </div>
 </footer>

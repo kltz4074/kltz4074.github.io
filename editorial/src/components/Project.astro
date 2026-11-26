@@ -1,30 +1,33 @@
 ---
+import Arrow from './Arrow.astro';
 import type { Project } from '../lib/schema';
 import { isVideo } from '../lib/portfolio';
+import { label } from '../lib/labels';
 import Copy from './Copy.astro';
-interface Props { project: Project }
-const { project } = Astro.props;
-const { slug, title, summary, category, tech, role } = project;
+
+interface Props { project: Project; reverse: boolean }
+const { project, reverse } = Astro.props;
+const { slug, title, summary, category, tech } = project;
 const frames = (project.media?.length ? project.media : project.cover ? [{src: project.cover, alt: title}] : []).filter(frame => !isVideo(frame.src));
+const url = '/projects/' + slug + '/';
 ---
-<article class:list={['project', 'project--' + slug, { 'project-text-only': frames.length === 0 }]} id={slug} aria-labelledby={slug + '-title'}>
+<article class:list={['project', { 'project--reverse': reverse, 'project--text': frames.length === 0 }]} id={slug} aria-labelledby={slug + '-title'}>
   <div class="project-copy">
-    <p class="eyebrow project-kind">{[category, tech?.[0]].filter(Boolean).join(' / ')}</p>
-    <h3 id={slug + '-title'}><a href={'/projects/' + slug + '/'}>{title}</a></h3>
+    <h3 id={slug + '-title'}><a href={url}>{title}</a></h3>
+    <p class="project-kind"><Copy copy={label(category)} />{tech?.[0] && <> / {tech[0]}</>}</p>
     <p class="project-description"><Copy copy={summary} /></p>
-    {role && <p class="project-role">{role}</p>}
-    <a class="action project-action" href={'/projects/' + slug + '/'}>View project <span class="arrow" aria-hidden="true">↗</span></a>
+    <a class="action project-action" href={url}><Copy copy={label('View project', 'Открыть проект')} /><Arrow moving /></a>
   </div>
   {frames.length > 0 && <figure class="project-gallery" data-gallery>
-    <div class="project-media" id={slug + '-frames'}>
-      <div class="project-reel">
+    <a class="project-media" href={url} id={slug + '-frames'} aria-label={title}>
+      <div class="project-reel" style={`view-transition-name: project-${slug}`}>
         {frames.map(({ src, alt }, index) => <img src={src} alt={alt} width="1440" height="810" loading="lazy" decoding="async" hidden={index !== 0} />)}
       </div>
-    </div>
+    </a>
     {frames.length > 1 && <figcaption>
-      <span class="eyebrow">Gallery</span>
-      <div class="frame-picker" aria-label={title + ' gallery'} role="group" hidden>
-        {frames.map((frame, index) => <button type="button" aria-label={`Show image ${index + 1}: ${frame.alt}`} aria-pressed={index === 0} aria-controls={slug + '-frames'}>{String(index + 1).padStart(2, '0')}</button>)}
+      <span class="project-caption" aria-hidden="true"><Copy copy={label('Gallery', 'Галерея')} /></span>
+      <div class="frame-picker" aria-label={title + ' gallery'} data-label-ru={'Галерея ' + title} role="group" hidden>
+        {frames.map((frame, index) => <button type="button" aria-label={`Show image ${index + 1}: ${frame.alt}`} data-label-ru={`Кадр ${index + 1}`} aria-pressed={index === 0} aria-controls={slug + '-frames'}>{String(index + 1).padStart(2, '0')}</button>)}
       </div>
       <span class="sr-only" aria-live="polite" data-frame-status></span>
     </figcaption>}

@@ -1,14 +1,16 @@
 ---
+import { label } from '../../lib/labels';
+import Copy from '../../components/Copy.astro';
 import Base from '../../layouts/Base.astro';
 import { devlog, site, sectionEnabled } from '../../lib/portfolio';
 const posts = sectionEnabled('devlog') ? devlog : [];
 ---
 <Base title="Devlog" seo={site.pageSeo?.devlog} noindex={!posts.length}>
-  <main id="main" class="page-gutter interior">
-    <h1>Devlog<span>.</span></h1>
+  <main id="main" class="page-gutter interior" tabindex="-1">
+    <h1><Copy copy={label("Devlog")} /></h1>
     {posts.length ? <>
       <a class="back-link" href="/rss.xml">RSS feed ↗</a>
       <ul class="index-list">{posts.map(post => <li><a href={'/devlog/' + post.slug + '/'}><strong>{post.title}</strong><time datetime={post.date}>{post.date}</time><span aria-hidden="true">↗</span></a></li>)}</ul>
-    </> : <a href="/projects/">Browse projects ↗</a>}
+    </> : <a href="/projects/"><Copy copy={label("Browse projects", "Смотреть проекты")} /> ↗</a>}
   </main>
 </Base>

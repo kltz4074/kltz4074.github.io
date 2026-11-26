@@ -38,6 +38,17 @@ const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': h
     <slot name="head" />
   </head>
   <body id="top">
+    <script is:inline>
+      try {
+        document.documentElement.toggleAttribute('data-reduced', matchMedia('(prefers-reduced-motion: reduce)').matches || localStorage.getItem('kltzqu-reduced-motion') === 'true');
+      } catch {}
+      // Cross-document transitions can be skipped by the browser, for example when opening the editor.
+      for (const phase of ['pageswap', 'pagereveal']) {
+        window.addEventListener(phase, event => {
+          event.viewTransition?.ready.catch(() => {});
+        });
+      }
+    </script>
     <Nav />
     <slot />
     <Footer full={home} />

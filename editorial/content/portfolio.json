@@ -2,17 +2,17 @@
   "site": {
     "name": "KLTZQU",
     "intro": {
-      "en": "I’m Eugene. I make horror games and build tools.",
-      "ru": "Я Юджин. Делаю хоррор-игры и инструменты."
+      "en": "I’m Eugene. I make indie games, apps and tools.",
+      "ru": "Я Юджин. Делаю инди-игры, приложения и инструменты."
     },
     "about": {
-      "en": "I’m Eugene. I like making horror games set in familiar places. I made Frozen Fries on my own and worked on Little Seeds with a team of four. I also build tools like BackOS, a computer that runs inside my Unity game.",
-      "ru": "Я Юджин. Мне нравится делать хоррор-игры в знакомых местах. Frozen Fries я сделал сам, а Little Seeds — с командой из четырёх человек. Ещё я делаю инструменты, например BackOS — компьютер внутри моей игры на Unity."
+      "en": "I like making horror games set in familiar places. I made Frozen Fries on my own and worked on Little Seeds with a team of four. I’m also building KLPocket for my own budget and BackOS, the computer you can use inside The Dev Blog.",
+      "ru": "Мне нравится делать хорроры, действие которых происходит в знакомых местах. Frozen Fries я сделал сам, а над Little Seeds работал в команде из четырёх человек. Ещё я делаю KLPocket для своего бюджета и BackOS — компьютер, которым можно пользоваться внутри The Dev Blog."
     },
     "avatar": "/media/mark.webp",
     "hero": "/media/hero.webp",
     "heroMobile": "/media/hero-small.webp",
-    "alive": true,
+    "alive": false,
     "footer": "KLTZQU",
     "categories": [
       "Games",
@@ -80,7 +80,7 @@
     ],
     "seo": {
       "title": "KLTZQU — Portfolio",
-      "description": "Games, tools and experiments by Eugene, an independent developer."
+      "description": "Indie horror games, apps and tools by Eugene (KLTZQU)."
     },
     "languages": [
       "en",
@@ -92,12 +92,12 @@
       "slug": "little-seeds",
       "title": "Little Seeds",
       "summary": {
-        "en": "I made this horror game for My First Game Jam with a team of four. You take orders at a computer, grow plants and deliver them. Then the plants start acting strange.",
-        "ru": "Спокойная игра о выращивании растений, которая незаметно превращается в хоррор."
+        "en": "You take orders at a computer, grow plants and deliver them. Then the plants start acting strange.",
+        "ru": "Ты принимаешь заказы за компьютером, выращиваешь растения и доставляешь их. Потом растения начинают вести себя странно."
       },
       "body": {
-        "en": "Made for My First Game Jam with a small team. You accept orders through a terminal, grow plants and deliver them — until the routine reveals what it has been hiding.",
-        "ru": "Сделана небольшой командой для My First Game Jam. Ты принимаешь заказы через терминал, выращиваешь растения и отправляешь их — пока рутина не показывает, что она скрывала."
+        "en": "I led development and worked on the game design. There were four of us on the team, and we made the game for My First Game Jam.",
+        "ru": "Я руководил разработкой и занимался геймдизайном. Нас было четверо, и мы сделали игру для My First Game Jam."
       },
       "status": "Released",
       "category": "Games",
@@ -134,12 +134,12 @@
       "slug": "frozen-fries",
       "title": "Frozen Fries",
       "summary": {
-        "en": "My first released game started with a dream someone posted on Reddit. I spent most of 2025 turning it into a short horror game about a bag of frozen fries.",
-        "ru": "Короткий атмосферный хоррор о замороженной картошке фри, родившийся из странного сна."
+        "en": "My first released game is a short horror about a bag of frozen fries. It started with a dream someone posted on Reddit.",
+        "ru": "Моя первая выпущенная игра — короткий хоррор о пакете замороженной картошки фри. Идея пришла из сна, которым кто-то поделился на Reddit."
       },
       "body": {
-        "en": "My first released game, developed from early 2025 to January 2026. What began as a story about someone isolated in a small room became a retro horror about an ordinary bag of frozen fries.",
-        "ru": "Моя первая выпущенная игра, которую я разрабатывал с начала 2025 года до января 2026-го. История об изолированном человеке в маленькой комнате превратилась в ретро-хоррор об обычной пачке замороженной картошки."
+        "en": "I worked on it from early 2025 to January 2026. The first version took place in a small room with a character who lived in isolation. I built the game in Unity and used Blender for the 3D models.",
+        "ru": "Я работал над игрой с начала 2025-го до января 2026-го. Действие первой версии происходило в маленькой комнате, где герой жил в изоляции. Игру я сделал в Unity, а 3D-модели — в Blender."
       },
       "status": "Released",
       "category": "Games",
@@ -177,12 +177,12 @@
       "slug": "the-dev-blog",
       "title": "The Dev Blog",
       "summary": {
-        "en": "A psychological horror about responsibility and isolation.",
-        "ru": "Психологический хоррор об ответственности и изоляции."
+        "en": "I’m making a first-person psychological horror game set in an apartment. The computer at the desk has three working monitors.",
+        "ru": "Я делаю психологический хоррор от первого лица. Действие происходит в квартире, а у компьютера на столе три рабочих монитора."
       },
       "body": {
-        "en": "",
-        "ru": ""
+        "en": "I built BackOS so I could make the desktop part of the game. You can sit down at the desk, look between displays and use the programs inside the game.",
+        "ru": "Я сделал BackOS, чтобы рабочий стол самого компьютера стал частью игры. За столом можно переводить взгляд между мониторами и пользоваться программами внутри игры."
       },
       "status": "In development",
       "category": "Games",
@@ -193,8 +193,8 @@
       ],
       "role": "Game direction / code",
       "created": "2026 — Now",
-      "featured": false,
-      "cover": "",
+      "featured": true,
+      "cover": "/media/dev-blog-01.webp",
       "media": [],
       "links": []
     },
@@ -202,12 +202,12 @@
       "slug": "backos",
       "title": "BackOS",
       "summary": {
-        "en": "A fully interactive in-game operating system built around windows, apps and physical screens.",
-        "ru": "Полностью интерактивная внутриигровая ОС с окнами, приложениями и физическими мониторами."
+        "en": "I built an in-game desktop for The Dev Blog. You can open apps and move their windows across the monitors.",
+        "ru": "Я сделал рабочий стол компьютера внутри The Dev Blog. На нём можно открывать приложения и перетаскивать окна между мониторами."
       },
       "body": {
-        "en": "A reusable computer system for The Dev Blog: multiple physical displays, draggable windows, app definitions, cursor input and a camera that reacts to the interface.",
-        "ru": "Переиспользуемая компьютерная система для The Dev Blog: несколько физических мониторов, перетаскиваемые окна, приложения, курсор и камера, реагирующая на интерфейс."
+        "en": "I’m using Unity UI to handle input on the displays. The system also moves the player’s camera to follow the interface when needed.",
+        "ru": "Для работы с мониторами я использую Unity UI. При необходимости система переводит камеру игрока туда, где он взаимодействует с интерфейсом."
       },
       "status": "In development",
       "category": "Tools",
@@ -227,12 +227,12 @@
       "slug": "pillars",
       "title": "Pillars",
       "summary": {
-        "en": "A Minecraft map editor and match system designed for repeatable multiplayer arenas.",
-        "ru": "Редактор карт и система матчей Minecraft для переиспользуемых многопользовательских арен."
+        "en": "I built a map editor and match system for Minecraft so multiplayer arenas can be reused.",
+        "ru": "Я сделал редактор карт и систему матчей для Minecraft, чтобы на одних и тех же аренах можно было играть снова."
       },
       "body": {
-        "en": "A Paper plugin with isolated build worlds, anchors, automatic floors, schematic exports, undo/redo and a parallel match-world strategy.",
-        "ru": "Paper-плагин с изолированными мирами строительства, якорями, автоматическим полом, экспортом схем, undo/redo и системой параллельных матчей."
+        "en": "The Paper plugin keeps building and matches in separate worlds. It supports undo, redo and schematic export, and can run several matches in parallel.",
+        "ru": "Плагин для Paper держит строительство и матчи в отдельных мирах. В нём есть отмена и повтор действий, экспорт схем и возможность запускать несколько матчей параллельно."
       },
       "status": "Released",
       "category": "Tools",
@@ -252,7 +252,8 @@
       "slug": "pointengine",
       "title": "PointEngine",
       "summary": {
-        "en": "A 3D game engine I’m building in C++ and OpenGL."
+        "en": "I’m building a 3D game engine in C++ and OpenGL.",
+        "ru": "Я пишу трёхмерный игровой движок на C++ и OpenGL."
       },
       "status": "In development",
       "category": "Tools",
@@ -271,8 +272,8 @@
       "slug": "klpocket",
       "title": "KLPocket",
       "summary": {
-        "en": "I built KLPocket to keep track of my spending, savings and budgets across currencies.",
-        "ru": "Я сделал KLPocket, чтобы следить за расходами, сбережениями и бюджетами в разных валютах."
+        "en": "I built KLPocket to track spending, savings and budgets across currencies.",
+        "ru": "Я сделал KLPocket, чтобы следить за расходами, сбережениями и бюджетом в разных валютах."
       },
       "status": "In development",
       "category": "Applications",
@@ -280,6 +281,18 @@
         {
           "label": "Open KLPocket",
           "url": "https://klpocket.com/"
+        }
+      ],
+      "body": {
+        "en": "The app supports accounts in different currencies, transfers between them and budgets split into envelopes. You can try it in the browser as a guest.",
+        "ru": "В приложении есть счета в разных валютах, переводы между ними и распределение бюджета по конвертам. Его можно попробовать в браузере в гостевом режиме."
+      },
+      "featured": true,
+      "cover": "/media/klpocket-guest.webp",
+      "media": [
+        {
+          "src": "/media/klpocket-guest.webp",
+          "alt": "KLPocket dashboard in guest mode"
         }
       ]
     }
@@ -289,7 +302,7 @@
       "slug": "gallery-1786621474669-0",
       "media": [
         {
-          "src": "/media/gallery/1786621472569-0-unity-yrrld6dmez.png",
+          "src": "/media/dev-blog-01.webp",
           "alt": "Unity development screenshot"
         }
       ],
@@ -309,16 +322,16 @@
       "slug": "ps1-visuals",
       "title": "PS1 Visual Study",
       "body": {
-        "en": "Vertex snapping, pixelization and post-processing.",
-        "ru": "Дрожание вершин, пикселизация и постобработка."
+        "en": "I tested vertex snapping and pixelation in Unity.",
+        "ru": "Я тестировал привязку вершин к сетке и пикселизацию в Unity."
       }
     },
     {
       "slug": "water-buoyancy",
-      "title": "Object's floating physics",
+      "title": "Buoyancy in Unity",
       "body": {
-        "en": "Multi-point buoyancy, damping and debug tools for objects that need to feel heavy in water.",
-        "ru": "Многоточечная плавучесть, демпфирование и отладка для объектов, которые должны ощущаться тяжёлыми в воде."
+        "en": "I tested buoyancy at several points on an object so it could lean and settle in water.",
+        "ru": "Я проверял плавучесть в нескольких точках объекта, чтобы он мог крениться и постепенно выравниваться на воде."
       }
     }
   ],

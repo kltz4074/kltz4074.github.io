@@ -1,0 +1,12 @@
+---
+interface Props { direction?: 'out' | 'down' | 'back'; moving?: boolean }
+const { direction = 'out', moving = false } = Astro.props;
+const paths = {
+  out: 'M3.5 12.5 12 4m-6 0h6v6',
+  down: 'M8 2.5v10M4 8.5l4 4 4-4',
+  back: 'M13.5 8h-11M7 3.5 2.5 8 7 12.5',
+};
+---
+<svg class:list={['icon-arrow', { arrow: moving }]} viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+  <path d={paths[direction]} stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+</svg>

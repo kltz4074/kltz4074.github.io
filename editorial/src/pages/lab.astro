@@ -1,16 +1,17 @@
 ---
+import { label } from '../lib/labels';
 import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import Copy from '../components/Copy.astro';
 import { lab, site, sectionEnabled } from '../lib/portfolio';
 ---
 <Base title="Lab" seo={site.pageSeo?.lab} noindex={!sectionEnabled('lab') || !lab.length}>
-  <main id="main" class="page-gutter interior">
-    <h1>Lab<span>.</span></h1>
+  <main id="main" class="page-gutter interior" tabindex="-1">
+    <h1><Copy copy={label("Lab")} /></h1>
     {sectionEnabled('lab') && <div class="lab-grid">
       {lab.map(item => <article class="lab-entry">
         <Media frames={item.media ?? []} />
-        {item.title && <h2>{item.title}</h2>}
+        {item.title && <h2><Copy copy={label(item.title)} /></h2>}
         {item.body && <div class="prose"><Copy copy={item.body} rich /></div>}
       </article>)}
     </div>}

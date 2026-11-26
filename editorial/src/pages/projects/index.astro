@@ -1,43 +1,64 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Copy from '../../components/Copy.astro';
+import Arrow from '../../components/Arrow.astro';
 import { projects, site, sectionEnabled } from '../../lib/portfolio';
+import { label } from '../../lib/labels';
 const visible = sectionEnabled('projects') ? projects : [];
 ---
-<Base title="Projects" seo={site.pageSeo?.projects}>
-  <main id="main" class="page-gutter interior">
-    <h1>Projects<span>.</span></h1>
+<Base title="Projects" seo={site.pageSeo?.projects} noindex={!sectionEnabled('projects')}>
+  <main id="main" class="page-gutter interior" tabindex="-1">
+    <h1><Copy copy={label('Projects')} /></h1>
     {visible.length > 0 && <>
-    <div class="filters" hidden data-filters>
-      <label>Search projects<input type="search" data-search placeholder="Title, technology or tag" /></label>
-      <label>Category<select data-category><option value="">All categories</option>{site.categories.filter(category => visible.some(item => item.category === category)).map(category => <option>{category}</option>)}</select></label>
-      <label>Status<select data-status><option value="">All statuses</option>{site.statuses.filter(status => visible.some(item => item.status === status)).map(status => <option>{status}</option>)}</select></label>
-    </div>
-    <ul class="index-list project-index">
-      {[...visible].sort((a,b) => Number(!!a.archived) - Number(!!b.archived)).map(item => <li data-project data-category={item.category} data-status={item.status} data-terms={[item.title, ...Object.values(item.summary), ...item.tech ?? [], ...item.tags ?? []].join(' ').toLowerCase()}>
-        <a href={'/projects/' + item.slug + '/'}><strong>{item.title}</strong><span><Copy copy={item.summary} /></span><span>{item.archived ? 'Archived' : item.status} <span aria-hidden="true">↗</span></span></a>
-      </li>)}
-    </ul>
-    <p data-count role="status"></p>
+      <div class="filters" hidden data-filters>
+        <label><Copy copy={label('Search', 'Поиск')} /><input type="search" data-search placeholder="Title, technology or tag" data-placeholder-ru="Название, технология или тег" /></label>
+        <label><Copy copy={label('Category', 'Категория')} /><select data-category>
+          <option value="" data-option-ru="Все категории">All categories</option>
+          {site.categories.filter(category => visible.some(item => item.category === category)).map(category => <option value={category} data-option-ru={label(category).ru}>{category}</option>)}
+        </select></label>
+        <label><Copy copy={label('Status', 'Статус')} /><select data-status>
+          <option value="" data-option-ru="Все статусы">All statuses</option>
+          {site.statuses.filter(status => visible.some(item => item.status === status)).map(status => <option value={status} data-option-ru={label(status).ru}>{status}</option>)}
+        </select></label>
+      </div>
+      <ul class="index-list project-index">
+        {[...visible].sort((a,b) => Number(!!a.archived) - Number(!!b.archived)).map(item => <li data-project data-category={item.category} data-status={item.status} data-terms={[item.title, ...Object.values(item.summary), ...item.tech ?? [], ...item.tags ?? []].join(' ').toLowerCase()}>
+          <a href={'/projects/' + item.slug + '/'}><strong>{item.title}</strong><span><Copy copy={item.summary} /></span>
+            <span class="directory-end"><Copy copy={label(item.archived ? 'Archived' : item.status)} /><Arrow /></span>
+          </a>
+        </li>)}
+      </ul>
+      <p data-count role="status"></p>
     </>}
-    {visible.length === 0 && <p>No projects to show.</p>}
+    {visible.length === 0 && <p><Copy copy={label('No projects to show.', 'Здесь пока нет проектов.')} /></p>}
   </main>
   <script>
     const controls = document.querySelector<HTMLElement>('[data-filters]');
-    if (controls) {
+    const statusLine = document.querySelector('[data-count]');
+    if (controls && statusLine) {
       const search = controls.querySelector<HTMLInputElement>('[data-search]')!;
       const category = controls.querySelector<HTMLSelectElement>('[data-category]')!;
       const status = controls.querySelector<HTMLSelectElement>('[data-status]')!;
       const entries = [...document.querySelectorAll<HTMLElement>('[data-project]')];
       controls.hidden = false;
-      controls.addEventListener('input', () => {
+
+      function filter() {
+        const terms = search.value.trim().toLowerCase();
         for (const entry of entries) {
           entry.hidden = !!((category.value && entry.dataset.category !== category.value)
             || (status.value && entry.dataset.status !== status.value)
-            || !entry.dataset.terms?.includes(search.value.trim().toLowerCase()));
+            || !entry.dataset.terms?.includes(terms));
         }
         const count = entries.filter(entry => !entry.hidden).length;
-        document.querySelector('[data-count]')!.textContent = count ? `${count} projects` : 'No projects match these filters.';
+        const ru = document.documentElement.lang === 'ru';
+        statusLine!.textContent = count
+          ? (ru ? `Найдено проектов: ${count}` : `${count} ${count === 1 ? 'project' : 'projects'}`)
+          : (ru ? 'Проекты не найдены.' : 'No projects match these filters.');
+      }
+
+      controls.addEventListener('input', filter);
+      document.addEventListener('portfolio:language', () => {
+        if (statusLine.textContent) filter();
       });
     }
   </script>
