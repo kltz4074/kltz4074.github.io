@@ -4,16 +4,17 @@ import Base from '../layouts/Base.astro';
 import Media from '../components/Media.astro';
 import Copy from '../components/Copy.astro';
 import { lab, site, sectionEnabled } from '../lib/portfolio';
+const visible = sectionEnabled('lab') && lab.length > 0;
 ---
-<Base title="Lab" seo={site.pageSeo?.lab} noindex={!sectionEnabled('lab') || !lab.length}>
+<Base title={visible ? "Lab" : "Projects"} seo={site.pageSeo?.lab} noindex={!visible}>
   <main id="main" class="page-gutter interior" tabindex="-1">
-    <h1><Copy copy={label("Lab")} /></h1>
-    {sectionEnabled('lab') && <div class="lab-grid">
+    <h1><Copy copy={label(visible ? "Lab" : "Projects")} /></h1>
+    {visible ? <div class="lab-grid">
       {lab.map(item => <article class="lab-entry">
         <Media frames={item.media ?? []} />
         {item.title && <h2><Copy copy={label(item.title)} /></h2>}
         {item.body && <div class="prose"><Copy copy={item.body} rich /></div>}
       </article>)}
-    </div>}
+    </div> : <a class="action" href="/projects/"><Copy copy={label("Browse projects", "Смотреть проекты")} /></a>}
   </main>
 </Base>
