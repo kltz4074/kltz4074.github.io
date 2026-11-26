@@ -2,12 +2,12 @@
 name: KLTZQU Portfolio
 description: Portfolio for Eugene’s independent games, apps and tools.
 colors:
-  room: "#171816"
-  surface: "#24251f"
-  ink: "#f0eddf"
-  muted: "#bdb9ab"
-  accent: "#dce697"
-  gallery: "#e9e6d8"
+  room: "#17141e"
+  surface: "#252132"
+  ink: "#f6effa"
+  muted: "#c2b8ce"
+  accent: "#cfb8ff"
+  gallery: "#f1eaf6"
 typography:
   display:
     fontFamily: "Unbounded Variable"
@@ -18,7 +18,9 @@ typography:
     fontFamily: "Manrope Variable"
     lineHeight: 1.5
 rounded:
-  controls: "2px"
+  controls: "12px"
+  media: "clamp(17px, 2.2vw, 32px)"
+  pill: "999px"
 spacing:
   gutter: "clamp(22px, 5vw, 96px)"
 ---
@@ -26,11 +28,11 @@ spacing:
 
 ## Overview
 
-The portfolio opens on an editing table made of real project frames. Selecting a project changes the camera’s subject. Scrolling closes the distance to the work, then gives each project its own spread.
+The portfolio opens on a single rounded window that plays real project frames. A directional shader transitions between projects, with a small camera movement following each cut. Scrolling closes the distance to the work, then gives each project its own spread.
 
 ## Layout
 
-Use a dark surround at the entrance, light paper for the gallery and clear section boundaries. Project galleries alternate image placement on desktop and put the title before the image on mobile.
+Use a low-chroma plum surround, lavender paper and a brighter accent for controls. The active shot lights the first screen in dusk violet, warm amber or steel blue. Project galleries alternate image placement on desktop and put the title before the image on mobile.
 
 ## Elevation & Depth
 
@@ -38,4 +40,4 @@ Keep movement tied to real content. The virtual camera handles the hero, ScrollT
 
 ## Components
 
-Use square editing controls for gallery frames. Keep Cyrillic and Latin on the same type system. The KLPocket image is a capture of the live web app in a clean guest profile. The Dev Blog cover is derived from the project's original file in the Lab.
+Use still-image thumbnails to switch projects, pill-shaped gallery controls and consistent rounded corners for screenshots. Keep Cyrillic and Latin on the same type system. The KLPocket image is a capture of the live web app in a clean guest profile. The Dev Blog cover is derived from the project's original file in the Lab.
