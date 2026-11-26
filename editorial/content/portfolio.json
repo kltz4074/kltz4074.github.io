@@ -6,8 +6,8 @@
       "ru": "Я Юджин. Делаю инди-игры, приложения и инструменты."
     },
     "about": {
-      "en": "I like making horror games set in familiar places. I made Frozen Fries on my own and worked on Little Seeds with a team of four. I’m also building KLPocket for my own budget and BackOS, the computer you can use inside The Dev Blog.",
-      "ru": "Мне нравится делать хорроры, действие которых происходит в знакомых местах. Frozen Fries я сделал сам, а над Little Seeds работал в команде из четырёх человек. Ещё я делаю KLPocket для своего бюджета и BackOS — компьютер, которым можно пользоваться внутри The Dev Blog."
+      "en": "I like making horror games set in familiar places. I made Frozen Fries on my own and worked on Little Seeds with a team of four. I also built KLPocket to track my budget.",
+      "ru": "Мне нравится делать хорроры, действие которых происходит в знакомых местах. Frozen Fries я сделал сам, а над Little Seeds работал в команде из четырёх человек. Ещё я сделал KLPocket, чтобы следить за своим бюджетом."
     },
     "avatar": "/media/mark.webp",
     "hero": "/media/hero.webp",
@@ -180,8 +180,8 @@
         "ru": "Я делаю психологический хоррор от первого лица. Действие происходит в квартире, а у компьютера на столе три рабочих монитора."
       },
       "body": {
-        "en": "I built BackOS so I could make the desktop part of the game. You can sit down at the desk, look between displays and use the programs inside the game.",
-        "ru": "Я сделал BackOS, чтобы рабочий стол самого компьютера стал частью игры. За столом можно переводить взгляд между мониторами и пользоваться программами внутри игры."
+        "en": "I built BackOS for the computer inside the game. When you sit at the desk, you can switch your view between the three monitors, open apps and drag their windows from one screen to another.",
+        "ru": "Я сделал BackOS для компьютера внутри игры. Если сесть за стол, можно переводить взгляд между тремя мониторами, открывать приложения и перетаскивать окна с одного экрана на другой."
       },
       "status": "In development",
       "category": "Games",
@@ -220,7 +220,8 @@
       "featured": false,
       "cover": "",
       "media": [],
-      "links": []
+      "links": [],
+      "hidden": true
     },
     {
       "slug": "pillars",
@@ -264,6 +265,75 @@
         {
           "label": "View source",
           "url": "https://github.com/kltz4074/PointEngine"
+        }
+      ],
+      "cover": "/media/pointengine.webp",
+      "media": [
+        {
+          "src": "/media/pointengine.webp",
+          "alt": "Screenshot from PointEngine’s repository"
+        }
+      ]
+    },
+    {
+      "slug": "machinelearning",
+      "title": "MachineLearning",
+      "summary": {
+        "en": "I trained an agent to reach a target marked by a red circle in a 2D simulation.",
+        "ru": "Я обучил агента добираться до красного круга в двумерной симуляции."
+      },
+      "body": {
+        "en": "I used Pygame for the simulation and TensorFlow to train the agent. In the demo below, you can see how it moves toward the red target.",
+        "ru": "Симуляцию я сделал на Pygame, а для обучения агента использовал TensorFlow. На видео видно, как он движется к красной цели."
+      },
+      "status": "Prototype",
+      "category": "Experiments",
+      "tech": [
+        "Python",
+        "Pygame",
+        "NumPy",
+        "TensorFlow"
+      ],
+      "cover": "/media/machinelearning.webp",
+      "media": [
+        {
+          "src": "/media/machinelearning.webp",
+          "alt": "MachineLearning simulation with a red target"
+        },
+        {
+          "src": "/media/machinelearning-demo.webm",
+          "alt": "MachineLearning agent moving toward the target"
+        }
+      ],
+      "links": [
+        {
+          "label": "View source",
+          "url": "https://github.com/kltz4074/MachineLearning"
+        }
+      ]
+    },
+    {
+      "slug": "fll-lib",
+      "title": "fll_lib",
+      "summary": {
+        "en": "I built a MicroPython library for controlling LEGO SPIKE Prime robots and testing their programs without the hub.",
+        "ru": "Я написал библиотеку на MicroPython для управления роботами LEGO SPIKE Prime и проверки их программ без контроллера."
+      },
+      "body": {
+        "en": "The library uses the gyro to keep the robot on course and estimates its position from wheel rotations. It also controls motorized attachments. I added a simulator so I could run the same code on my computer.",
+        "ru": "Библиотека удерживает курс по гироскопу, оценивает положение робота по вращению колёс и управляет механизмами с моторами. Я добавил симулятор, чтобы запускать тот же код на компьютере."
+      },
+      "status": "Prototype",
+      "category": "Tools",
+      "tech": [
+        "MicroPython",
+        "Pybricks",
+        "LEGO SPIKE Prime"
+      ],
+      "links": [
+        {
+          "label": "View source",
+          "url": "https://github.com/kltz4074/fll_lib"
         }
       ]
     },
