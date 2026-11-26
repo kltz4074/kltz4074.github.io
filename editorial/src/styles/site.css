@@ -319,10 +319,3 @@ html[data-reduced]::view-transition-old(*), html[data-reduced]::view-transition-
 @media (min-width: 701px) {
   .site-header .nav-contact { margin-inline-start: .2rem; }
 }
-
-@supports not (view-transition-class: project-cover) {
-  @media (prefers-reduced-motion: no-preference) {
-    html:not([data-reduced]) .interior { animation: .36s cubic-bezier(.22,.72,.18,1) both interior-enter; }
-    @keyframes interior-enter { from { transform: translateY(12px); } }
-  }
-}
