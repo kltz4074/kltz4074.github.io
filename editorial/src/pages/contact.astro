@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Copy from '../components/Copy.astro';
+import { site, sectionEnabled } from '../lib/portfolio';
+---
+<Base title="Contact" seo={site.pageSeo?.contact} noindex={!sectionEnabled('contact')}>
+  <main id="main" class="page-gutter interior">
+    <h1>Say <em>hello.</em></h1>
+    {sectionEnabled('contact') && <>
+      {site.collaboration?.en && <Copy copy={site.collaboration} rich />}
+      <ul class="index-list">
+        {site.contacts.map(link => <li class="contact-row">
+          <a href={link.url}><strong>{link.label}</strong><span>{link.value || new URL(link.url, Astro.site).hostname}</span><span aria-hidden="true">↗</span></a>
+          {link.value && <button type="button" data-copy-contact={link.value} aria-label={'Copy ' + link.label}>Copy</button>}
+        </li>)}
+      </ul>
+      <p data-copy-status role="status"></p>
+    </>}
+  </main>
+</Base>
+<script>
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-contact]')) {
+    button.addEventListener('click', async () => {
+      const status = document.querySelector('[data-copy-status]')!;
+      try {
+        await navigator.clipboard.writeText(button.dataset.copyContact!);
+        status.textContent = 'Copied to clipboard.';
+      } catch {
+        status.textContent = 'Clipboard access is unavailable. Select and copy the contact text.';
+      }
+    });
+  }
+</script>

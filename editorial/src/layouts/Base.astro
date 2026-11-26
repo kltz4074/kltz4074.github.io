@@ -1,0 +1,45 @@
+---
+import '../styles/site.css';
+import '../styles/pages.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { site, devlog, sectionEnabled } from '../lib/portfolio';
+import type { Seo } from '../lib/schema';
+
+interface Props { title: string; description?: string; seo?: Seo; home?: boolean; noindex?: boolean }
+const { title, description, seo, home = false, noindex = false } = Astro.props;
+const pageTitle = seo?.title || (home ? title : title + ' — ' + site.name);
+const pageDescription = seo?.description || description || site.seo.description || site.name;
+const image = new URL(seo?.image || site.seo.image || site.hero, Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': home ? 'WebSite' : 'WebPage', name: pageTitle, description: pageDescription, url: canonical }).replaceAll('<', '\\u003c');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href={site.avatar} />
+    {sectionEnabled('devlog') && devlog.length > 0 && <link rel="alternate" type="application/rss+xml" title="Devlog" href="/rss.xml" />}
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={image} />
+    <script is:inline type="application/ld+json" set:html={structured}></script>
+    <slot name="head" />
+  </head>
+  <body id="top">
+    <Nav />
+    <slot />
+    <Footer full={home} />
+  </body>
+</html>

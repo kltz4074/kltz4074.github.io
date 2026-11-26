@@ -1,0 +1,7 @@
+---
+import { markdown } from '../lib/markdown';
+interface Props { copy?: Record<string, string>; rich?: boolean }
+const { copy = {}, rich = false } = Astro.props;
+const fallback = copy.en ?? '';
+---
+{rich ? <div data-copy><div data-copy-value set:html={markdown(fallback)} />{Object.entries(copy).filter(([lang]) => lang !== 'en').map(([lang, text]) => <template data-lang={lang} set:html={markdown(text)} />)}</div> : <span data-copy><span data-copy-value>{fallback}</span>{Object.entries(copy).filter(([lang]) => lang !== 'en').map(([lang, text]) => <template data-lang={lang}>{text}</template>)}</span>}

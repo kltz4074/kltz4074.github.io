@@ -1,0 +1,36 @@
+---
+import { isVideo } from '../lib/portfolio';
+import type { Frame } from '../lib/schema';
+interface Props { frames: Frame[] }
+const { frames } = Astro.props;
+---
+{frames.length > 0 && <div class="media-grid">
+  {frames.map(({src, alt}) => isVideo(src)
+    ? <video controls playsinline preload="none" aria-label={alt || 'Project video'}><source src={src} /><a href={src}>Open video</a></video>
+    : <a href={src} data-lightbox aria-label={alt ? 'Open image: ' + alt : 'Open image'}><img loading="lazy" decoding="async" src={src} alt={alt} /></a>)}
+</div>}
+<script>
+  const gallery = document.querySelectorAll<HTMLAnchorElement>('[data-lightbox]');
+  if (gallery.length) {
+    const dialog = document.createElement('dialog');
+    dialog.className = 'lightbox';
+    dialog.setAttribute('aria-label', 'Image viewer');
+    const close = document.createElement('button');
+    close.textContent = 'Close';
+    const image = document.createElement('img');
+    dialog.append(close, image);
+    document.body.append(dialog);
+    close.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => image.removeAttribute('src'));
+    for (const link of gallery) {
+      link.addEventListener('click', event => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        image.alt = link.querySelector('img')?.alt ?? '';
+        image.src = link.href;
+        dialog.showModal();
+      });
+    }
+  }
+</script>

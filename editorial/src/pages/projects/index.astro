@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import Copy from '../../components/Copy.astro';
+import { projects, site, sectionEnabled } from '../../lib/portfolio';
+const visible = sectionEnabled('projects') ? projects : [];
+---
+<Base title="Projects" seo={site.pageSeo?.projects}>
+  <main id="main" class="page-gutter interior">
+    <h1>Projects<span>.</span></h1>
+    {visible.length > 0 && <>
+    <div class="filters" hidden data-filters>
+      <label>Search projects<input type="search" data-search placeholder="Title, technology or tag" /></label>
+      <label>Category<select data-category><option value="">All categories</option>{site.categories.filter(category => visible.some(item => item.category === category)).map(category => <option>{category}</option>)}</select></label>
+      <label>Status<select data-status><option value="">All statuses</option>{site.statuses.filter(status => visible.some(item => item.status === status)).map(status => <option>{status}</option>)}</select></label>
+    </div>
+    <ul class="index-list project-index">
+      {[...visible].sort((a,b) => Number(!!a.archived) - Number(!!b.archived)).map(item => <li data-project data-category={item.category} data-status={item.status} data-terms={[item.title, ...Object.values(item.summary), ...item.tech ?? [], ...item.tags ?? []].join(' ').toLowerCase()}>
+        <a href={'/projects/' + item.slug + '/'}><strong>{item.title}</strong><span><Copy copy={item.summary} /></span><span>{item.archived ? 'Archived' : item.status} <span aria-hidden="true">↗</span></span></a>
+      </li>)}
+    </ul>
+    <p data-count role="status"></p>
+    </>}
+    {visible.length === 0 && <p>No projects to show.</p>}
+  </main>
+  <script>
+    const controls = document.querySelector<HTMLElement>('[data-filters]');
+    if (controls) {
+      const search = controls.querySelector<HTMLInputElement>('[data-search]')!;
+      const category = controls.querySelector<HTMLSelectElement>('[data-category]')!;
+      const status = controls.querySelector<HTMLSelectElement>('[data-status]')!;
+      const entries = [...document.querySelectorAll<HTMLElement>('[data-project]')];
+      controls.hidden = false;
+      controls.addEventListener('input', () => {
+        for (const entry of entries) {
+          entry.hidden = !!((category.value && entry.dataset.category !== category.value)
+            || (status.value && entry.dataset.status !== status.value)
+            || !entry.dataset.terms?.includes(search.value.trim().toLowerCase()));
+        }
+        const count = entries.filter(entry => !entry.hidden).length;
+        document.querySelector('[data-count]')!.textContent = count ? `${count} projects` : 'No projects match these filters.';
+      });
+    }
+  </script>
+</Base>

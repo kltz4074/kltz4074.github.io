@@ -1,0 +1,47 @@
+---
+import '../../styles/admin.css';
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' blob:; media-src 'self' blob:; connect-src https://api.github.com; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <title>Portfolio editor — KLTZQU</title>
+</head>
+<body>
+  <div class="login" id="login">
+    <a href="/">← Portfolio</a>
+    <h1>Portfolio editor</h1>
+    <form id="sign-in">
+      <label for="token">GitHub fine-grained access token</label>
+      <input id="token" type="password" required autocomplete="off" spellcheck="false" />
+      <p>Use a token for <strong>kltz4074/kltz4074.github.io</strong> with Contents read and write access. Actions read access is optional.</p>
+      <button class="primary" type="submit">Connect to GitHub</button>
+    </form>
+    <p id="login-status" role="status"></p>
+  </div>
+  <div id="workspace" hidden>
+    <header class="toolbar">
+      <a href="/">KLTZQU</a>
+      <div><button id="undo" type="button" disabled>Undo</button><button id="preview" type="button">Review changes</button><button id="logout" type="button">Sign out</button></div>
+    </header>
+    <div class="workspace-grid">
+      <nav id="sections" aria-label="Editor sections"></nav>
+      <main id="panel" tabindex="-1"></main>
+    </div>
+    <p class="status" id="status" role="status"></p>
+  </div>
+  <dialog id="review" aria-labelledby="review-title">
+    <h2 id="review-title">Review changes</h2>
+    <div id="review-body"></div>
+    <div class="actions"><button id="close-review" type="button">Close</button><button class="primary" id="publish" type="button">Publish to GitHub</button></div>
+    <p id="publish-status" role="status"></p>
+  </dialog>
+  <script>
+    import '../../admin/editor';
+  </script>
+</body>
+</html>

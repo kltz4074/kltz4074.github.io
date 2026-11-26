@@ -1,0 +1,20 @@
+---
+import { navigation, site } from '../lib/portfolio';
+---
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header page-gutter">
+  <a class="brand" href="/" aria-label={site.name + ' home'}>
+    <img src={site.avatar} alt="" width="32" height="32" />
+    <span>{site.name}</span>
+  </a>
+  <nav aria-label="Main" class="main-nav">
+    {navigation.filter(link => link.url !== '/contact/').map(link => <a href={link.url} aria-current={Astro.url.pathname === link.url ? 'page' : undefined}>{link.label}</a>)}
+  </nav>
+  <div class="header-actions">
+    {navigation.filter(link => link.url === '/contact/').map(link => <a class="header-contact" href={link.url}>{link.label}</a>)}
+    {site.languages.length > 1 && <label class="language"><span class="sr-only">Content language</span><select data-language>{site.languages.map(lang => <option value={lang}>{lang.toUpperCase()}</option>)}</select></label>}
+  </div>
+</header>
+<script>
+  import '../lib/language';
+</script>
