@@ -58,10 +58,6 @@
         "url": "/projects/"
       },
       {
-        "label": "Lab",
-        "url": "/lab/"
-      },
-      {
         "label": "About",
         "url": "/about/"
       },
@@ -85,7 +81,10 @@
     "languages": [
       "en",
       "ru"
-    ]
+    ],
+    "sectionVisibility": {
+      "lab": false
+    }
   },
   "projects": [
     {
@@ -288,8 +287,12 @@
         "ru": "В приложении есть счета в разных валютах, переводы между ними и распределение бюджета по конвертам. Его можно попробовать в браузере в гостевом режиме."
       },
       "featured": true,
-      "cover": "/media/klpocket-guest.webp",
+      "cover": "/media/klpocket-landing.webp",
       "media": [
+        {
+          "src": "/media/klpocket-landing.webp",
+          "alt": "KLPocket overview with demo data on the product landing page"
+        },
         {
           "src": "/media/klpocket-guest.webp",
           "alt": "KLPocket dashboard in guest mode"
