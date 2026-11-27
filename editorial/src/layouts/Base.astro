@@ -64,15 +64,20 @@ const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': h
         return () => { chosen.style.viewTransitionName = ''; };
       }
 
+      const reducedMotion = () => document.documentElement.hasAttribute('data-reduced') ||
+        matchMedia('(prefers-reduced-motion: reduce)').matches;
       let nativeArrival = false;
       window.addEventListener('pageshow', event => {
         const internal = document.referrer && new URL(document.referrer).origin === location.origin;
         const history = performance.getEntriesByType('navigation')[0]?.type === 'back_forward';
         if (nativeArrival || !(event.persisted || history || internal)) return;
         const main = document.querySelector('main');
-        if (!main || document.documentElement.hasAttribute('data-reduced') || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-        main.animate([{ opacity: .55, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], {
-          duration: 340,
+        if (!main || reducedMotion()) return;
+        main.animate([
+          { opacity: .45, transform: 'translateY(24px)', clipPath: 'inset(0 8vw round 20px)' },
+          { opacity: 1, transform: 'none', clipPath: 'inset(0)' },
+        ], {
+          duration: 540,
           easing: 'cubic-bezier(.22,.72,.18,1)',
         });
       });
@@ -84,7 +89,7 @@ const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': h
           if (!transition) return;
           if (phase === 'pagereveal') nativeArrival = true;
           transition.ready.catch(() => {});
-          if (document.documentElement.hasAttribute('data-reduced')) {
+          if (reducedMotion()) {
             transition.skipTransition();
             return;
           }
