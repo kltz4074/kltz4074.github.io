@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
 import Project from '../components/Project.astro';
 import Copy from '../components/Copy.astro';
-import { site, projects, devlog, portfolio, showNow, sectionEnabled } from '../lib/portfolio';
+import { site, projects, projectHref, devlog, portfolio, showNow, sectionEnabled } from '../lib/portfolio';
 import { label } from '../lib/labels';
 
 const visible = sectionEnabled('projects') ? projects.filter(project => !project.archived) : [];
@@ -23,7 +23,7 @@ const other = visible.filter(project => !project.featured);
       {other.length > 0 && <div class="work-directory">
         {featured.length > 0 && <h3><Copy copy={label('More projects', 'Другие проекты')} /></h3>}
         <ul class="index-list">
-          {other.map(project => <li><a href={'/projects/' + project.slug + '/'}>
+          {other.map(project => <li><a href={projectHref(project)}>
             <strong>{project.title}</strong><span><Copy copy={project.summary} /></span>
             <span class="directory-end"><Copy copy={label(project.category)} /><Arrow /></span>
           </a></li>)}
