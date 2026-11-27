@@ -271,31 +271,8 @@ em { font-style: normal; }
 .contact-foot a, .motion-toggle { display: inline-flex; align-items: center; min-height: 36px; }
 .motion-toggle { background: none; border: 0; padding: 0; font-size: inherit; text-decoration: underline; text-underline-offset: .23em; }
 
-::view-transition { background: var(--paper); }
-::view-transition-group(*) { animation-duration: .68s; animation-timing-function: cubic-bezier(.22,.76,.18,1); }
-::view-transition-image-pair(root) { isolation: isolate; overflow: clip; }
-::view-transition-old(root) { animation: .55s ease both page-out; mix-blend-mode: normal; }
-::view-transition-new(root) { animation: .68s cubic-bezier(.22,.76,.18,1) both page-in; mix-blend-mode: normal; }
-::view-transition-group(selected-project) { z-index: 1; }
-::view-transition-image-pair(selected-project) { isolation: isolate; overflow: clip; border-radius: var(--radius-media); }
-::view-transition-old(selected-project), ::view-transition-new(selected-project) { mix-blend-mode: normal; object-fit: cover; block-size: 100%; }
-::view-transition-old(selected-project) { animation: .42s ease both cover-out; }
-::view-transition-new(selected-project) { animation: .46s .08s ease both cover-in; }
-
-@keyframes page-out {
-  to { opacity: .25; transform: translateY(-1.5%) scale(.975); }
-}
-@keyframes page-in {
-  from { clip-path: inset(13% 0 round 20px); transform: translateY(5%) scale(1.035); opacity: .35; }
-  to { clip-path: inset(0); transform: none; opacity: 1; }
-}
-@keyframes cover-out { to { opacity: 0; } }
-@keyframes cover-in { from { opacity: 0; } }
-
 html[data-reduced] :is(.hero, .hero-scroll, .reel-controls button, .reel-controls button img, .frame-picker button, .frame-picker button img) { transition: none; }
 html[data-reduced] :is(.hero-scroll, .reel-controls button):hover { translate: none; transform: none; }
-html[data-reduced]::view-transition-group(*) { animation-duration: .001s; }
-html[data-reduced]::view-transition-old(*), html[data-reduced]::view-transition-new(*) { animation: none; }
 
 @media (max-width: 880px) {
   .hero-title { font-size: calc(9.9vw * var(--word-scale, 1)); }
@@ -336,8 +313,6 @@ html[data-reduced]::view-transition-old(*), html[data-reduced]::view-transition-
   .hero-type { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(*) { animation-duration: .001s; }
-  ::view-transition-old(*), ::view-transition-new(*) { animation: none; }
   .hero, .hero-stage canvas, .hero-scroll, .reel-controls button { transition: none; }
   .hero-scroll:hover, .reel-controls button:hover { translate: none; transform: none; }
 }
