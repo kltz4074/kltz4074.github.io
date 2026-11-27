@@ -1,7 +1,7 @@
 ---
 import Arrow from './Arrow.astro';
 import type { Project } from '../lib/schema';
-import { isVideo } from '../lib/portfolio';
+import { gamePage, isVideo, projectHref } from '../lib/portfolio';
 import { label } from '../lib/labels';
 import Copy from './Copy.astro';
 import ProjectGallery from './ProjectGallery.astro';
@@ -10,14 +10,15 @@ interface Props { project: Project; reverse: boolean }
 const { project, reverse } = Astro.props;
 const { slug, title, summary, category, tech } = project;
 const frames = (project.media?.length ? project.media : project.cover ? [{src: project.cover, alt: title}] : []).filter(frame => !isVideo(frame.src));
-const url = '/projects/' + slug + '/';
+const url = projectHref(project);
+const action = gamePage(project) ? label('Play on itch.io', 'Играть на itch.io') : label('View project', 'Открыть проект');
 ---
 <article class:list={['project', { 'project--reverse': reverse, 'project--text': frames.length === 0 }]} id={slug} aria-labelledby={slug + '-title'}>
   <div class="project-copy">
     <h3 id={slug + '-title'}><a href={url}>{title}</a></h3>
     <p class="project-kind"><Copy copy={label(category)} />{tech?.[0] && <> / {tech[0]}</>}</p>
     <p class="project-description"><Copy copy={summary} /></p>
-    <a class="action project-action" href={url}><Copy copy={label('View project', 'Открыть проект')} /><Arrow moving /></a>
+    <a class="action project-action" href={url}><Copy copy={action} /><Arrow moving /></a>
   </div>
   <ProjectGallery {frames} {title} {slug} {url} tilt={category === 'Games'} />
 </article>

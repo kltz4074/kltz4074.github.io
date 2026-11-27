@@ -18,7 +18,44 @@ const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': h
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <style is:inline>@view-transition { navigation: auto; }</style>
+    <style is:inline>
+      .page-curtain {
+        position: fixed;
+        inset: 0;
+        z-index: 2147483647;
+        pointer-events: none;
+        visibility: hidden;
+        background: linear-gradient(165deg, #30223e, #17141e 65%);
+        transform: translateY(100%);
+      }
+
+      html[data-page-arriving] .page-curtain {
+        visibility: visible;
+        animation: uncover-page 540ms cubic-bezier(.76,0,.24,1) both;
+      }
+
+      @keyframes uncover-page {
+        from { transform: translateY(0); }
+        to { transform: translateY(-101%); }
+      }
+
+      html[data-reduced] .page-curtain { display: none; }
+      @media (prefers-reduced-motion: reduce) { .page-curtain { display: none; } }
+    </style>
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        try {
+          root.toggleAttribute('data-reduced', matchMedia('(prefers-reduced-motion: reduce)').matches ||
+            localStorage.getItem('kltzqu-reduced-motion') === 'true');
+        } catch {}
+        const navigation = performance.getEntriesByType('navigation')[0];
+        const internal = document.referrer && new URL(document.referrer).origin === location.origin;
+        if (!root.hasAttribute('data-reduced') && (navigation?.type === 'back_forward' || (navigation?.type === 'navigate' && internal))) {
+          root.setAttribute('data-page-arriving', '');
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
@@ -39,64 +76,55 @@ const structured = JSON.stringify({ '@context': 'https://schema.org', '@type': h
     <slot name="head" />
   </head>
   <body id="top">
+    <div class="page-curtain" aria-hidden="true"></div>
     <script is:inline>
-      try {
-        document.documentElement.toggleAttribute('data-reduced', matchMedia('(prefers-reduced-motion: reduce)').matches || localStorage.getItem('kltzqu-reduced-motion') === 'true');
-      } catch {}
-      function sharedCover(activation) {
-        const projectPath = /^\/projects\/([a-z0-9-]+)\/?$/;
-        const slug = [activation?.entry?.url, activation?.from?.url]
-          .map(url => url && new URL(url).pathname.match(projectPath)?.[1])
-          .find(Boolean);
-        if (!slug) return;
+      (() => {
+        const root = document.documentElement;
+        const curtain = document.querySelector('.page-curtain');
+        const reduced = () => root.hasAttribute('data-reduced') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let outgoing;
+        let recover;
+        const clearArrival = () => root.removeAttribute('data-page-arriving');
 
-        const cover = document.querySelector('[data-project-cover="' + slug + '"]');
-        const stage = document.querySelector('.hero-stage');
-        const active = document.querySelector('[data-reel-link]')?.pathname;
-        const onScreen = element => {
-          if (!element) return false;
-          const bounds = element.getBoundingClientRect();
-          return bounds.bottom > 0 && bounds.top < innerHeight;
-        };
-        const chosen = onScreen(cover) ? cover : active === '/projects/' + slug + '/' && onScreen(stage) ? stage : null;
-        if (!chosen) return;
-        chosen.style.viewTransitionName = 'selected-project';
-        return () => { chosen.style.viewTransitionName = ''; };
-      }
-
-      const reducedMotion = () => document.documentElement.hasAttribute('data-reduced') ||
-        matchMedia('(prefers-reduced-motion: reduce)').matches;
-      let nativeArrival = false;
-      window.addEventListener('pageshow', event => {
-        const internal = document.referrer && new URL(document.referrer).origin === location.origin;
-        const history = performance.getEntriesByType('navigation')[0]?.type === 'back_forward';
-        if (nativeArrival || !(event.persisted || history || internal)) return;
-        const main = document.querySelector('main');
-        if (!main || reducedMotion()) return;
-        main.animate([
-          { opacity: .45, transform: 'translateY(24px)', clipPath: 'inset(0 8vw round 20px)' },
-          { opacity: 1, transform: 'none', clipPath: 'inset(0)' },
-        ], {
-          duration: 540,
-          easing: 'cubic-bezier(.22,.72,.18,1)',
+        curtain.addEventListener('animationend', clearArrival);
+        window.addEventListener('pageshow', ({ persisted }) => {
+          if (persisted && !reduced()) root.setAttribute('data-page-arriving', '');
         });
-      });
-      window.addEventListener('pagehide', () => { nativeArrival = false; });
-
-      for (const phase of ['pageswap', 'pagereveal']) {
-        window.addEventListener(phase, event => {
-          const transition = event.viewTransition;
-          if (!transition) return;
-          if (phase === 'pagereveal') nativeArrival = true;
-          transition.ready.catch(() => {});
-          if (reducedMotion()) {
-            transition.skipTransition();
-            return;
-          }
-          const reset = sharedCover(event.activation ?? window.navigation?.activation);
-          if (reset) transition.finished.then(reset, reset);
+        window.addEventListener('pagehide', () => {
+          clearTimeout(recover);
+          outgoing?.cancel();
+          outgoing = undefined;
+          clearArrival();
         });
-      }
+
+        document.addEventListener('click', event => {
+          const anchor = event.target instanceof Element && event.target.closest('a[href]');
+          if (!anchor || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey ||
+              event.shiftKey || event.altKey || (anchor.target && anchor.target !== '_self') ||
+              anchor.hasAttribute('download') || reduced() || typeof curtain.animate !== 'function') return;
+
+          const url = new URL(anchor.href, location.href);
+          const internal = url.origin === location.origin;
+          const itchGame = url.protocol === 'https:' && /^[a-z0-9-]+\.itch\.io$/i.test(url.hostname) && url.pathname !== '/';
+          if ((!internal && !itchGame) || (internal && url.pathname === location.pathname && url.search === location.search) ||
+              (internal && /\.[a-z0-9]+$/i.test(url.pathname) && !url.pathname.endsWith('.html'))) return;
+
+          event.preventDefault();
+          if (outgoing) return;
+          clearArrival();
+          outgoing = curtain.animate([
+            { visibility: 'visible', transform: 'translateY(101%)' },
+            { visibility: 'visible', transform: 'translateY(0)' },
+          ], { duration: 300, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards' });
+          outgoing.finished.then(() => {
+            location.assign(url.href);
+            recover = setTimeout(() => {
+              outgoing?.cancel();
+              outgoing = undefined;
+            }, 1800);
+          }, () => {});
+        });
+      })();
     </script>
     <Nav />
     <slot />

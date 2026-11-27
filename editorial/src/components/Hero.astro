@@ -1,7 +1,7 @@
 ---
 import Arrow from './Arrow.astro';
 import Copy from './Copy.astro';
-import { isVideo, site } from '../lib/portfolio';
+import { isVideo, projectHref, site } from '../lib/portfolio';
 import { label } from '../lib/labels';
 import type { Project } from '../lib/schema';
 
@@ -38,11 +38,11 @@ const lighting = new Map([
         {first && <canvas data-stage-canvas></canvas>}
       </div>
       {first && <div class="hero-reel">
-        <a class="reel-project" data-reel-link href={`/projects/${first.project.slug}/`}>
+        <a class="reel-project" data-reel-link href={projectHref(first.project)}>
           <span data-reel-title>{first.project.title}</span><Arrow />
         </a>
         {shots.length > 1 && <div class="reel-controls" role="group" aria-label="Project preview" data-label-ru="Превью проектов" hidden>
-          {shots.map(({ project, src }, index) => <button type="button" data-shot={src} data-light={lighting.get(project.slug) ?? 'dusk'} data-title={project.title} data-url={`/projects/${project.slug}/`} aria-label={project.title} aria-pressed={index === 0}>
+          {shots.map(({ project, src }, index) => <button type="button" data-shot={src} data-light={lighting.get(project.slug) ?? 'dusk'} data-title={project.title} data-url={projectHref(project)} aria-label={project.title} aria-pressed={index === 0}>
             <img src={src} alt="" width="64" height="42" loading="lazy" decoding="async" />
           </button>)}
         </div>}

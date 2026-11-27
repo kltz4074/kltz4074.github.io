@@ -1,5 +1,5 @@
 import source from '../../content/portfolio.json';
-import { portfolioSchema } from './schema';
+import { portfolioSchema, type Project } from './schema';
 
 export const portfolio = portfolioSchema.parse(source);
 export const { site } = portfolio;
@@ -19,4 +19,15 @@ export const navigation = site.navigation.filter(({ url }) => {
 
 export function english(copy?: Record<string, string>) {
   return copy?.en ?? '';
+}
+
+
+export function gamePage(project: Project) {
+  return project.category === 'Games'
+    ? project.links?.find(({ url }) => /^https:\/\/[a-z0-9-]+\.itch\.io\/[^/?#]+/i.test(url))
+    : undefined;
+}
+
+export function projectHref(project: Project) {
+  return gamePage(project)?.url ?? `/projects/${project.slug}/`;
 }
