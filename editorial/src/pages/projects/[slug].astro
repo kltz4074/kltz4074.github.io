@@ -4,7 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Copy from '../../components/Copy.astro';
 import Media from '../../components/Media.astro';
 import ProjectGallery from '../../components/ProjectGallery.astro';
-import { projects, devlog, lab, english, isVideo, sectionEnabled } from '../../lib/portfolio';
+import { projectHref, projects, devlog, lab, english, isVideo, sectionEnabled } from '../../lib/portfolio';
 import { label } from '../../lib/labels';
 import type { Project } from '../../lib/schema';
 export function getStaticPaths() {
@@ -25,7 +25,7 @@ const videos = frames.filter(frame => isVideo(frame.src));
 const posts = sectionEnabled('devlog') ? devlog.filter(post => post.project === project.slug) : [];
 const queue = projects.filter(item => !item.archived);
 const next = queue.length > 1 ? queue[(queue.findIndex(item => item.slug === project.slug) + 1) % queue.length] : undefined;
-const url = (slug: string) => '/projects/' + slug + '/';
+
 ---
 <Base title={project.title} description={english(project.summary)} seo={{ image: cover?.src, ...project.seo }}>
   <main id="main" class="page-gutter interior" tabindex="-1">
@@ -49,6 +49,6 @@ const url = (slug: string) => '/projects/' + slug + '/';
     <Media frames={videos} secondary={!!cover} />
     {english(project.updates) && <section class="prose"><h2><Copy copy={label('Updates', 'Обновления')} /></h2><Copy copy={project.updates} rich /></section>}
     {posts.length > 0 && <section class="prose"><h2><Copy copy={label('Devlog')} /></h2><ul>{posts.map(post => <li><a href={'/devlog/' + post.slug + '/'}>{post.title}</a></li>)}</ul></section>}
-    {next && <div class="detail-next"><a class="action" href="/projects/">← <Copy copy={label('All projects', 'Все проекты')} /></a><a class="action" href={url(next.slug)}>{next.title}<Arrow moving /></a></div>}
+    {next && <div class="detail-next"><a class="action" href="/projects/">← <Copy copy={label('All projects', 'Все проекты')} /></a><a class="action" href={projectHref(next)}>{next.title}<Arrow moving /></a></div>}
   </main>
 </Base>

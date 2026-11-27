@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import Copy from '../../components/Copy.astro';
 import Arrow from '../../components/Arrow.astro';
-import { projects, site, sectionEnabled } from '../../lib/portfolio';
+import { projects, projectHref, site, sectionEnabled } from '../../lib/portfolio';
 import { label } from '../../lib/labels';
 const visible = sectionEnabled('projects') ? projects : [];
 ---
@@ -23,7 +23,7 @@ const visible = sectionEnabled('projects') ? projects : [];
       </div>
       <ul class="index-list project-index">
         {[...visible].sort((a,b) => Number(!!a.archived) - Number(!!b.archived)).map(item => <li data-project data-category={item.category} data-status={item.status} data-terms={[item.title, ...Object.values(item.summary), ...item.tech ?? [], ...item.tags ?? []].join(' ').toLowerCase()}>
-          <a href={'/projects/' + item.slug + '/'}><strong>{item.title}</strong><span><Copy copy={item.summary} /></span>
+          <a href={projectHref(item)}><strong>{item.title}</strong><span><Copy copy={item.summary} /></span>
             <span class="directory-end"><Copy copy={label(item.archived ? 'Archived' : item.status)} /><Arrow /></span>
           </a>
         </li>)}
