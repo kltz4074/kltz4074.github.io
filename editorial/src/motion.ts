@@ -43,6 +43,12 @@ if (shots.length > 1) {
         if (active !== index || !still) return;
         still.replaceWith(image);
         still = image;
+        if (!reduced() && !canvas?.parentElement?.hasAttribute('data-rendered')) {
+          image.animate([
+            { opacity: .45, transform: 'scale(1.14)' },
+            { opacity: 1, transform: 'scale(1.09)' },
+          ], { duration: 420, easing: 'cubic-bezier(.22,.76,.18,1)' });
+        }
       }).catch(() => {});
       reelLink.href = button.dataset.url!;
       reelTitle.textContent = button.dataset.title!;
@@ -84,13 +90,17 @@ function configureMotion() {
     const title = hero?.querySelector('.hero-title > span');
     if (title && !introPlayed && !location.hash && window.scrollY < 70) {
       gsap.timeline({ defaults: { ease: 'power3.out' } })
-        .from(title, { y: 15, duration: .55, clearProps: 'transform' }, 0)
-        .from('.hero-stage', { y: 18, duration: .68, clearProps: 'transform' }, .04)
-        .from('.hero-intro, .hero-scroll, .hero-reel', { y: 10, duration: .5, stagger: .048, clearProps: 'transform' }, .1);
+        .from(title, { yPercent: 90, duration: .86, clearProps: 'transform' }, 0)
+        .fromTo('.hero-stage', { y: 20, clipPath: 'inset(9% 3% round 22px)' }, {
+          y: 0, clipPath: 'inset(0% 0% round 0px)', duration: .95, clearProps: 'transform,clipPath',
+        }, .06)
+        .from('.hero-intro, .hero-scroll, .hero-reel', {
+          y: 14, opacity: 0, duration: .6, stagger: .075, clearProps: 'transform,opacity',
+        }, .17);
       introPlayed = true;
     }
 
-    if (hero) {
+    if (hero && !coarsePointer.matches) {
       const cameraTravel = { value: 0 };
       gsap.timeline({
         scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom 22%', scrub: .28 },
@@ -109,7 +119,7 @@ function configureMotion() {
 
     if (document.querySelector('.work-word > span')) {
       gsap.from('.work-word > span', {
-        y: 15, ease: 'none',
+        yPercent: 68, ease: 'none',
         scrollTrigger: { trigger: '.work', start: 'top 88%', end: 'top 62%', scrub: true },
       });
     }
@@ -122,8 +132,14 @@ function configureMotion() {
       gsap.timeline({
         scrollTrigger: { trigger: media, start: 'top 98%', end: 'top 48%', scrub: .24 },
         defaults: { ease: 'none' },
-      }).from(reel, { scale: 1.095, xPercent: side * 1.8, yPercent: 1.5 }, 0)
-        .from(windowElement, { y: 22 }, 0);
+      }).from(reel, { scale: 1.14, xPercent: side * 2.4, yPercent: 2.2 }, 0)
+        .from(windowElement, { y: 24 }, 0);
+    });
+    document.querySelectorAll<HTMLElement>('.work .project-copy, .about-copy, .work-directory').forEach(copy => {
+      gsap.from(copy, {
+        y: 20, duration: .72, ease: 'power3.out', clearProps: 'transform',
+        scrollTrigger: { trigger: copy, start: 'clamp(top 88%)', once: true },
+      });
     });
     if (document.querySelector('.contact-title-line')) {
       gsap.from('.contact-title-line', {

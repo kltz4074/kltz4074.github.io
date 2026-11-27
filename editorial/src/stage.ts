@@ -19,6 +19,7 @@ const fragmentShader = `
   uniform vec3 spill;
   uniform float progress;
   uniform float direction;
+  uniform vec2 lens;
   varying vec2 frameUv;
 
   vec3 sampleShot(sampler2D shot, vec2 uv, vec2 crop) {
@@ -27,6 +28,8 @@ const fragmentShader = `
 
   void main() {
     vec2 uv = frameUv;
+    vec2 offset = uv - (0.5 + lens * 0.32);
+    uv -= offset * dot(offset, offset) * length(lens) * 0.055;
     float axis = direction > 0.0 ? uv.x : 1.0 - uv.x;
     float edge = mix(-0.25, 1.25, progress) - axis + (uv.y - 0.5) * 0.16;
     float reveal = smoothstep(-0.1, 0.1, edge);
@@ -58,6 +61,7 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
     spill: { value: new Color('#cfb8ff') },
     progress: { value: 1 },
     direction: { value: 1 },
+    lens: { value: new Vector2() },
   };
   const material = new ShaderMaterial({ uniforms, vertexShader, fragmentShader, toneMapped: false });
   const screen = new Mesh(geometry, material);
@@ -161,6 +165,7 @@ export async function createStage(canvas: HTMLCanvasElement, sources: string[], 
     previousTime = now;
     const damping = 1 - Math.exp(-dt / 88);
     cursor.lerp(target, damping);
+    uniforms.lens.value.copy(cursor);
     travel = MathUtils.lerp(travel, destination, damping);
     const cut = start === undefined ? 1 : MathUtils.clamp((now - start) / cutDuration, 0, 1);
     const ease = MathUtils.smootherstep(cut, 0, 1);
